@@ -1,0 +1,11 @@
+# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+
+- name: aurora
+  hosts: localhost
+  sudo: yes
+  roles:
+      - base-tools
+      - desktop-environment
+      - dev-common
+      - dev-cpp
+      - dev-python

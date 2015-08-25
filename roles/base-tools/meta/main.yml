@@ -1,0 +1,20 @@
+# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+
+dependencies:
+    - role: package-install
+      list_Archlinux:
+          - fish
+          - gvim
+          - gnupg
+          - mlocate
+          - pass
+          - wget
+          - zsh
+
+      list_Apt:
+          - gnupg
+          - pass
+          - mlocate
+          - vim
+          - wget
+          - zsh

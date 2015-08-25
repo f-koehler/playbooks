@@ -1,0 +1,14 @@
+# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+
+dependencies:
+    - role: package-install
+      list_Archlinux:
+          - calibre
+          - firefox
+          - gimp
+          - inkscape
+          - kdegraphics-okular
+          - network-manager-applet
+          - owncloud-client
+          - thunderbird
+          - vlc

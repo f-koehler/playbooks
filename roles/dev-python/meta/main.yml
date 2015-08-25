@@ -1,0 +1,20 @@
+# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+
+dependencies:
+    - role: dev-common
+    - role: package-install
+      list_Archlinux:
+        - python
+        - python2
+        - ipython
+
+        - flake8
+        - pep8
+
+        - python-dateutil
+        - python-jinja
+        - python-matplotlib
+        - python-mistune
+        - python-numpy
+        - python-scipy
+        - python-sympy

@@ -1,0 +1,11 @@
+# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+
+- name: Install pacman packages
+  when: ansible_distribution == 'Archlinux'
+  action: pacman name={{ item }} state=installed
+  with_items: list_Archlinux
+
+- name: Install apt packages
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
+  action: apt name={{ item }} state=installed
+  with_items: list_Apt
