@@ -1,0 +1,17 @@
+# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+
+- name: Update pacman cache
+  when: ansible_distribution == 'Archlinux'
+  pacman: update_cache=yes
+
+- name: Upgrade pacman packages
+  when: ansible_distribution == 'Archlinux'
+  pacman: upgrade=yes
+
+- name: Update apt cache
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  pacman: update_cache=yes
+
+- name: Ugrade apt packages
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  pacman: upgrade=full
