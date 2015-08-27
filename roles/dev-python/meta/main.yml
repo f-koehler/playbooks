@@ -10,11 +10,13 @@ dependencies:
 
         - flake8
         - pep8
+        - pygmentize
 
         - python-dateutil
         - python-jinja
         - python-matplotlib
         - python-mistune
         - python-numpy
+        - python-pygments
         - python-scipy
         - python-sympy

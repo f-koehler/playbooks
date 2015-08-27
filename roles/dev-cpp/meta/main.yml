@@ -1,5 +1,5 @@
 # Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
-#
+
 dependencies:
     - role: dev-common
     - role: package-install
@@ -12,5 +12,7 @@ dependencies:
         - cmake
         - gcc
         - gdb
-        - gsl
         - gmp
+        - gsl
+        - oprofile
+        - perf

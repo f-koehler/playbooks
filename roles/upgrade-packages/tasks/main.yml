@@ -10,8 +10,8 @@
 
 - name: Update apt cache
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-  pacman: update_cache=yes
+  apt: update_cache=yes
 
 - name: Ugrade apt packages
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-  pacman: upgrade=full
+  apt: upgrade=full

@@ -3,4 +3,11 @@
 dependencies:
     - role: package-install
       list_Ubuntu:
+          - cgit
+          - mysql-server
           - nginx
+          - php5
+          - php5-mysql
+          - python3
+          - uwsgi
+          - uwsgi-plugin-php
