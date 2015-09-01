@@ -11,3 +11,4 @@
       - dev-cpp
       - dev-python
       - upgrade-texlive
+      - install-texlive
