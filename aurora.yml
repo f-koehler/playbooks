@@ -10,3 +10,4 @@
       - dev-common
       - dev-cpp
       - dev-python
+      - upgrade-texlive

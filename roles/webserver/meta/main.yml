@@ -3,7 +3,8 @@
 dependencies:
     - role: package-install
       list_Ubuntu:
-          - cgit
+          - gcc
+          - make
           - mysql-server
           - nginx
           - php5
