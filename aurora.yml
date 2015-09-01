@@ -12,3 +12,4 @@
       - dev-python
       - upgrade-texlive
       - install-texlive
+      - install-texlive-packages

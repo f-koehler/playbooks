@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 # Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
 
 import os.path
@@ -28,15 +29,14 @@ def update_all(module, tlmgr_path, dry_run=False):
 
 
 def is_installed(module, tlmgr_path, package):
-    cmd = tmlgr_path+" info "+package
+    cmd = tlmgr_path+" info "+package
     rc, stdout, stderr = module.run_command(cmd)
     if rc != 0:
         module.fail_json(msg="cannot query status of package".format(package))
-    if stdout.find("tlmgr: cannot find package"):
+    if stdout.find("tlmgr: cannot find package") >= 0:
         module.fail_json(msg="cannot find package {}".format(package))
 
-    regex = re.compile(r"installed\:\s+(?<state>Yes|No)")
-    m = regex.search(stdout)
+    m = re.search(r"installed\:\s+(?P<state>Yes|No)", stdout)
     if not m:
         module.fail_json(msg="cannot extract status of package {}".format(package))
 
@@ -53,8 +53,7 @@ def install_packages(module, tlmgr_path, pkgs):
         if rc != 0:
             module.fail_json(msg="cannot install package {}".format(pkg))
         changed += 1
-    if changed > 0:
-        module.exit_json(changed=changed, msg="installed {} packages".format())
+    module.exit_json(changed=(changed > 0), msg="installed {} packages".format(changed))
 
 
 def remove_packages(module, tlmgr_path, pkgs):
@@ -67,15 +66,14 @@ def remove_packages(module, tlmgr_path, pkgs):
         if rc != 0:
             module.fail_json(msg="cannot remove package {}".format(pkg))
         changed += 1
-    if changed > 0:
-        module.exit_json(changed=changed, msg="removed {} packages".format())
+    module.exit_json(changed=(changed > 0), msg="removed {} packages".format(changed))
 
 
 def main():
     module = AnsibleModule(
         argument_spec=dict(
             name=dict(aliases=["pkg"]),
-            state=dict(choices=["present", "absent"]),
+            state=dict(choices=["installed", "absent"]),
             update_self=dict(default="no", choices=BOOLEANS, type="bool"),
             update_all=dict(default="no", choices=BOOLEANS, type="bool"),
         ),
@@ -102,7 +100,7 @@ def main():
     if p["name"]:
         pkgs = p["name"].split(",")
 
-        if p["state"] == "present":
+        if p["state"] == "installed":
             install_packages(module, tlmgr_path, pkgs)
         elif p["state"] == "absent":
             remove_packages(module, tlmgr_path, pkgs)

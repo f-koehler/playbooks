@@ -1,0 +1,17 @@
+# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+
+list_TeXLive:
+   # math
+   - amsmath
+
+   # physics
+   - siunitx
+
+   # bib
+   - biber
+
+   # graphics
+   - circuitikz,graphics
+   
+   # tables
+   - booktabs,booktabs-de
