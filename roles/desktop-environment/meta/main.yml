@@ -4,6 +4,7 @@ dependencies:
     - role: package-install
       list_Archlinux:
           - calibre
+          - feh
           - firefox
           - gimp
           - inkscape
