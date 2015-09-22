@@ -2,6 +2,11 @@
 
 list_TeXLive:
     - amscls
+    - ucharcat
+    - filehook
+    - fontawesome
+    - tex-gyre-math
+    - xunicode
     - amsmath
     - avantgar
     - babel
@@ -18,10 +23,12 @@ list_TeXLive:
     - cmextra
     - colortbl
     - courier
+    - dvipng
     - ec
     - environ
     - eso-pic
     - etoolbox
+    - euenc
     - euro
     - euro-ce
     - eurosym
@@ -56,6 +63,7 @@ list_TeXLive:
     - ncntrsbk
     - oberdiek
     - palatino
+    - pdfcrop
     - pdftex-def
     - pgf
     - pgfplots
