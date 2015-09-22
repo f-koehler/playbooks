@@ -1,0 +1,12 @@
+# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+
+- name: Generate locales
+  locale_gen:
+      name: en_US.UTF-8
+      state: present
+
+- name: Copy locale.conf
+  copy:
+      src: locale.conf
+      dest: /etc/locale.conf
+      mode: 644
