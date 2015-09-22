@@ -1,5 +1,12 @@
 # Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
 
+- name: Install ntp on Arch linux
+  when:       ansible_distribution == 'Archlinux'
+  action:
+      pacman:
+          name: ntp
+          state: installed
+
 - name: Copy ntp.conf
   copy:
       src: ntp.conf
