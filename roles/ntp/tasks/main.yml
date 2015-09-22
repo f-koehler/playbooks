@@ -1,0 +1,16 @@
+# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+
+- name: Copy ntp.conf
+  copy:
+      src: ntp.conf
+      dest: /etc/ntp.conf
+      mode: 644
+  notify: Restart ntpd
+  tags: ntp
+
+- name: Start and enable ntpd
+  service:
+      name: ntpd
+      state: started
+      enabled: yes
+  tags: ntp

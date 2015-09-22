@@ -10,6 +10,7 @@
       - dev-common
       - dev-cpp
       - dev-python
+      - ntp
       # - install-texlive
       # - upgrade-texlive
-      - texlive-packages
+      # - texlive-packages
