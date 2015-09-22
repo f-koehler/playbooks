@@ -2,10 +2,10 @@
 
 - name:       Install pacman packages
   when:       ansible_distribution == 'Archlinux'
-  action:     pacman name={{ item }} state=installed
+  pacman: name={{ item }} state=installed
   with_items: list_Archlinux
 
 - name:       Install apt packages
   when:       ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
-  action:     apt name={{ item }} state=installed
+  apt: name={{ item }} state=installed
   with_items: list_Apt

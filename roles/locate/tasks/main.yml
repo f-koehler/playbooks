@@ -1,0 +1,12 @@
+# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+
+- name: Install locate on Arch Linux
+  when: ansible_distribution == 'Archlinux'
+  pacman: name=mlocate state=installed
+
+- name: Create updatedb cronjob
+  cron:
+      name: Update locate db
+      job: updatedb
+      special_time: weekly
+      state: present

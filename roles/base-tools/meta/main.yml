@@ -3,9 +3,10 @@
 dependencies:
     - role: package-install
       list_Archlinux:
+          - cronie
           - fish
-          - gvim
           - gnupg
+          - gvim
           - mlocate
           - pass
           - wget

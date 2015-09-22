@@ -12,6 +12,7 @@
       - dev-python
       - ntp
       - locale
+      - locate
       # - install-texlive
       # - upgrade-texlive
       # - texlive-packages
