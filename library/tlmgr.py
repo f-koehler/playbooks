@@ -32,13 +32,17 @@ def is_installed(module, tlmgr_path, package):
     cmd = tlmgr_path+" info "+package
     rc, stdout, stderr = module.run_command(cmd)
     if rc != 0:
-        module.fail_json(msg="cannot query status of package".format(package))
+        module.fail_json(msg="cannot query status of package" % package)
     if stdout.find("tlmgr: cannot find package") >= 0:
-        module.fail_json(msg="cannot find package {}".format(package))
+        module.fail_json(
+            msg="cannot find package %s" % package
+        )
 
     m = re.search(r"installed\:\s+(?P<state>Yes|No)", stdout)
     if not m:
-        module.fail_json(msg="cannot extract status of package {}".format(package))
+        module.fail_json(
+            msg="cannot extract status of package %s" % package
+        )
 
     return m.groupdict()["state"] == "Yes"
 
@@ -51,9 +55,14 @@ def install_packages(module, tlmgr_path, pkgs):
             continue
         rc, stdout, stderr = module.run_command(base_cmd+pkg)
         if rc != 0:
-            module.fail_json(msg="cannot install package {}".format(pkg))
+            module.fail_json(
+                msg="cannot install package %s" % pkg
+            )
         changed += 1
-    module.exit_json(changed=(changed > 0), msg="installed {} packages".format(changed))
+    module.exit_json(
+        changed=(changed > 0),
+        msg="installed %s packages" % changed
+    )
 
 
 def remove_packages(module, tlmgr_path, pkgs):
@@ -64,9 +73,14 @@ def remove_packages(module, tlmgr_path, pkgs):
             continue
         rc, stdout, stderr = module.run_command(base_cmd+pkg)
         if rc != 0:
-            module.fail_json(msg="cannot remove package {}".format(pkg))
+            module.fail_json(
+                msg="cannot remove package %s" % pkg
+            )
         changed += 1
-    module.exit_json(changed=(changed > 0), msg="removed {} packages".format(changed))
+    module.exit_json(
+        changed=(changed > 0),
+        msg="removed %s packages" % changed
+    )
 
 
 def main():
@@ -83,7 +97,9 @@ def main():
     tlmgr_path = module.get_bin_path("tlmgr", True)
 
     if not os.path.exists(tlmgr_path):
-        module.fail_json(msg="cannot find tlmgr in path {}".format(tlmgr_path))
+        module.fail_json(
+            msg="cannot find tlmgr in path %s" % tlmgr_path
+        )
 
     p = module.params
 
@@ -98,7 +114,13 @@ def main():
             module.exit_json(changed=changed, msg="updated TeX Live packages")
 
     if p["name"]:
-        pkgs = p["name"].split(",")
+        if isinstance(p["name"], str):
+            pkgs = p["name"].split(",")
+        else:
+            pkgs = p["name"]
+
+        with open("/home/fabian/ansible.tmp", "w") as f:
+            f.write(", ".join(pkgs)+"\n\n")
 
         if p["state"] == "installed":
             install_packages(module, tlmgr_path, pkgs)

@@ -1,12 +1,9 @@
 # Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
 
 list_TeXLive:
+    - algorithmicx
+    - algorithms
     - amscls
-    - ucharcat
-    - filehook
-    - fontawesome
-    - tex-gyre-math
-    - xunicode
     - amsmath
     - avantgar
     - babel
@@ -19,10 +16,14 @@ list_TeXLive:
     - booktabs
     - caption
     - charter
+    - chktex
     - cm
     - cmextra
     - colortbl
     - courier
+    - ctablestack
+    - datatool
+    - doublestruck
     - dvipng
     - ec
     - environ
@@ -32,20 +33,26 @@ list_TeXLive:
     - euro
     - euro-ce
     - eurosym
+    - filehook
+    - float
+    - fontawesome
     - fp
     - fpl 
     - geometry
     - german
     - gitinfo2
+    - glossaries
     - graphics
     - helvetic
     - hyperref
     - hyphen-german
     - import
     - koma-script
+    - lacheck
     - latex
     - latex-bin
     - latexmk
+    - lineno
     - lipsum
     - listings
     - lm-math
@@ -57,6 +64,7 @@ list_TeXLive:
     - manfnt-font
     - marvosym
     - mathpazo
+    - mfirstuc
     - mflogo-font
     - microtype
     - ms
@@ -72,21 +80,31 @@ list_TeXLive:
     - psnfss
     - pxfonts
     - rsfs
+    - setspace
     - siunitx
+    - substr
     - symbol
     - tex-gyre
+    - tex-gyre-math
+    - textcase
     - tikz-3dplot
+    - tikzorbital
     - times
     - tocloft
     - tools
+    - tracklang
     - trimspaces
     - txfonts
+    - ucharcat
     - unicode-math
     - url
     - utopia
     - wasy
     - wasy2-ps
     - wasysym
+    - xetex
+    - xfor
     - xstring
+    - xunicode
     - zapfchan
     - zapfding
