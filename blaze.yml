@@ -1,0 +1,13 @@
+- name: blaze
+  hosts: blaze
+  sudo:  yes
+  roles:
+      - upgrade-packages
+      - base-tools
+      - desktop-environment
+      - dev-common
+      - dev-cpp
+      - dev-python
+      - ntp
+      - locale
+      - locate
