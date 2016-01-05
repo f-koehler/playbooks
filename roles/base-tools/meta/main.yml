@@ -8,6 +8,7 @@ dependencies:
           - gnupg
           - gvim
           - mlocate
+          - nmap
           - pass
           - wget
           - zsh

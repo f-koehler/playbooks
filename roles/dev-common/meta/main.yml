@@ -8,6 +8,7 @@ dependencies:
         - doxygen
         - git
         - jupyter
+        - meld
         - mercurial
         - ninja
         - subversion

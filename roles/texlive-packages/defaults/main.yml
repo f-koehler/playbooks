@@ -1,6 +1,7 @@
 # Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
 
 list_TeXLive:
+    - algorithm2e
     - algorithmicx
     - algorithms
     - amscls
@@ -14,6 +15,7 @@ list_TeXLive:
     - bibunits
     - bookman
     - booktabs
+    - braket
     - caption
     - charter
     - chktex
@@ -46,8 +48,10 @@ list_TeXLive:
     - helvetic
     - hyperref
     - hyphen-german
+    - ifmtarg
     - import
     - koma-script
+    - l3packages
     - lacheck
     - latex
     - latex-bin
@@ -77,20 +81,26 @@ list_TeXLive:
     - pgfplots
     - physics
     - placeins
+    - polyglossia
     - psnfss
     - pxfonts
+    - relsize
     - rsfs
     - setspace
     - siunitx
+    - standalone
     - substr
     - symbol
     - tex-gyre
     - tex-gyre-math
+    - texdef
+    - texdoc
     - textcase
     - tikz-3dplot
     - tikzorbital
     - times
     - tocloft
+    - todonotes
     - tools
     - tracklang
     - trimspaces
@@ -102,8 +112,11 @@ list_TeXLive:
     - wasy
     - wasy2-ps
     - wasysym
+    - xcolor
     - xetex
+    - xetex-def
     - xfor
+    - xifthen
     - xstring
     - xunicode
     - zapfchan
