@@ -3,5 +3,9 @@
 dependencies:
     - role: package-install
       list_Archlinux:
-          xorg-server
-          xorg-xinit
+        - xbindkeys
+        - xdotool
+        - xorg-server
+        - xorg-xinit
+        - xorg-xrdb
+        - xsel

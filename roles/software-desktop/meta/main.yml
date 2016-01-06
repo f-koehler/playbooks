@@ -11,6 +11,7 @@ dependencies:
           - i3
           - inkscape
           - kdegraphics-okular
+          - keepass
           - network-manager-applet
           - owncloud-client
           - thunar
