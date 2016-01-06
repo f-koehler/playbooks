@@ -4,12 +4,16 @@ dependencies:
     - role: package-install
       list_Archlinux:
           - calibre
+          - dmenu
           - feh
           - firefox
           - gimp
+          - i3
           - inkscape
           - kdegraphics-okular
           - network-manager-applet
           - owncloud-client
+          - thunar
           - thunderbird
+          - rxvt-unicode
           - vlc

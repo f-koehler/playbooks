@@ -1,0 +1,18 @@
+# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+- name: add user "fabian"
+  user:
+      createhome: yes
+      generate_ssh_key: yes
+      group: fabian
+      groups: wheel
+      name: fabian
+      shell: /bin/zsh
+      ssh_key_bits: 4096
+      state: present
+
+- name: add user "fabian" to sudoers
+  lineinfile:
+      dest: /etc/sudoers
+      line: fabian ALL=(ALL) ALL
+      insertafter: root ALL=(ALL) ALL
+      validate: visudo -cf %s

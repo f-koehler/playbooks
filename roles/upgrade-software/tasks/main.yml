@@ -7,11 +7,3 @@
 - name: Upgrade pacman packages
   when: ansible_distribution == 'Archlinux'
   pacman: upgrade=yes
-
-- name: Update apt cache
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-  apt: update_cache=yes
-
-- name: Ugrade apt packages
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-  apt: upgrade=full

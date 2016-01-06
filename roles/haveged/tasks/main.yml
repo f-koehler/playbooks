@@ -1,0 +1,11 @@
+# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+
+- name: Install haveged on Arch linux
+  when: ansible_distribution == 'Archlinux'
+  pacman: name=haveged state=installed
+
+- name: Start and enable haveged
+  service:
+      name: haveged
+      state: started
+      enabled: yes

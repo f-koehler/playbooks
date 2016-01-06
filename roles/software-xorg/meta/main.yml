@@ -3,5 +3,5 @@
 dependencies:
     - role: package-install
       list_Archlinux:
-          - luarocks
-          - lua-sec
+          xorg-server
+          xorg-xinit

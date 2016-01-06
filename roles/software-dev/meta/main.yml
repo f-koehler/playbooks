@@ -7,7 +7,6 @@ dependencies:
         - cvs
         - doxygen
         - git
-        - jupyter
         - meld
         - mercurial
         - ninja

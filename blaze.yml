@@ -2,12 +2,19 @@
   hosts: blaze
   sudo:  yes
   roles:
-      - upgrade-packages
-      - base-tools
-      - desktop-environment
-      - dev-common
-      - dev-cpp
-      - dev-python
-      - ntp
+      - upgrade-software
       - locale
+      - keyboard
+      - pacman-config
+      - software-base
+      - software-dev
+      - software-cpp
+      - software-python
+      - software-xorg
+      - software-desktop
+      - default-groups
+      - default-users
+      - haveged
+      - ntp
       - locate
+      - graphics-intel
