@@ -5,6 +5,7 @@ dependencies:
       list_Archlinux:
           - calibre
           - dmenu
+          - chromium
           - feh
           - firefox
           - gimp
@@ -14,6 +15,7 @@ dependencies:
           - keepass
           - network-manager-applet
           - owncloud-client
+          - pavucontrol
           - thunar
           - thunderbird
           - rxvt-unicode

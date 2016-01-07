@@ -3,11 +3,13 @@
 dependencies:
     - role: package-install
       list_Archlinux:
+          - alsa-utils
           - cronie
           - fish
           - gnupg
           - gvim
           - nmap
           - pass
+          - pulseaudio
           - wget
           - zsh
