@@ -4,6 +4,7 @@
   roles:
       - upgrade-software
       - locale
+      - timezone-berlin
       - keyboard
       - pacman-config
       - software-base

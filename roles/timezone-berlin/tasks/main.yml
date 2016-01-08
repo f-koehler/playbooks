@@ -1,0 +1,8 @@
+# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+
+- name: Install ntp on Arch linux
+  when: ansible_distribution == 'Archlinux'
+  file:
+      src: /usr/share/zoneinfo/Europe/Berlin
+      dest: /etc/localtime
+      state: link
