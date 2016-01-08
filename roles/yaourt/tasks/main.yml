@@ -13,10 +13,10 @@
   become_user: ansible
 
 - name: install package-query
-  shell: pacman --noconfirm -U *.pkg.tar.xz
+  shell: cd package-query && pacman --noconfirm -U *.pkg.tar.xz
   args:
     creates: /usr/bin/package-query
-    chdir: /tmp/package-query
+    chdir: /tmp
 
 - name: build yaourt
   when: ansible_distribution == 'Archlinux'
@@ -28,7 +28,7 @@
   become_user: ansible
 
 - name: install yaourt
-  shell: pacman --noconfirm -U *.pkg.tar.xz
+  shell: cd yaourt && pacman --noconfirm -U *.pkg.tar.xz
   args:
     creates: /usr/bin/yaourt
-    chdir: /tmp/yaourt
+    chdir: /tmp

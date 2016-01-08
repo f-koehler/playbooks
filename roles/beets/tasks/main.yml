@@ -1,0 +1,5 @@
+# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+
+- name: Install haveged on Arch linux
+  when: ansible_distribution == 'Archlinux'
+  pacman: name=beets,python2-pathlib,python2-pyacoustid,python2-pylast,python2-requests,python2-xdg state=installed
