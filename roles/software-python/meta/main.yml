@@ -15,6 +15,7 @@ dependencies:
         - python-jinja
         - python-matplotlib
         - python-numpy
+        - python-pint
         - python-pip
         - python-pygments
         - python-scipy

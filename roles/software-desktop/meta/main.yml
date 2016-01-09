@@ -9,10 +9,14 @@ dependencies:
           - feh
           - firefox
           - gimp
-          - i3
+          - i3-wm
+          - i3status
+          - i3lock
           - inkscape
           - kdegraphics-okular
           - keepass
+          - libreoffice-fresh
+          - libreoffice-fresh-de
           - network-manager-applet
           - owncloud-client
           - pavucontrol

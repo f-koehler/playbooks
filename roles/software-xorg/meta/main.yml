@@ -7,5 +7,6 @@ dependencies:
         - xdotool
         - xorg-server
         - xorg-xinit
+        - xorg-xrandr
         - xorg-xrdb
         - xsel

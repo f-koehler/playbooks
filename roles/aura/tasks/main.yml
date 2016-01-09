@@ -1,0 +1,19 @@
+# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+- name: install dependencies
+  when: ansible_distribution == 'Archlinux'
+  pacman: name=abs,gmp,pcre state=installed
+
+- name: build aura
+  when: ansible_distribution == 'Archlinux'
+  shell: wget "https://aur.archlinux.org/cgit/aur.git/snapshot/aura-bin.tar.gz" && tar xf aura-bin.tar.gz && cd aura-bin && makepkg -f
+  args:
+    creates: /usr/bin/aura
+    chdir: /tmp
+  become: yes
+  become_user: ansible
+
+- name: install aura
+  shell: cd aura && pacman --noconfirm -U *.pkg.tar.xz
+  args:
+    creates: /usr/bin/aura
+    chdir: /tmp
