@@ -1,0 +1,9 @@
+# Copyright © 2016 Fabian Köhler <fkoehler1024@googlemail.com>
+
+- name: install TeX live
+  script: tl.sh
+  args:
+      creates: /usr/local/texlive/2015/bin/x86_64-linux/tlmgr
+
+- name: install packages
+  command: /usr/local/texlive/2015/bin/x86_64-linux/tlmgr install {{ tl_packages | join(' ') }}

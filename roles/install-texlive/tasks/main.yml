@@ -1,9 +1,0 @@
-# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.co
-
-- name: Check if TeX Live is installed
-  stat: path=/usr/bin/tlmgr
-  register: tlmgr_exe
-
-- name: Load TeX Live setup tasks
-  include: tasks/install.yml
-  when: not tlmgr_exe.stat.exists

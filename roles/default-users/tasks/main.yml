@@ -4,7 +4,7 @@
       createhome: yes
       generate_ssh_key: yes
       group: fabian
-      groups: wheel
+      groups: wheel,audio
       name: fabian
       shell: /bin/zsh
       ssh_key_bits: 4096

@@ -20,5 +20,7 @@
       - haveged
       - ntp
       - locate
+      - mysql
       - graphics-intel
       - beets
+      # - texlive

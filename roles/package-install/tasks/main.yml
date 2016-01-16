@@ -2,10 +2,15 @@
 
 - name:       Install pacman packages
   when:       ansible_distribution == 'Archlinux'
-  pacman: name={{ item }} state=installed
+  pacman:     name={{ item }} state=installed
   with_items: list_Archlinux
+
+# - name:       Install AUR packages with aura
+#   when:       ansible_distribution == 'Archlinux'
+#   aura:       name={{ item }} state=installed
+#   with_items: list_Aura
 
 - name:       Install apt packages
   when:       ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
-  apt: name={{ item }} state=installed
+  apt:        name={{ item }} state=installed
   with_items: list_Apt

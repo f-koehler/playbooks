@@ -1,0 +1,47 @@
+# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+
+tl_packages:
+    - amscls
+    - amsfonts
+    - amsmath
+    - booktabs
+    - braket
+    - caption
+    - chktex
+    - ctablestack
+    - eso-pic
+    - etoolbox
+    - euenc
+    - filehook
+    - gitinfo2
+    - graphics
+    - hyperref
+    - ifluatex
+    - ifxetex
+    - koma-script
+    - l3packages
+    - lacheck
+    - latex
+    - latex-bin
+    - latexmk
+    - lipsum
+    - lm-math
+    - lualatex-math
+    - luaotfload
+    - luatexbase
+    - ms
+    - oberdiek
+    - pdftex-def
+    - pgf
+    - siunitx
+    - todonotes
+    - tools
+    - ucharcat
+    - unicode-math
+    - url
+    - xcolor
+    - xetex
+    - xetex-def
+    - xstring
+    - xunicode
+    - zapfding

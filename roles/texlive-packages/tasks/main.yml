@@ -1,5 +1,0 @@
-# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
-
-- name: Install TeX Live packages
-  action:     tlmgr name={{ list_TeXLive }} state=installed
-  # with_items: list_TeXLive
