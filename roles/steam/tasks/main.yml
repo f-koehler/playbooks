@@ -1,0 +1,5 @@
+# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+
+- name: install steam
+  when: ansible_distribution == 'Archlinux'
+  pacman: name=steam,lib32-alsa-plugins,lib32-libpulse,ttf-liberation state=installed

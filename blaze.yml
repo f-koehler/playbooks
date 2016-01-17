@@ -1,6 +1,7 @@
 - name: blaze
   hosts: blaze
-  sudo:  yes
+  become: yes
+  become_method: sudo
   roles:
       - upgrade-software
       - locale
@@ -23,4 +24,5 @@
       - mysql
       - graphics-intel
       - beets
+      - steam
       # - texlive
