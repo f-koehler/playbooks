@@ -27,4 +27,4 @@
       - graphics-intel
       - beets
       - steam
-      # - texlive
+      - texlive

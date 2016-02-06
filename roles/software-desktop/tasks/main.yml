@@ -2,4 +2,8 @@
 
 - name: Install Arch Linux packages
   when: ansible_distribution == 'Archlinux'
-  pacman: name={{packages_arch}} state=installed
+  pacman: name={{packages_arch}} state=present
+
+- name: Install Arch Linux AUR packages
+  when: ansible_distribution == 'Archlinux'
+  aura: name={{packages_aur}} state=present

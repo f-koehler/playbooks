@@ -22,3 +22,6 @@ packages_arch:
     - thunderbird
     - rxvt-unicode
     - vlc
+
+packages_aur:
+    - i3blocks
