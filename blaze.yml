@@ -1,3 +1,5 @@
+# Copyright © 2015-2016 Fabian Köhler <fkoehler1024@googlemail.com>
+
 - name: blaze
   hosts: blaze
   become: yes

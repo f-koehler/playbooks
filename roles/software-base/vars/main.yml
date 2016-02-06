@@ -1,0 +1,13 @@
+# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+
+packages_arch:
+    - alsa-utils
+    - cronie
+    - fish
+    - gnupg
+    - gvim
+    - nmap
+    - pass
+    - pulseaudio
+    - wget
+    - zsh

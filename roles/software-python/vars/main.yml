@@ -1,0 +1,18 @@
+# Copyright © 2015-2016 Fabian Köhler <fkoehler1024@googlemail.com>
+
+packages_arch:
+    - flake8
+    - ipython
+    - pep8
+    - pygmentize
+    - python
+    - python-dateutil
+    - python-jinja
+    - python-matplotlib
+    - python-numpy
+    - python-pint
+    - python-pip
+    - python-pygments
+    - python-scipy
+    - python-sympy
+    - python2

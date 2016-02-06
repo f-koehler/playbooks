@@ -1,4 +1,5 @@
 # Copyright © 2016 Fabian Köhler <fkoehler1024@googlemail.com>
+
 - name: Copy makepkg.conf
   when: ansible_distribution == 'Archlinux'
   copy:

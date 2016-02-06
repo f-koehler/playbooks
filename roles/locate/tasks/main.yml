@@ -1,4 +1,4 @@
-# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+# Copyright © 2015-2016 Fabian Köhler <fkoehler1024@googlemail.com>
 
 - name: Install locate on Arch Linux
   when: ansible_distribution == 'Archlinux'

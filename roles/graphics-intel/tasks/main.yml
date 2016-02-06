@@ -1,4 +1,4 @@
-# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
+# Copyright © 2015-2016 Fabian Köhler <fkoehler1024@googlemail.com>
 
 - name: Install Intel graphics driver on Arch linux
   when: ansible_distribution == 'Archlinux'
