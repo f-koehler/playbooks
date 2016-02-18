@@ -1,0 +1,7 @@
+# Copyright © 2016 Fabian Köhler <fkoehler1024@googlemail.com>
+
+- name: copy screen config
+  copy:
+      src: screens.conf
+      dest: /etc/X11/xorg.conf.d/30-screens.conf
+      mode: 644

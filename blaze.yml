@@ -27,5 +27,6 @@
       - beets
       - steam
       - texlive
+      - screens-home
   tasks:
       - hostname: name=blaze
