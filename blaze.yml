@@ -24,7 +24,8 @@
       - ntp
       - locate
       - mysql
-      - graphics-intel
       - beets
       - steam
       - texlive
+  tasks:
+      - hostname: name=blaze
