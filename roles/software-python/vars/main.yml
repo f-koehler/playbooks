@@ -6,13 +6,17 @@ packages_arch:
     - pep8
     - pygmentize
     - python
+    - python-beautifulsoup4
+    - python-chardet
     - python-dateutil
     - python-jinja
+    - python-lxml
     - python-matplotlib
     - python-numpy
     - python-pint
     - python-pip
     - python-pygments
+    - python-requests
     - python-scipy
     - python-sympy
     - python2
