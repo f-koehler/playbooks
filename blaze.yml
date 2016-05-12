@@ -11,13 +11,14 @@
       - keyboard
       - pacman-config
       - makepkg-config
-      - aura
+      # - aura
       - software-base
       - software-dev
       - software-cpp
       - software-python
       - software-xorg
       - software-desktop
+      - xonsh
       - default-groups
       - default-users
       - haveged
