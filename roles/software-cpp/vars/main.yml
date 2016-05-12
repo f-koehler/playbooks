@@ -4,10 +4,9 @@ packages_arch:
     - boost
     - boost-libs
     - clang
-    - clang-analyzer
     - clang-tools-extra
     - cmake
-    - gcc
+    - gcc-multilib
     - gdb
     - gmp
     - gsl
