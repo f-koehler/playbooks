@@ -119,9 +119,6 @@ def main():
         else:
             pkgs = p["name"]
 
-        with open("/home/fabian/ansible.tmp", "w") as f:
-            f.write(", ".join(pkgs)+"\n\n")
-
         if p["state"] == "installed":
             install_packages(module, tlmgr_path, pkgs)
         elif p["state"] == "absent":

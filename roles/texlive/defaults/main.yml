@@ -4,6 +4,7 @@ tl_packages:
     - amscls
     - amsfonts
     - amsmath
+    - beamer
     - booktabs
     - braket
     - caption
@@ -13,6 +14,7 @@ tl_packages:
     - etoolbox
     - euenc
     - filehook
+    - geometry
     - gitinfo2
     - graphics
     - hyperref

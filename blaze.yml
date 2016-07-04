@@ -23,7 +23,7 @@
       - default-users
       - haveged
       - ntp
-      - locate
+      # - locate
       - mysql
       - beets
       - steam

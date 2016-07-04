@@ -4,7 +4,7 @@ cd /tmp
 mkdir texlive
 cd texlive
 mkdir tl-installer
-wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+wget http://ftp.cstug.cz/pub/tex/local/tlpretest/install-tl-unx.tar.gz
 tar xzf install-tl-unx.tar.gz --strip-components=1 -C tl-installer
 cd tl-installer
 
@@ -33,6 +33,6 @@ option_write18_restricted 1
 portable 0
 EOF
 
-./install-tl -profile minimal.profile
+./install-tl -repository http://ftp.cstug.cz/pub/tex/local/tlpretest/ -profile minimal.profile
 
 rm -rf /tmp/texlive
