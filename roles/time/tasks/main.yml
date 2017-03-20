@@ -1,0 +1,11 @@
+- timezone:
+    name: Europe/Berlin
+
+- pacman:
+    name: ntp
+    state: present
+
+- service:
+    name: ntpd.service
+    state: started
+    enabled: yes

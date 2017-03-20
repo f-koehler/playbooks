@@ -1,9 +1,0 @@
-# Copyright © 2015-2016 Fabian Köhler <fkoehler1024@googlemail.com>
-
-- name: Install setproctitle
-  when: ansible_distribution == 'Archlinux'
-  pacman: name={{packages_arch}} state=present
-
-- name: Install xonsh and friends
-  when: ansible_distribution == 'Archlinux'
-  aura: name={{packages_aur}} state=present

@@ -1,8 +1,0 @@
-# Copyright © 2015-2016 Fabian Köhler <fkoehler1024@googlemail.com>
-
-dependencies:
-    - role: package-install
-      list_Archlinux:
-          - wine
-          - wine_geck
-          - wine-mono

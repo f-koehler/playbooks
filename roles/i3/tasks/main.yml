@@ -1,0 +1,19 @@
+- pacman:
+    name: i3-wm
+    state: present
+
+- pacman:
+    name: i3status
+    state: present
+
+- pacman:
+    name: i3status
+    state: present
+
+- pacman:
+    name: konsole
+    state: present
+
+- pacman:
+    name: dmenu
+    state: present

@@ -1,7 +1,0 @@
-# Copyright © 2015-2016 Fabian Köhler <fkoehler1024@googlemail.com>
-
-- name: Upgrade tlmgr itself
-  action: tlmgr update_self=yes
-
-- name: Upgrade TeX Live packages
-  action: tlmgr update_all=yes

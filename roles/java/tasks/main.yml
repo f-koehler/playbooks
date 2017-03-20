@@ -1,0 +1,15 @@
+- pacman:
+    name: jre7-openjdk
+    state: absent
+
+- pacman:
+    name: jdk7-openjdk
+    state: absent
+
+- pacman:
+    name: jre8-openjdk
+    state: present
+
+- pacman:
+    name: jdk8-openjdk
+    state: present

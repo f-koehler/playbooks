@@ -1,0 +1,7 @@
+- pacman:
+    name: util-linux
+    state: present
+
+- service:
+    name: fstrim.timer
+    enabled: yes

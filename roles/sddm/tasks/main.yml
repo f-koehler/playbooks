@@ -1,0 +1,7 @@
+- pacman:
+    name: sddm
+    state: present
+
+- service:
+    name: sddm
+    enabled: yes

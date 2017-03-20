@@ -1,6 +1,0 @@
-packages_arch:
-    - python-setproctitle
-
-packages_aur:
-    - xonsh-git
-    - python-prompt_toolkit

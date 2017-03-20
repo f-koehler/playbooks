@@ -1,0 +1,18 @@
+- hosts: pcs
+  remote_user: ansible
+  roles:
+    - pacman
+    - time
+    - locale
+    - trim
+    - reflector
+    - network-manager
+    - ssh
+    - haveged
+    - nvidia-gpu
+    - java
+    - aura
+    - sddm
+    - themes
+    - i3
+    - wine

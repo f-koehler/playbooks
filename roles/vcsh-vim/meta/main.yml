@@ -1,6 +1,0 @@
-# Copyright © 2015-2016 Fabian Köhler <fkoehler1024@googlemail.com>
-
-dependencies:
-    - role: packages-install
-      list_Apt:
-        - vcsh

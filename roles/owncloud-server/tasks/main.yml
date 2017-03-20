@@ -1,5 +1,0 @@
-# Copyright © 2015-2016 Fabian Köhler <fkoehler1024@googlemail.com>
-
-- name: install required packages on Arch linux
-  when: ansible_distribution == 'Archlinux'
-  pacman: name=owncloud,php-intl,php-mcrypti,uwsgi,uwsgi-plugin-php state=installed

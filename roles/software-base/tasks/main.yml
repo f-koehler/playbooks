@@ -1,5 +1,0 @@
-# Copyright © 2015 Fabian Köhler <fkoehler1024@googlemail.com>
-
-- name: Install Arch Linux packages
-  when: ansible_distribution == 'Archlinux'
-  pacman: name={{packages_arch}} state=installed

@@ -1,0 +1,11 @@
+- pacman:
+    name: networkmanager
+    state: present
+
+- pacman:
+    name: network-manager-applet
+    state: present
+
+- service:
+    name: NetworkManager
+    enabled: yes

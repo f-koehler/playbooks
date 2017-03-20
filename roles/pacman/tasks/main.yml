@@ -1,0 +1,13 @@
+- name: Configure pacman
+  copy:
+    src: pacman.conf
+    dest: /etc/pacman.conf
+
+- name: Update pacman cache
+  pacman:
+    force: yes
+    update_cache: yes
+
+- name: Upgrade pacman packages
+  pacman:
+    upgrade: yes

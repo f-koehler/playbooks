@@ -2,6 +2,10 @@
 # -*- coding: utf-8 -*-
 from ansible.module_utils.basic import *
 
+ANSIBLE_METADATA = {"status": ["preview"],
+                    "supported_by": "community",
+                    "version": "0.1"}
+
 
 def extract_version(aura_output):
     lines = aura_output.splitlines()
@@ -75,11 +79,11 @@ def install_packages(module, aura_path, packages, state):
         if installed and (state == "present" or (state == "latest" and up_to_date)):
             continue
 
-        cmd = "sudo %s -A --noconfirm --builduser=%s %s" % (aura_path, user, pkg)
+        cmd = "%s -A --noconfirm --builduser=%s %s" % (aura_path, user, pkg)
         rc, stdout, stderr = module.run_command(cmd, check_rc=False)
 
         if rc != 0:
-            module.fail_json(msg="failed to install %s" % pkg)
+            module.fail_json(msg="failed to install %s: %s" % (pkg, stderr))
 
         install_count += 1
 
@@ -104,7 +108,7 @@ def remove_packages(module, aura_path, pkgs):
         if not installed:
             continue
 
-        cmd = "sudo %s -%s %s --noconfirm" % (aura_path, args, pkg)
+        cmd = "%s -%s %s --noconfirm" % (aura_path, args, pkg)
         rc, stdout, stderr = module.run_command(cmd, check_rc="False")
 
         if rc != 0:

@@ -1,0 +1,10 @@
+[Unit]
+Description=Update pacman mirrorlist weekly
+
+[Timer]
+OnCalendar=weekly
+RandomizedDelaySec=12h
+Persistent=True
+
+[Install]
+WantedBy=timers.target

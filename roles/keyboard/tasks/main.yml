@@ -1,7 +1,0 @@
-# Copyright © 2015-2016 Fabian Köhler <fkoehler1024@googlemail.com>
-
-- name: Copy vconsole.conf
-  copy:
-      src:  vconsole.conf
-      dest: /etc/vconsole.conf
-      mode: 644

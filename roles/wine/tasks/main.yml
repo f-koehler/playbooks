@@ -1,0 +1,15 @@
+- pacman:
+    name: wine
+    state: present
+
+- pacman:
+    name: wine-mono
+    state: present
+
+- pacman:
+    name: wine_gecko
+    state: present
+
+- pacman:
+    name: winetricks
+    state: present

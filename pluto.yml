@@ -1,9 +1,0 @@
-# Copyright © 2015-2016 Fabian Köhler <fkoehler1024@googlemail.com>
-
-- name:  pluto
-  hosts: fkoehler.org
-  sudo:  yes
-  roles:
-      - upgrade-packages
-      - base-tools
-      - webserver
