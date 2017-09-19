@@ -1,4 +1,4 @@
-- hosts: landau
+- hosts: majorana
   remote_user: fkoehler
   roles:
     - aura
@@ -12,7 +12,7 @@
     - ssh-server
     - time
 
-    - gpu-nvidia
+    - gpu-intel
 
     - i3
     - sddm
