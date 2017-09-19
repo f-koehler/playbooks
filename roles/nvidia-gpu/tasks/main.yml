@@ -5,9 +5,9 @@
 
 - name: Install 64bit nvidia packages
   pacman:
-    name: nvidia,nvidia-settings,nvidia-utils,nvidia-cg-toolkit,cuda,libvdpau,libxnvctrl,opencl-nvidia
+    name: nvidia,nvidia-settings,nvidia-utils,libvdpau,libxnvctrl,opencl-nvidia
     state: present
 
 - name: Install 32bit nvidia packages
   pacman:
-    name: lib32-nvidia-utils,lib32-nvidia-cg-toolkit,lib32-libvdpau
+    name: lib32-nvidia-utils,lib32-libvdpau

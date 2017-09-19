@@ -11,3 +11,11 @@
 - name: Upgrade pacman packages
   pacman:
     upgrade: yes
+
+- pacman:
+    name: reflector
+    state: present
+
+- copy:
+    src: reflector.hook
+    dest: /etc/pacman.d/hooks/reflector.hook

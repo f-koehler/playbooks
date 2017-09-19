@@ -1,0 +1,18 @@
+- hosts: landau
+  remote_user: fkoehler
+  roles:
+    - aura
+    - pacman-config
+
+    - grub
+    - haveged
+    - locale
+    - network-manager
+    - ssd-trim
+    - ssh-server
+    - time
+
+    - nvidia-gpu
+
+    - i3
+    - sddm

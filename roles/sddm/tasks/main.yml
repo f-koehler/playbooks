@@ -1,7 +1,35 @@
-- pacman:
+- name: Install SDDM
+  pacman:
     name: sddm
     state: present
 
-- service:
+- name: Enable SDDM
+  service:
     name: sddm
     enabled: yes
+
+- name: Install SDDM Maia theme
+  aura:
+    name: sddm-maia-theme
+    state: present
+
+- name: Enable SDDM Maia theme
+  ini_file:
+    path: /etc/sddm.conf
+    section: Theme
+    option: Current
+    value: maia
+    no_extra_spaces: yes
+
+- name: Install Breeze assets
+  pacman:
+    name: breeze
+    state: present
+
+- name: Enable SDDM Maia theme
+  ini_file:
+    path: /etc/sddm.conf
+    section: Theme
+    option: CursorTheme
+    value: breeze-dark
+    no_extra_spaces: yes
