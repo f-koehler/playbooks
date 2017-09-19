@@ -1,0 +1,35 @@
+- name: Clone AUR package repository
+  git:
+    accept_hostkey: yes
+    clone: yes
+    update: yes
+    repo: "https://aur.archlinux.org/intel-parallel-studio-xe.git"
+    dest: /data/aur-intel-parallel-studio-xe
+  register: aurgit
+
+- name: Install makedepends
+  pacman:
+    name: libarchive,sed,gzip,lzop
+    state: present
+
+- name: Set owner of build dir
+  file:
+    path: /data/aur-intel-parallel-studio-xe
+    owner: ansible
+
+- name: Build package
+  command: makepkg
+  args:
+    chdir: /data/aur-intel-parallel-studio-xe
+  when: aurgit.changed
+  register: makepkg
+  become: yes
+  become_user: ansible
+
+- name: Install package
+  shell: pacman --noconfirm --needed -U *.pkg.tar.lzo
+  args:
+    chdir: /data/aur-intel-parallel-studio-xe
+  become: yes
+  become_user: root
+  when: makepkg.changed

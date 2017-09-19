@@ -1,0 +1,24 @@
+- name: Install grub package
+  pacman:
+    name: grub, efibootmgr
+    state: present
+  register: grub_installed
+
+- name: Install grub boot manager
+  command: grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub-archlinux
+  when: grub_installed.changed
+
+- name: Install Archlinux grub theme
+  aura:
+    name: grub2-theme-archlinux
+    state: present
+
+- name: Copy grub default config
+  copy:
+    src: grub
+    dest: /etc/default/grub
+  register: grub_config
+
+- name: Update grub config
+  command: grub-mkconfig -o /boot/grub/grub.cfg
+  when: grub_config.changed

@@ -1,31 +1,13 @@
-- pacman:
-    name: nvidia
-    state: present
-
-- pacman:
-    name: libvdpau
-    state: present
-
-- pacman:
-    name: libxnvctrl
-    state: present
-
-- pacman:
-    name: nvidia-settings
-    state: present
-
-- pacman:
-    name: nvidia-utils
-    state: present
-
-- pacman:
-    name: lib32-libvdpau
-    state: present
-
-- pacman:
-    name: lib32-nvidia-utils
-    state: present
-
-- copy:
+- name: Register pacman hook
+  copy:
     src: nvidia.hook
     dest: /etc/pacman.d/hooks/nvidia.hook
+
+- name: Install 64bit nvidia packages
+  pacman:
+    name: nvidia,nvidia-settings,nvidia-utils,nvidia-cg-toolkit,cuda,libvdpau,libxnvctrl,opencl-nvidia
+    state: present
+
+- name: Install 32bit nvidia packages
+  pacman:
+    name: lib32-nvidia-utils,lib32-nvidia-cg-toolkit,lib32-libvdpau

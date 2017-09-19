@@ -1,11 +1,11 @@
 - pacman:
-    name: i3-wm,i3status,i3lock
+    name: git,hub
     state: present
 
 - pacman:
-    name: dmenu
+    name: mercurial
     state: present
 
 - pacman:
-    name: konsole
+    name: subversion
     state: present
