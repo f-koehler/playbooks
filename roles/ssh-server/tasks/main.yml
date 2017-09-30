@@ -1,8 +1,12 @@
-- pacman:
+- name: Install OpenSSH
+  pacman:
     name: openssh
     state: present
+  become: yes
 
-- service:
+- name: Enable OpenSSH server
+  service:
     name: sshd.service
     state: started
     enabled: yes
+  become: yes

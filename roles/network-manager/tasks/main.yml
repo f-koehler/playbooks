@@ -1,11 +1,11 @@
-- pacman:
-    name: networkmanager
+- name: Install NetworkManager
+  pacman:
+    name: networkmanager networkmanager-openvpn networkmanager-vpnc network-manager-applet
     state: present
+  become: yes
 
-- pacman:
-    name: network-manager-applet
-    state: present
-
-- service:
+- name: Enable NetworkManager
+  service:
     name: NetworkManager
     enabled: yes
+  become: yes

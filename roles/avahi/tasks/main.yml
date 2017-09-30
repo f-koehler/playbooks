@@ -1,0 +1,21 @@
+- name: Install avahi
+  pacman:
+    name: avahi,nss-mdns
+    state: present
+  become: yes
+
+- name: Enable the *.local domain
+  lineinfile:
+    dest: /etc/nsswitch.conf
+    regexp: "hosts: files mymachines resolve \\[!UNAVAIL=return\\] dns myhostname"
+    line: "files mymachines mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] dns myhostname"
+    backrefs: yes
+  become: yes
+
+
+- name: Enable avahi service
+  service:
+    name: avahi-daemon.service
+    enabled: yes
+    state: started
+  become: yes

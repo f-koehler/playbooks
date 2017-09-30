@@ -1,7 +1,11 @@
-- pacman:
+- name: Install util-linux
+  pacman:
     name: util-linux
     state: present
+  become: yes
 
-- service:
+- name: Enable periodical fstrim
+  service:
     name: fstrim.timer
     enabled: yes
+  become: yes

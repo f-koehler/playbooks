@@ -2,20 +2,33 @@
   copy:
     src: pacman.conf
     dest: /etc/pacman.conf
+  become: yes
 
 - name: Update pacman cache
   pacman:
     force: yes
     update_cache: yes
+  become: yes
 
 - name: Upgrade pacman packages
   pacman:
     upgrade: yes
+  become: yes
 
-- pacman:
+- name: Create directory for pacman hooks
+  file:
+    path: /etc/pacman.d/hooks
+    state: directory
+  become: yes
+
+- name: Install reflector
+  pacman:
     name: reflector
     state: present
+  become: yes
 
-- copy:
+- name: Create pacman hook for reflector
+  copy:
     src: reflector.hook
     dest: /etc/pacman.d/hooks/reflector.hook
+  become: yes

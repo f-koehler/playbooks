@@ -2,7 +2,9 @@
   aura:
     name: i3-gaps,i3status,i3lock,dmenu
     state: present
+  become: yes
 
 - pacman:
     name: konsole
     state: present
+  become: yes

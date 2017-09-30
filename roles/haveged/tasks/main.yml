@@ -1,8 +1,12 @@
-- pacman:
+- name: Install haveged
+  pacman:
     name: haveged
     state: present
+  become: yes
 
-- service:
+- name: Enable haveged
+  service:
     name: haveged.service
     state: started
     enabled: true
+  become: yes

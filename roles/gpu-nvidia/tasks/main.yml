@@ -2,7 +2,9 @@
   pacman:
     name: mesa,xf86-video-intel,vulkan-intel,libva-intel-driver,libvdpau-va-gl
     state: present
+  become: yes
 
 - name: Install 32bit intel driver
   pacman:
     name: lib32-mesa
+  become: yes

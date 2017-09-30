@@ -1,9 +1,10 @@
 - hosts: majorana
   remote_user: fkoehler
   roles:
-    - aura
+    # - aura
     - pacman-config
 
+    - avahi
     - grub
     - haveged
     - locale
@@ -12,7 +13,7 @@
     - ssh-server
     - time
 
-    - gpu-intel
+    # - gpu-intel
 
-    - i3
+    #   #- i3
     - sddm

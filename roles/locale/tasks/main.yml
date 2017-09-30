@@ -1,7 +1,11 @@
-- locale_gen:
+- name: Generate locales
+  locale_gen:
     name: en_US.UTF-8
     state: present
+  become: yes
 
-- copy:
+- name: Set locale
+  copy:
     src: locale.conf
     dest: /etc/locale.conf
+  become: yes

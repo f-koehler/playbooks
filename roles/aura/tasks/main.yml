@@ -1,7 +1,8 @@
 - name: Install aura dependencies
   pacman:
-    name: abs,gmp,pcre
+    name: gmp,pcre
     state: present
+  become: yes
 
 - name: Build aura package
   shell: |
@@ -9,8 +10,6 @@
     tar xf aura-bin.tar.gz
     cd aura-bin
     makepkg -f
-  become: yes
-  become_user: ansible
   args:
     creates: /usr/bin/aura
     chdir: /tmp
@@ -23,7 +22,6 @@
     rm -rf aura-bin
     rm aura-bin.tar.gz
   become: yes
-  become_user: root
   args:
     creates: /usr/bin/aura
     chdir: /tmp

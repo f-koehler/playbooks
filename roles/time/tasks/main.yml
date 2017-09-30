@@ -1,11 +1,17 @@
-- timezone:
+- name: Set timezone
+  timezone:
     name: Europe/Berlin
+  become: yes
 
-- pacman:
+- name: Install NTP
+  pacman:
     name: ntp
     state: present
+  become: yes
 
-- service:
+- name: Enable NTP
+  service:
     name: ntpd.service
     state: started
     enabled: yes
+  become: yes
