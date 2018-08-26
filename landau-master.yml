@@ -1,0 +1,22 @@
+- hosts: localhost
+  remote_user: fkoehler
+  tasks:
+    - hostname:
+        name: landau
+      become: yes
+    - timezone:
+        name: Europe/Berlin
+      become: yes
+  roles:
+    - locale
+    - ntp
+    - haveged
+    - ssh-server
+    - intel-microcodes
+    - x11-forwarding
+    - kvm
+    - libvirt
+    - vm-isos
+    - netdata
+    - pci-passthrough
+    - docker

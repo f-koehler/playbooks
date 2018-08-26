@@ -1,0 +1,14 @@
+- name: install netdata
+  pacman:
+    name: netdata
+    state: present
+  become: yes
+  notify:
+    - restart netdata
+
+- name: enable netdata
+  service:
+    name: netdata
+    enabled: yes
+    state: started
+  become: yes

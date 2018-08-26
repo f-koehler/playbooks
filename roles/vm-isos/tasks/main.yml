@@ -1,0 +1,7 @@
+- name: download Ubuntu 18.04.1 iso
+  get_url:
+    url: http://releases.ubuntu.com/18.04.1/ubuntu-18.04.1-desktop-amd64.iso
+    dest: /var/lib/libvirt/images/ubuntu-18.04.1-desktop-amd64.iso
+    checksum: "sha256:5748706937539418ee5707bd538c4f5eabae485d17aa49fb13ce2c9b70532433"
+    group: kvm
+  become: yes

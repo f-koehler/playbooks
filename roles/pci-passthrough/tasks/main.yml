@@ -1,0 +1,23 @@
+- name: copy mkinitcpio.conf
+  copy:
+    src: mkinitcpio.conf
+    dest: /etc/mkinitcpio.conf
+  become: yes
+  notify:
+    - run mkinitcpio
+
+- name: install OVMF
+  pacman:
+    name: ovmf
+    state: present
+  become: yes
+
+- name: use OVMF in qemu
+  lineinfile:
+    path: "/etc/libvirt/qemu.conf"
+    line: "nvram = [ \"/usr/share/ovmf/x64/OVMF_CODE.fd:/usr/share/ovmf/x64/OVMF_VARS.fd\" ]"
+    insertbefore: '^#nvram\s+=\s+\[\s*$'
+  become: yes
+  notify:
+    - restart libvirtd
+    - restart virtlogd

@@ -1,0 +1,7 @@
+- name: install Intel microcodes
+  pacman:
+    name: intel-ucode
+    state: present
+  become: yes
+  notify:
+    - regenerate grub config

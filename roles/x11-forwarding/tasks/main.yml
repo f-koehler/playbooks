@@ -1,0 +1,33 @@
+- name: install required packages
+  pacman:
+    name: xorg-xhost,xorg-xauth
+    state: present
+  become: yes
+
+- name: set AllowTcpForwarding
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    line: "AllowTcpForwarding yes"
+  become: yes
+  notify: restart sshd
+
+- name: set X11UseLocalhost
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    line: "X11UseLocalhost yes"
+  become: yes
+  notify: restart sshd
+
+- name: set X11DisplayOffset
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    line: "X11DisplayOffset 10"
+  become: yes
+  notify: restart sshd
+
+- name: set X11Forwarding
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    line: "X11Forwarding yes"
+  become: yes
+  notify: restart sshd

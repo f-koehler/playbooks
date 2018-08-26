@@ -1,0 +1,45 @@
+- name: load kernel module kvm
+  modprobe:
+    name: kvm
+    state: present
+  become: yes
+
+- name: load kernel module kvm_intel
+  modprobe:
+    name: kvm_intel
+    state: present
+  become: yes
+
+- name: load kernel module virtio_net
+  modprobe:
+    name: virtio_net
+    state: present
+  become: yes
+
+- name: load kernel module virtio_blk
+  modprobe:
+    name: virtio_blk
+    state: present
+  become: yes
+
+- name: load kernel module virtio_scsi
+  modprobe:
+    name: virtio_scsi
+    state: present
+  become: yes
+
+- name: load kernel module virtio_balloon
+  modprobe:
+    name: virtio_balloon
+    state: present
+  become: yes
+
+- name: load kernel module virtio_pci
+  modprobe:
+    name: virtio_pci
+    state: present
+  become: yes
+
+- name: copy kvm.conf
+  copy: src=kvm.conf dest=/etc/modules-load.d/kvm.conf
+  become: yes

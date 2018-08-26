@@ -1,0 +1,37 @@
+- name: install libvirt
+  pacman:
+    name: libvirt,dnsmasq,ebtables,bridge-utils,openbsd-netcat,qemu
+    state: present
+  become: yes
+  notify:
+    - restart libvirtd
+    - restart virtlogd
+
+- name: install virt-manager
+  pacman:
+    name: virt-manager
+    state: present
+  become: yes
+
+- name: enable libvirtd service
+  service:
+    name: libvirtd
+    state: started
+    enabled: yes
+  become: yes
+
+- name: enable virtlogd service
+  service:
+    name: libvirtd
+    state: started
+    enabled: yes
+  become: yes
+
+- name: setup polkit rules
+  copy:
+    src: 50-libvirt.rules
+    dest: /etc/polkit-1/rules.d/50-libvirt.rules
+  become: yes
+  notify:
+    - restart libvirtd
+    - restart virtlogd
