@@ -1,9 +1,0 @@
-- name: Install maia theme meta-package
-  aura:
-    name: artwork-maia
-    state: present
-
-- name: Install maia gtk theme
-  aura:
-    name: maia-gtk-theme
-    state: present
