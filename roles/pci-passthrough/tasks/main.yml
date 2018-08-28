@@ -21,3 +21,23 @@
   notify:
     - restart libvirtd
     - restart virtlogd
+
+- name: configure kernel parameters
+  copy:
+    src: grub
+    dest: /etc/default/grub
+  become: yes
+  notify: regenerate grub config
+  register: pci_passthrough_restart_required
+
+- name: set PCI passthrough devices
+  copy:
+    src: vfio.conf
+    dest: /etc/modprobe.d/vfio.conf
+  become: yes
+  register: pci_passthrough_restart_required
+
+- name: restart for PCI passthrough config
+  shell: "sync && sleep 1 && reboot"
+  become: yes
+  when: pci_passthrough_restart_required
