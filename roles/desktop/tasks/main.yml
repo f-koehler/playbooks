@@ -1,0 +1,11 @@
+- name: firefox
+  pacman:
+    name: firefox
+    state: present
+  become: yes
+
+- name: thunderbird
+  pacman:
+    name: thunderbird
+    state: present
+  become: yes

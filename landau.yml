@@ -2,7 +2,7 @@
   remote_user: fkoehler
   tasks:
     - hostname:
-        name: landau-master
+        name: landau
       become: yes
     - timezone:
         name: Europe/Berlin
@@ -14,9 +14,7 @@
     - ssh-server
     - intel-microcodes
     - x11-forwarding
-    - kvm
-    - libvirt
-    - vm-isos
     - netdata
-    - pci-passthrough
-    - docker
+    - i3
+    - nvidia-gpu
+    - desktop
