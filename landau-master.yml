@@ -12,6 +12,7 @@
     - ntp
     - haveged
     - ssh-server
+    - cli
     - intel-microcodes
     - x11-forwarding
     - kvm

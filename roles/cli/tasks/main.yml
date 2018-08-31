@@ -1,0 +1,17 @@
+- name: install htop
+  pacman:
+    name: htop
+    state: present
+  become: yes
+
+- name: install bat
+  pacman:
+    name: bat
+    state: present
+  become: yes
+
+- name: install ncdu
+  pacman:
+    name: ncdu
+    state: present
+  become: yes
