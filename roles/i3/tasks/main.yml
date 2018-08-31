@@ -1,0 +1,11 @@
+- name: install i3
+  pacman:
+    name: i3-gaps,rofi
+    state: present
+  become: yes
+
+- name: install xinit
+  pacman:
+    name: xorg-xinit
+    state: present
+  become: yes

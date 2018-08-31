@@ -1,0 +1,5 @@
+- name: proprietary NVIDIA driver
+  pacman:
+    name: nvidia
+    state: present
+  become: yes
