@@ -3,3 +3,15 @@
     name: nvidia
     state: present
   become: yes
+
+- name: NVIDIA settings
+  pacman:
+    name: nvidia-settings
+    state: present
+  become: yes
+
+- name: blacklist nouveau
+  copy:
+    src: nouveau.conf
+    dest: /etc/modprobe.d/nouveau.conf
+  become: yes

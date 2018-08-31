@@ -13,8 +13,12 @@
     - haveged
     - ssh-server
     - intel-microcodes
+    - cli-tools
+    - vim
     - x11-forwarding
+    - keyboard
     - netdata
     - i3
     - nvidia-gpu
     - desktop
+    - fonts

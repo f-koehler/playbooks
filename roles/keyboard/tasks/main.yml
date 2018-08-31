@@ -1,0 +1,11 @@
+- name: set key layout (terminal)
+  copy:
+    src: vconsole.conf
+    dest: /etc/vconsole.conf
+  become: yes
+
+- name: set key layout (X11)
+  copy:
+    src: 00-keyboard.conf
+    dest: /etc/X11/xorg.conf.d/00-keyboard.conf
+  become: yes

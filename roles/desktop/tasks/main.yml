@@ -9,3 +9,27 @@
     name: thunderbird
     state: present
   become: yes
+
+- name: kitty terminal
+  pacman:
+    name: kitty
+    state: present
+  become: yes
+
+- name: thunar file manager
+  pacman:
+    name: thunar
+    state: present
+  become: yes
+
+- name: file-roller archiver
+  pacman:
+    name: file-roller,lrzip,p7zip,unace,unrar
+    state: present
+  become: yes
+
+- name: arandr
+  pacman:
+    name: arandr
+    state: present
+  become: yes

@@ -1,0 +1,5 @@
+- name: Fira Mono
+  pacman:
+    name: ttf-fira-mono
+    state: present
+  become: yes
