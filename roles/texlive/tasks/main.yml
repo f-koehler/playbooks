@@ -1,0 +1,17 @@
+- name: install TeX Live
+  pacman:
+    name: texlive-most
+    state: present
+  become: yes
+
+- name: install TeX Live languages
+  pacman:
+    name: texlive-lang
+    state: present
+  become: yes
+
+- name: install biber
+  pacman:
+    name: biber
+    state: present
+  become: yes

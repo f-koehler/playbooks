@@ -1,0 +1,17 @@
+- name: pulseaudio
+  pacman:
+    name: pulseaudio
+    state: present
+  become: yes
+
+- name: pulseaudio (ALSA)
+  pacman:
+    name: pulseaudio-alsa
+    state: present
+  become: yes
+
+- name: pavucontrol:
+  pacman:
+    name: pavucontrol
+    state: present
+  become: yes

@@ -1,0 +1,4 @@
+- pacman:
+    name: lutris
+    state: present
+  become: yes

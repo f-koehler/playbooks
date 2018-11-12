@@ -8,17 +8,28 @@
         name: Europe/Berlin
       become: yes
   roles:
-    - locale
-    - ntp
-    - haveged
-    - ssh-server
-    - intel-microcodes
-    - cli-tools
-    - vim
-    - x11-forwarding
-    - keyboard
-    - netdata
-    - i3
-    - nvidia-gpu
-    - desktop
-    - fonts
+    # - locale
+    # - ntp
+    # - haveged
+    # - ssh-server
+    # - intel-microcodes
+    # - cli
+    # - vim
+    # - x11-forwarding
+    # - keyboard
+    # - netdata
+    # - i3
+    # - nvidia-gpu
+    # - desktop
+    # - fonts
+    # - texlive
+    # - gaming
+    # - lsp
+    # - python-dev
+    # - jack
+    # - spack
+    # - lua
+      # - lightdm
+    # - kvm
+    # - libvirt
+    - virtualbox

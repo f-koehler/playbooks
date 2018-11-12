@@ -1,0 +1,48 @@
+- name: install git
+  apt:
+    name: git
+    state: present
+  become: yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: add git group
+  group:
+    name: git
+    state: present
+    system: yes
+  become: yes
+
+- name: add git user
+  user:
+    create_home: yes
+    generate_ssh_key: yes
+    group: git
+    hidden: yes
+    name: git
+    password_lock: yes
+    system: yes
+  become: yes
+
+- name: clone gitolite
+  git:
+    clone: yes
+    accept_hostkey: yes
+    dest: /home/git/gitolite
+    repo: https://github.com/sitaramc/gitolite
+  become: yes
+  become_user: git
+
+- name: create bin directory
+  file:
+    path: /home/git/bin
+    state: directory
+  become: yes
+  become_user: git
+
+- name: install gitolite
+  command: "gitolite/install -to $HOME/bin"
+  args:
+    chdir: /home/git
+    creates: /home/git/bin/gitolite
+  become: yes
+  become_user: git

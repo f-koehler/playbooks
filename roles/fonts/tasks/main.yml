@@ -1,5 +1,71 @@
+- name: Adobe Source Code Pro
+  pacman:
+    name: adobe-source-code-pro-fonts
+    state: present
+  become: yes
+
+- name: Anonymous Pro
+  pacman:
+    name: ttf-anonymous-pro
+    state: present
+  become: yes
+
+- name: Bitstream Vera
+  pacman:
+    name: ttf-bitstream-vera
+    state: present
+  become: yes
+
+- name: DejaVu
+  pacman:
+    name: ttf-dejavu
+    state: present
+  become: yes
+
+- name: Droid
+  pacman:
+    name: ttf-droid
+    state: present
+  become: yes
+
 - name: Fira Mono
   pacman:
     name: ttf-fira-mono
+    state: present
+  become: yes
+
+- name: Font Awesome
+  pacman:
+    name: ttf-font-awesome
+    state: present
+  become: yes
+
+- name: Hack
+  pacman:
+    name: ttf-hack
+    state: present
+  become: yes
+
+- name: Inconsolata
+  pacman:
+    name: ttf-inconsolata
+    state: present
+  become: yes
+
+- name: Liberation
+  pacman:
+    name: ttf-liberation
+    state: present
+  become: yes
+
+- name: Noto
+  pacman:
+    name: noto-fonts
+    state: present
+  become: yes
+
+- name: Ubuntu Font Family
+  pacman:
+    name: ttf-ubuntu-font-family
     state: present
   become: yes

@@ -1,0 +1,27 @@
+- hosts: webservers
+  remote_user: fkoehler
+  tasks:
+    - hostname:
+        name: fkoehler.org
+      become: yes
+    - timezone:
+        name: Europe/Berlin
+      become: yes
+    - name: block netdata
+      ufw:
+        rule: deny
+        port: 19999
+      become: yes
+    - name: install certbot
+      pacman:
+        name: certbot
+        state: present
+      become: yes
+  roles:
+    - ntp
+    - locale
+    - haveged
+    - docker
+    - docker-portainer
+    - netdata
+    - ufw

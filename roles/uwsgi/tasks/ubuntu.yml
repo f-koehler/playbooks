@@ -1,0 +1,25 @@
+- name: install uwsgi
+  apt:
+    name: uwsgi
+    state: present
+  become: yes
+
+- name: create directory for unix sockets
+  file:
+    path: /var/run/uwsgi
+    state: directory
+  become: yes
+
+- name: copy uwsgi emperor service
+  copy:
+    src: uwsgi-emperor.service
+    dest: /etc/systemd/system/uwsgi-emperor.service
+  become: yes
+
+- name: start uwsgi emperor
+  systemd:
+    daemon_reload: yes
+    enabled: yes
+    masked: no
+    name: uwsgi-emperor
+  become: yes

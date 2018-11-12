@@ -1,5 +1,5 @@
-- name: restart netdata
+- name: restart ufw
   service:
-    name: netdata
+    name: ufw
     state: restarted
   become: yes

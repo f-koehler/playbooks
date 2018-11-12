@@ -1,0 +1,15 @@
+[Unit]
+Description="Goaccess (%i)"
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+Restart=always
+ExecStart=/usr/bin/goaccess -a -g --log-format=COMBINED -f /var/log/nginx/access_%i.log -o /var/www/goaccess/%i.html --real-time-html
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target

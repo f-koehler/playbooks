@@ -1,0 +1,17 @@
+- name: install lua
+  pacman:
+    name: lua
+    state: present
+  become: yes
+
+- name: install luarocks
+  pacman:
+    name: luarocks
+    state: present
+  become: yes
+
+- name: install lua-filesystem
+  pacman:
+    name: lua-filesystem
+    state: present
+  become: yes

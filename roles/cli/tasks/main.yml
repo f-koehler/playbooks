@@ -1,3 +1,9 @@
+- name: install wget
+  pacman:
+    name: wget
+    state: present
+  become: yes
+
 - name: install htop
   pacman:
     name: htop
@@ -13,5 +19,17 @@
 - name: install ncdu
   pacman:
     name: ncdu
+    state: present
+  become: yes
+
+- name: install fzf
+  pacman:
+    name: fzf
+    state: present
+  become: yes
+
+- name: install zsh
+  pacman:
+    name: zsh
     state: present
   become: yes

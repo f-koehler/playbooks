@@ -1,22 +1,5 @@
-- name: install ntp
-  pacman:
-    name: ntp
-    state: present
-  become: yes
-  notify:
-    - restart ntpd
+- include: archlinux.yml
+  when: ansible_distribution == "Archlinux"
 
-- name: copy ntp config
-  copy:
-    src: ntp.conf
-    dest: /etc/ntp.conf
-  become: yes
-  notify:
-    - restart ntpd
-
-- name: start/enable ntpd
-  service:
-    name: ntpd
-    enabled: yes
-    state: started
-  become: yes
+- include: ubuntu.yml
+  when: ansible_distribution == "Ubuntu"

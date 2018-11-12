@@ -1,13 +1,5 @@
-- name: install haveged
-  pacman:
-    name: haveged
-    state: present
-  become: yes
-  notify: restart haveged
+- include: archlinux.yml
+  when: ansible_distribution == "Archlinux"
 
-- name: start/enable haveged
-  service:
-    name: haveged
-    state: started
-    enabled: yes
-  become: yes
+- include: ubuntu.yml
+  when: ansible_distribution == "Ubuntu"

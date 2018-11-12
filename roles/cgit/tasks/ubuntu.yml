@@ -1,0 +1,22 @@
+- name: install cgit
+  apt:
+    name: cgit
+    state: present
+  become: yes
+
+- name: copy uwsgi config
+  copy:
+    src: cgit.ini
+    dest: /etc/uwsgi/apps-available/cgit.ini
+  become: yes
+  notify:
+    - restart uwsgi emperor
+
+- name: activate cgit uwsgi
+  file:
+    src: /etc/uwsgi/apps-available/cgit.ini
+    path: /etc/uwsgi/apps-enabled/cgit.ini
+    state: link
+  become: yes
+  notify:
+    - restart uwsgi emperor

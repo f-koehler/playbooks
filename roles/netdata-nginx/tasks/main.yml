@@ -1,0 +1,14 @@
+- name: copy nginx config
+  copy:
+    src: netdata.conf
+    dest: /etc/nginx/sites-available/netdata.conf
+  become: yes
+  notify: restart nginx
+
+- name: activate netdata nginx proxy
+  file:
+    src: /etc/nginx/sites-available/netdata.conf
+    dest: /etc/nginx/sites-enabled/netdata.conf
+    state: link
+  become: yes
+  notify: restart nginx

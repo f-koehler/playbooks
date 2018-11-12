@@ -3,8 +3,14 @@
     name: netdata
     state: present
   become: yes
-  notify:
-    - restart netdata
+  when: ansible_distribution == "Archlinux"
+
+- name: install netdata
+  apt:
+    name: netdata
+    state: present
+  become: yes
+  when: ansible_distribution == "Ubuntu"
 
 - name: enable netdata
   service:

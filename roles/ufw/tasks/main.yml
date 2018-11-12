@@ -1,0 +1,40 @@
+- name: install UFW
+  pacman:
+    name: ufw
+    state: present
+  become: yes
+  notify: restart ufw
+
+- name: enable UFW
+  service:
+    name: ufw
+    enabled: yes
+    state: started
+  become: yes
+
+- name: enable logging
+  ufw:
+    logging: on
+  become: yes
+  notify: restart ufw
+
+- name: block incoming traffic
+  ufw:
+    direction: incoming
+    policy: deny
+  become: yes
+  notify: restart ufw
+
+- name: allow outgoing traffic
+  ufw:
+    direction: outgoing
+    policy: deny
+  become: yes
+  notify: restart ufw
+
+- name: allow SSH
+  ufw:
+    name: ssh
+    rule: allow
+  become: yes
+  notify: restart ufw

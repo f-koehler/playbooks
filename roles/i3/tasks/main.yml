@@ -9,3 +9,10 @@
     name: xorg-xinit
     state: present
   become: yes
+
+- name: install X server
+  pacman:
+    name: xorg-server
+    state: present
+  become: yes
+

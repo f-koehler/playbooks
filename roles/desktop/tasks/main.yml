@@ -1,6 +1,12 @@
-- name: firefox
+- name: remove firefox
   pacman:
     name: firefox
+    state: absent
+  become: yes
+
+- name: install firefox (developer edition)
+  pacman:
+    name: firefox-developer-edition
     state: present
   become: yes
 
@@ -31,5 +37,36 @@
 - name: arandr
   pacman:
     name: arandr
+    state: present
+  become: yes
+
+- name: arandr
+  pacman:
+    name: arandr
+    state: present
+  become: yes
+
+- name: owncloud-client
+  pacman:
+    name: owncloud-client
+    state: present
+  become: yes
+
+- name: vlc
+  pacman:
+    name: vlc
+    state: present
+  become: yes
+
+
+- name: network-manager-applet
+  pacman:
+    name: network-manager-applet
+    state: present
+  become: yes
+
+- name: keepassxc
+  pacman:
+    name: keepassxc
     state: present
   become: yes
