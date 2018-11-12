@@ -1,0 +1,26 @@
+- hosts: 192.168.178.30
+  remote_user: fkoehler
+  tasks:
+    - hostname:
+        name: majorana
+      become: yes
+    - timezone:
+        name: Europe/Berlin
+      become: yes
+  roles:
+    - locale
+    - ntp
+    - haveged
+    - ssh-server
+    - intel-microcodes
+    - cli
+    - vim
+    - x11-forwarding
+    - keyboard
+    - netdata
+    - i3
+    - gpu-intel
+    - desktop
+    - fonts
+    - texlive
+    - virtualbox
