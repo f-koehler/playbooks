@@ -1,16 +1,16 @@
-- name: pulseaudio
+- name: install pulseaudio
   pacman:
     name: pulseaudio
     state: present
   become: yes
 
-- name: pulseaudio (ALSA)
+- name: install pulseaudio (ALSA bridge)
   pacman:
     name: pulseaudio-alsa
     state: present
   become: yes
 
-- name: pavucontrol:
+- name: install pavucontrol
   pacman:
     name: pavucontrol
     state: present
