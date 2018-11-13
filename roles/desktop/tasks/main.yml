@@ -70,3 +70,9 @@
     name: keepassxc
     state: present
   become: yes
+
+- name: Install emacs
+  pacman:
+    name: emacs
+    state: present
+  become: yes
