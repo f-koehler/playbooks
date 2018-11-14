@@ -27,3 +27,4 @@
     - sddm
     - ansible
     - pulseaudio
+    - tlp

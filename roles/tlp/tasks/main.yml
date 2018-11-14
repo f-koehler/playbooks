@@ -1,0 +1,27 @@
+- name: Install tlp
+  pacman:
+    name: tlp
+    state: present
+  become: yes
+- name: Start tlp
+  service:
+    name: tlp
+    state: started
+    enabled: yes
+  become: yes
+- name: Start tlp-sleep
+  service:
+    name: tlp
+    state: started
+    enabled: yes
+  become: yes
+- name: Mask systemd-rfkill.socket
+  systemd:
+    name: systemd-rfkill.socket
+    masked: yes
+  become: yes
+- name: Mask systemd-rfkill.service
+  systemd:
+    name: systemd-rfkill.service
+    masked: yes
+  become: yes
