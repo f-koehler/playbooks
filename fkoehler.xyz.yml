@@ -1,0 +1,8 @@
+- hosts: webservers
+  become: yes
+  vars:
+    timezone: "Europe/Berlin"
+  roles:
+    - localtime
+    - haveged
+    - personal-vpn
