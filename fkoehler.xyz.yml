@@ -3,10 +3,10 @@
   vars:
     timezone: "Europe/Berlin"
   roles:
+    - firewall
     - localtime
     - haveged
     - personal-vpn
-    - firewall
     - docker
     - anki-sync-server
     - vps-nginx

@@ -16,3 +16,9 @@
     creates: /home/fkoehler/client.ovpn
   environment:
     AUTO_INSTALL: y 
+
+- name: open port 1194 in ufw
+  ufw:
+    port: "1194"
+    proto: udp
+    rule: allow
