@@ -1,0 +1,39 @@
+- name: install nginx and certbot
+  package:
+    name:
+      - nginx
+      - certbot
+
+- name: start/enable nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: open port 80 in firewall
+  ufw:
+    rule: allow
+    port: "80"
+
+- name: open port 443 in firewall
+  ufw:
+    rule: allow
+    port: "443"
+
+- name: copy nginx config
+  copy:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+  notify: restart nginx
+
+- name: copy nginx ssl config
+  copy:
+    src: ssl.conf
+    dest: /etc/nginx/ssl.conf
+  notify: restart nginx
+
+- name: copy nginx mime types
+  copy:
+    src: mime.types
+    dest: /etc/nginx/ssl.conf
+  notify: restart nginx

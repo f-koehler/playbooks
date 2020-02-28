@@ -9,3 +9,4 @@
     - firewall
     - docker
     - anki-sync-server
+    - vps-nginx

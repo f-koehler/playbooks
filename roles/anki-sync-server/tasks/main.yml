@@ -1,3 +1,8 @@
+- name: create a data directory for anki sync server
+  file:
+    path: /srv/anki
+    state: directory
+
 - name: obtain docker-compose.yml for anki sync server
   git:
     accept_hostkey: yes
