@@ -1,0 +1,9 @@
+- name: install netdata
+  package:
+    name: netdata
+
+- name: start/enable netdata
+  service:
+    name: netdata
+    state: started
+    enabled: yes
