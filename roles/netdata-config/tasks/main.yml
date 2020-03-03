@@ -1,0 +1,4 @@
+- include_tasks: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_hostname|lower }}.yml"
+    - "fallback.yml"

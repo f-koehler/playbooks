@@ -1,0 +1,9 @@
+- name: install logrotate
+  package:
+    name: logrotate
+
+- name: start/enable logrotate
+  service:
+    name: logrotate
+    state: started
+    enabled: yes
