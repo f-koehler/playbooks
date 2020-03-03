@@ -11,5 +11,6 @@
     # - anki-sync-server
     - logrotate
     - vps-nginx
+    - vps-goaccess
     # - netdata
     # - netdata-config

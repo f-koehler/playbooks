@@ -1,0 +1,3 @@
+- name: install goaccess
+  package:
+    name: goaccess
