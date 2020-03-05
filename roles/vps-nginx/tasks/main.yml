@@ -22,6 +22,11 @@
     dest: /etc/nginx/ssl.conf
   notify: restart nginx
 
+- name: create nginx logging directory
+  file:
+    path: /var/log/nginx
+    state: directory
+
 - name: start/enable nginx
   service:
     name: nginx
