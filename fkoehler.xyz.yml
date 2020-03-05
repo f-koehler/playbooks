@@ -3,14 +3,14 @@
   vars:
     timezone: "Europe/Berlin"
   roles:
-    # - firewall
-    # - localtime
-    # - haveged
-    # - personal-vpn
-    # - docker
-    # - anki-sync-server
+    - firewall
+    - localtime
+    - haveged
+    - personal-vpn
+    - docker
+    - anki-sync-server
     - logrotate
     - vps-nginx
     - vps-goaccess
-    # - netdata
-    # - netdata-config
+    - netdata
+    - netdata-config

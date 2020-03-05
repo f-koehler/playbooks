@@ -13,12 +13,12 @@
 - name: install openvpn server
   command: /home/fkoehler/openvpn-install/openvpn-install.sh
   args:
-    creates: /home/fkoehler/client.ovpn
+    creates: /home/fkoehler/fkoehler.ovpn
   environment:
     AUTO_INSTALL: y 
 
 - name: open port 1194 in ufw
   ufw:
-    port: "1194"
+    port: "2804"
     proto: udp
     rule: allow
