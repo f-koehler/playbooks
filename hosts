@@ -1,2 +1,5 @@
 [webservers]
 fkoehler.xyz
+
+[desktops]
+localhost ansible_connection=local

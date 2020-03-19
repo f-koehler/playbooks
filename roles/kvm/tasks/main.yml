@@ -1,0 +1,71 @@
+- name: "load intel module"
+  modprobe:
+    name: kvm_intel
+    params: "nested=1"
+
+- name: "load virtio modules"
+  modprobe:
+    name: "{{ item }}"
+  loop:
+    - virtio_net
+    - virtio_blk
+    - virtio_scsi
+    - virtio_balloon
+
+- name: "configure automatic module loading"
+  copy:
+    src: modules_intel.conf
+    dest: /etc/modules-load.d/kvm_intel.conf
+
+- name: "set module options"
+  copy:
+    src: options_intel.conf
+    dest: /etc/modprobe.d/kvm_intel.conf
+
+
+- name: "install qemu and libvirt"
+  package:
+    name:
+      - qemu
+      - qemu-arch-extra
+      - qemu-block-iscsi
+      - qemu-block-rbd
+      - samba
+      - ebtables
+      - dnsmasq
+      - bridge-utils
+      - openbsd-netcat
+      - libvirt
+      - gnome-boxes
+      - virt-manager
+
+- name: "setup polkit rules"
+  copy:
+    src: libvirt.rules
+    dest: /etc/polkit-1/rules.d/50-libvirt.rules
+
+- name: "create kvm group"
+  group:
+    name: kvm
+
+  
+- name: "add users to kvm group"
+  user:
+    name: "{{ item }}"
+    append: yes
+    groups:
+      - kvm
+  loop: "{{ kvm_users }}"
+
+- name: "start virt service"
+  service:
+    name: "{{ item }}"
+    state: started
+  loop:
+    - libvirtd
+    - virtlogd
+
+- name: "enable virt service"
+  service:
+    name: libvirtd
+    enabled: yes

@@ -1,0 +1,11 @@
+- hosts: 127.0.0.1
+  connection: local
+  become: yes
+  vars:
+    timezone: "Europe/Berlin"
+    kvm_users:
+      - fkoehler
+  roles:
+    - localtime
+    - haveged
+    - kvm
