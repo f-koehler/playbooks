@@ -38,6 +38,7 @@
       - libvirt
       - gnome-boxes
       - virt-manager
+      - ovmf
 
 - name: "setup polkit rules"
   copy:
