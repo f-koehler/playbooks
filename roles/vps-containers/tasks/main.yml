@@ -107,14 +107,53 @@
   docker_volume:
     name: "synapse_data"
 
+- name: create synapse config
+  template:
+    src: "homeserver.yaml"
+    dest: "/var/lib/docker/volumes/synapse_data/_data/homeserver.yaml"
+    mode: "644"
+    owner: "991"
+    group: "991"
+  notify: restart synapse container
+
+- name: copy synapse log config
+  copy:
+    src: "synapse.log.config"
+    dest: "/var/lib/docker/volumes/synapse_data/_data/{{ synapse_domain }}.log.config"
+    mode: "644"
+    owner: "991"
+    group: "991"
+  notify: restart synapse container
+
+- name: set synapse signing key
+  template:
+    src: "synapse.signing.key"
+    dest: "/var/lib/docker/volumes/synapse_data/_data/{{ synapse_domain }}.signing.key"
+    mode: "644"
+    owner: "991"
+    group: "991"
+  notify: restart synapse container
+
+- name: create subdirectories for synapse
+  file:
+    path: "/var/lib/docker/volumes/synapse_data/_data/{{ item }}"
+    state: directory
+    owner: "991"
+    group: "991"
+  loop:
+    - media_store
+    - uploads
+    - logs
+  notify: restart synapse container
+
 - name: create synapse container
   docker_container:
     name: synapse
     image: "matrixdotorg/synapse:latest"
     ports:
-      - "8008:8008"
-      - "8009:8009"
-      - "8448:8448"
+      - "18008:8008"
+      - "18009:8009"
+      - "18448:8448"
     volumes:
       - "synapse_data:/data"
     networks:
@@ -122,15 +161,10 @@
     networks_cli_compatible: yes
     restart_policy: "unless-stopped"
     env:
-      SYNAPSE_SERVER_NAME: "synapse.fkoehler.xyz"
+      SYNAPSE_SERVER_NAME: "{{ synapse_domain }}"
       SYNAPSE_REPORT_STATS: "no"
-    command: generate
-
-- name: start synapse container
-  docker_container:
-    name: synapse
-    state: started
-    restart_policy: "unless-stopped"
+      UID: "991"
+      GID: "991"
 
 - name: install nginx
   package:
@@ -155,3 +189,4 @@
   loop:
     - 80
     - 443
+    - 8448
