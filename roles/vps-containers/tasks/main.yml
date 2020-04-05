@@ -82,6 +82,56 @@
     networks_cli_compatible: yes
     restart_policy: "unless-stopped"
 
+- name: create synapse postgresql user
+  postgresql_user:
+    name: "{{ postgres_user_synapse }}"
+    password: "{{ postgres_password_synapse }}"
+    role_attr_flags: NOSUPERUSER
+    login_user: "{{ postgres_user_root }}"
+    login_password: "{{ postgres_password_root }}"
+    login_host: "127.0.0.1"
+
+- name: create synapse database
+  postgresql_db:
+    name: "{{ postgres_db_synapse }}"
+    owner: "{{ postgres_user_synapse }}"
+    encoding: UTF-8
+    lc_collate: "C"
+    lc_ctype: "C"
+    template: "template0"
+    login_user: "{{ postgres_user_root }}"
+    login_password: "{{ postgres_password_root }}"
+    login_host: "127.0.0.1"
+
+- name: create volumes for synapse
+  docker_volume:
+    name: "synapse_data"
+
+- name: create synapse container
+  docker_container:
+    name: synapse
+    image: "matrixdotorg/synapse:latest"
+    ports:
+      - "8008:8008"
+      - "8009:8009"
+      - "8448:8448"
+    volumes:
+      - "synapse_data:/data"
+    networks:
+      - name: containers
+    networks_cli_compatible: yes
+    restart_policy: "unless-stopped"
+    env:
+      SYNAPSE_SERVER_NAME: "synapse.fkoehler.xyz"
+      SYNAPSE_REPORT_STATS: "no"
+    command: generate
+
+- name: start synapse container
+  docker_container:
+    name: synapse
+    state: started
+    restart_policy: "unless-stopped"
+
 - name: install nginx
   package:
     name: nginx
