@@ -2,16 +2,22 @@
   become: yes
   vars:
     timezone: "Europe/Berlin"
+  vars_files:
+    - secrets.yml
   roles:
-    # - firewall
-    # - localtime
-    # - haveged
+    - hardened-ssh-server
+    - firewall
+    - localtime
+    - haveged
+    - docker
+    - netdata
+    - vps-containers
+
     # - personal-vpn
-    # - docker
     # - anki-sync-server
     # - logrotate
-    - vps-nginx
+    # - vps-nginx
     # - vps-goaccess
     # - netdata
     # - netdata-config
-    - heimdall
+    # - heimdall

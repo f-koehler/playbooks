@@ -1,0 +1,2 @@
+sudo docker exec -it --user www-data nextcloud php occ db:add-missing-indices
+sudo docker exec -it --user www-data nextcloud php occ db:convert-filecache-bigint
