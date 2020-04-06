@@ -166,6 +166,62 @@
       UID: "991"
       GID: "991"
 
+- name: create mautrix-whatsapp postgresql user
+  postgresql_user:
+    name: "{{ postgres_user_mautrix_whatsapp }}"
+    password: "{{ postgres_password_mautrix_whatsapp }}"
+    role_attr_flags: NOSUPERUSER
+    login_user: "{{ postgres_user_root }}"
+    login_password: "{{ postgres_password_root }}"
+    login_host: "127.0.0.1"
+
+- name: create mautrix-whatsapp database
+  postgresql_db:
+    name: "{{ postgres_db_mautrix_whatsapp }}"
+    owner: "{{ postgres_user_mautrix_whatsapp }}"
+    encoding: UTF-8
+    login_user: "{{ postgres_user_root }}"
+    login_password: "{{ postgres_password_root }}"
+    login_host: "127.0.0.1"
+
+- name: create volume mautrix-whatsapp
+  docker_volume:
+    name: "mautrix-whatsapp_data"
+
+- name: create config for mautrix-whatsapp
+  template:
+    src: "mautrix_whatsapp_config.yaml"
+    dest: "/var/lib/docker/volumes/mautrix-whatsapp_data/_data/config.yaml"
+    mode: "644"
+    owner: "1337"
+    group: "1337"
+  notify: restart mautrix-whatsapp container
+
+- name: create mautrix-whatsapp container
+  docker_container:
+    name: mautrix-whatsapp
+    image: "dock.mau.dev/tulir/mautrix-whatsapp:latest"
+    ports:
+      - "29318:29318"
+    volumes:
+      - "mautrix-whatsapp_data:/data:z"
+    networks:
+      - name: containers
+    networks_cli_compatible: yes
+    restart_policy: "unless-stopped"
+    env:
+      UID: "1337"
+      GID: "1337"
+
+- name: copy registration for mautrix-whatsapp
+  copy:
+    remote_src: yes
+    src: "/var/lib/docker/volumes/mautrix-whatsapp_data/_data/registration.yaml"
+    dest: "/var/lib/docker/volumes/synapse_data/_data/mautrix-whatsapp.yaml"
+    mode: "644"
+    owner: "991"
+    group: "991"
+
 - name: install nginx
   package:
     name: nginx

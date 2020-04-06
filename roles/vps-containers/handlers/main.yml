@@ -2,3 +2,8 @@
   docker_container:
     name: synapse
     restart: true
+
+- name: restart mautrix-whatsapp container
+  docker_container:
+    name: mautrix-whatsapp
+    restart: true

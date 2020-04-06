@@ -409,11 +409,11 @@ retention:
 # instance, if using certbot, use `fullchain.pem` as your certificate,
 # not `cert.pem`).
 #
-#tls_certificate_path: "/data/synapse.fkoehler.xyz.tls.crt"
+#tls_certificate_path: "/data/{{ synapse_domain }}.tls.crt"
 
 # PEM-encoded private key for TLS
 #
-#tls_private_key_path: "/data/synapse.fkoehler.xyz.tls.key"
+#tls_private_key_path: "/data/{{ synapse_domain }}.tls.key"
 
 # Whether to verify TLS server certificates for outbound federation requests.
 #
@@ -1113,6 +1113,8 @@ report_stats: false
 #app_service_config_files:
 #  - app_service_1.yaml
 #  - app_service_2.yaml
+app_service_config_files:
+  - /data/mautrix-whatsapp.yaml
 
 # Uncomment to enable tracking of application service IP addresses. Implicitly
 # enables MAU tracking for application service users.

@@ -5,12 +5,12 @@
   vars_files:
     - secrets.yml
   roles:
-    - hardened-ssh-server
-    - firewall
-    - localtime
-    - haveged
-    - docker
-    - netdata
+    # - hardened-ssh-server
+    # - firewall
+    # - localtime
+    # - haveged
+    # - docker
+    # - netdata
     - vps-containers
 
     # - personal-vpn
