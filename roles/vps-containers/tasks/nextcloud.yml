@@ -28,6 +28,7 @@
       POSTGRES_USER: "{{ postgres_user_nextcloud }}"
       POSTGRES_PASSWORD: "{{ postgres_password_nextcloud }}"
       POSTGRES_HOST: "postgres"
+      OVERWRITEPROTOCOL: "https"
     volumes:
       - "/srv/containers/nextcloud:/var/www/html/"
     networks:
