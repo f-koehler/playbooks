@@ -1,5 +1,0 @@
-- name: install goaccess
-  package:
-    name:
-      - goaccess
-      - geoip2-database
