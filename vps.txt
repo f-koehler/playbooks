@@ -1,0 +1,3 @@
+pacman -S certbot
+certbot register --agree-tos -m fabian.koehler@protonmail.ch
+certbot certonly -d fkoehler.xyz,nextcloud.fkoehler.xyz,www.fkoehler.xyz --standalone

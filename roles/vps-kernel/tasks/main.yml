@@ -1,0 +1,15 @@
+- name: install mainline kernel
+  package:
+    name: linux
+    state: present
+  notify:
+    - run mkinitcpio
+    - update grub config
+
+- name: remove lts kernel
+  package:
+    name: linux-lts
+    state: absent
+  notify:
+    - run mkinitcpio
+    - update grub config

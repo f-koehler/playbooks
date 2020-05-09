@@ -1,0 +1,46 @@
+- name: create nextcloud postgresql user
+  postgresql_user:
+    name: "{{ postgres_user_nextcloud }}"
+    password: "{{ postgres_password_nextcloud }}"
+    role_attr_flags: NOSUPERUSER
+    login_user: "{{ postgres_user_root }}"
+    login_password: "{{ postgres_password_root }}"
+    login_host: "127.0.0.1"
+
+- name: create nextcloud database
+  postgresql_db:
+    name: "{{ postgres_db_nextcloud }}"
+    owner: "{{ postgres_user_nextcloud }}"
+    encoding: UTF-8
+    login_user: "{{ postgres_user_root }}"
+    login_password: "{{ postgres_password_root }}"
+    login_host: "127.0.0.1"
+
+- name: create nextcloud container
+  docker_container:
+    name: nextcloud
+    image: "nextcloud:stable"
+    env:
+      NEXTCLOUD_ADMIN_USER: "{{ nextcloud_user_admin }}"
+      NEXTCLOUD_ADMIN_PASSWORD: "{{ nextcloud_password_admin }}"
+      NEXTCLOUD_TRUSTED_DOMAINS: "{{ nextcloud_trusted_domains }}"
+      POSTGRES_DB: "{{ postgres_db_nextcloud }}"
+      POSTGRES_USER: "{{ postgres_user_nextcloud }}"
+      POSTGRES_PASSWORD: "{{ postgres_password_nextcloud }}"
+      POSTGRES_HOST: "postgres"
+    volumes:
+      - "/srv/containers/nextcloud:/var/www/html/"
+    networks:
+      - name: containers
+    networks_cli_compatible: yes
+    restart_policy: "unless-stopped"
+  # notify:
+  #   - nextcloud add missing indicies
+  #   - nextcloud convert file cache
+
+- name: enable nextcloud site
+  copy:
+    src: site-nextcloud.conf
+    dest: /srv/containers/nginx/config/sites-enabled/nextcloud.conf
+  notify:
+    - restart nginx container

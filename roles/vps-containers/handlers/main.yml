@@ -1,9 +1,10 @@
-- name: restart synapse container
+- name: restart nginx container
   docker_container:
-    name: synapse
-    restart: true
+    name: nginx
+    restart: yes
 
-- name: restart mautrix-whatsapp container
-  docker_container:
-    name: mautrix-whatsapp
-    restart: true
+- name: nextcloud add missing indicies
+  command: docker exec -it --user www-data nextcloud php occ db:add-missing-indices
+
+- name: nextcloud convert file cache
+  command: docker exec -it --user www-data nextcloud php occ db:convert-filecache-bigint --no-interaction

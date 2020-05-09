@@ -1,0 +1,36 @@
+- name: install the python postgres adapter
+  package:
+    name: python-psycopg2
+
+- name: create docker network
+  docker_network:
+    name: containers
+
+- name: create data directory for postgres
+  file:
+    state: directory
+    recurse: yes
+    path: /srv/containers/postgres/data
+
+- name: create postgres container
+  docker_container:
+    name: postgres
+    image: "postgres:alpine"
+    ports:
+      - "5432:5432"
+    env:
+      POSTGRES_USER: "{{ postgres_user_root }}"
+      POSTGRES_PASSWORD: "{{ postgres_password_root }}"
+    volumes:
+      - "/srv/containers/postgres/data:/var/lib/postgresql/data"
+    networks:
+      - name: containers
+    networks_cli_compatible: yes
+    restart_policy: "unless-stopped"
+
+- name: wait for postgres to start
+  shell: /usr/bin/pg_isready -U "{{ postgres_user_root }}" -h "127.0.0.1" -p 5432
+  register: result
+  until: result.rc == 0
+  retries: 12
+  delay: 10

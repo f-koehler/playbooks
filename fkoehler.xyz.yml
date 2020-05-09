@@ -5,14 +5,15 @@
   vars_files:
     - secrets.yml
   roles:
+    # - vps-kernel
     # - hardened-ssh-server
     # - firewall
     # - localtime
     # - haveged
     # - docker
-    # - netdata
     - vps-containers
 
+    # - netdata
     # - personal-vpn
     # - anki-sync-server
     # - logrotate

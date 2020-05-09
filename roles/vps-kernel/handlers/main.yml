@@ -1,0 +1,5 @@
+- name: run mkinitcpio
+  command: mkinitcpio -P
+
+- name: update grub config
+  command: grub-mkconfig -o /boot/grub/grub.cfg
