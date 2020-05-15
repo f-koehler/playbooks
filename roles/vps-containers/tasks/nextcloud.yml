@@ -1,4 +1,4 @@
-- name: create nextcloud postgresql user
+- name: create Nextcloud postgresql user
   postgresql_user:
     name: "{{ postgres_user_nextcloud }}"
     password: "{{ postgres_password_nextcloud }}"
@@ -7,7 +7,7 @@
     login_password: "{{ postgres_password_root }}"
     login_host: "127.0.0.1"
 
-- name: create nextcloud database
+- name: create Nextcloud database
   postgresql_db:
     name: "{{ postgres_db_nextcloud }}"
     owner: "{{ postgres_user_nextcloud }}"
@@ -16,7 +16,7 @@
     login_password: "{{ postgres_password_root }}"
     login_host: "127.0.0.1"
 
-- name: create nextcloud container
+- name: create Nextcloud container
   docker_container:
     name: nextcloud
     image: "nextcloud:stable"
@@ -39,7 +39,20 @@
   #   - nextcloud add missing indicies
   #   - nextcloud convert file cache
 
-- name: enable nextcloud site
+- name: create Nextcloud News Updater container
+  docker_container:
+    name: nextcloud-news-updater
+    image: "fabiankoehler/nextcloud-news-updater:latest"
+    env:
+      UPDATER_USER: "{{ nextcloud_user_admin }}"
+      UPDATER_PASSWORD: "{{ nextcloud_password_admin }}"
+      UPDATER_URL: "https://nextcloud.fkoehler.xyz"
+    networks:
+      - name: containers
+    networks_cli_compatible: yes
+    restart_policy: "unless-stopped"
+
+- name: enable Nextcloud site
   copy:
     src: site-nextcloud.conf
     dest: /srv/containers/nginx/config/sites-enabled/nextcloud.conf
