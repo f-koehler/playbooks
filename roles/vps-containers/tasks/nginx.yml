@@ -16,7 +16,7 @@
 - name: create nginx container
   docker_container:
     name: nginx
-    image: "nginx:stable-alpine"
+    image: "nginx:alpine"
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
@@ -45,17 +45,16 @@
     - mime.types
     - nginx.conf
     - proxy.conf
-    - fastcgi_params
     - ssl.conf
   notify:
     - restart nginx container
 
-- name: enable default site
-  copy:
-    src: site-default.conf
-    dest: /srv/containers/nginx/config/sites-enabled/default.conf
-  notify:
-    - restart nginx container
+# - name: enable default site
+#   copy:
+#     src: site-default.conf
+#     dest: /srv/containers/nginx/config/sites-enabled/default.conf
+#   notify:
+#     - restart nginx container
 
 - name: open ports for nginx
   ufw:

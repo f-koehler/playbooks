@@ -1,0 +1,56 @@
+- name: create directories for gitea
+  file:
+    path: "/srv/containers/gitea"
+    state: directory
+    recurse: yes
+
+- name: create Gitea postgresql user
+  postgresql_user:
+    name: "{{ postgres_user_gitea }}"
+    password: "{{ postgres_password_gitea }}"
+    role_attr_flags: NOSUPERUSER
+    login_user: "{{ postgres_user_root }}"
+    login_password: "{{ postgres_password_root }}"
+    login_host: "127.0.0.1"
+
+- name: create Gitea postgresql database
+  postgresql_db:
+    name: "{{ postgres_db_gitea }}"
+    owner: "{{ postgres_user_gitea }}"
+    encoding: UTF-8
+    login_user: "{{ postgres_user_root }}"
+    login_password: "{{ postgres_password_root }}"
+    login_host: "127.0.0.1"
+
+- name: create Gitea container
+  docker_container:
+    name: gitea
+    image: "gitea/gitea:latest"
+    env:
+      RUN_MODE: prod
+      DOMAIN: git.fkoehler.xyz
+      SSH_DOMAIN: git.fkoehler.xyz
+      HTTP_PORT: "3000"
+      ROOT_URL: "git.fkoehler.xyz"
+      DB_TYPE: postgres
+      DB_HOST: postgres
+      DB_NAME: "{{ postgres_db_gitea }}"
+      DB_USER: "{{ postgres_user_gitea }}"
+      DB_PASSWD: "{{ postgres_password_gitea }}"
+      INSTALL_LOCK: "true"
+      SECRET_KEY: "{{ gitea_secret_key }}"
+      DISABLE_REGISTRATION: "true"
+    volumes:
+      - "/srv/containers/gitea:/data"
+      - "/etc/localtime:/etc/localtime:ro"
+    networks:
+      - name: containers
+    networks_cli_compatible: yes
+    restart_policy: "unless-stopped"
+
+# - name: enable Gitea site
+#   copy:
+#     src: site-gitea.conf
+#     dest: /srv/containers/nginx/config/sites-enabled/gitea.conf
+#   notify:
+#     - restart nginx container
