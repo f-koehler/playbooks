@@ -21,6 +21,8 @@ http:
         - "https"
       tls:
         options: modern
+      middlewares:
+        - "hsts-headers"
     git_http:
       rule: "Host(`git.fkoehler.xyz`)"
       service: "gitea"
@@ -28,11 +30,15 @@ http:
         - "http"
       middlewares:
         - "redirect-to-https"
+        - "hsts-header"
   middlewares:
     redirect-to-https:
       redirectScheme:
         scheme: https
         permanent: true
+    hsts-header:
+      headers:
+        Strict-Transport-Security: "max-age=63072000"
   services:
     nextcloud:
       loadBalancer:
