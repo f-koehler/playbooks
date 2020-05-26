@@ -3,6 +3,11 @@
     name: nginx
     restart: yes
 
+- name: restart Traefik container
+  docker_container:
+    name: traefik
+    restart: yes
+
 - name: nextcloud add missing indicies
   command: docker exec -it --user www-data nextcloud php occ db:add-missing-indices
 

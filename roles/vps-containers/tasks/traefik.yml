@@ -1,0 +1,41 @@
+- name: create directory for Traefik
+  file:
+    path: /srv/containers/traefik/config/dynamic
+    state: directory
+    recurse: yes
+
+- name: copy static Traefik config
+  copy:
+    src: traefik/traefik.yml
+    dest: /srv/containers/traefik/config/traefik.yml
+  notify:
+    - restart Traefik container
+
+- name: copy dynamic Traefik config
+  copy:
+    src: traefik/dynamic/containers.yml
+    dest: /srv/containers/traefik/config/dynamic/containers.yml
+
+- name: create Traefik container
+  docker_container:
+    name: traefik
+    image: "traefik:latest"
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
+    volumes:
+      - "/srv/containers/traefik/config:/etc/traefik/:ro"
+      - "/etc/letsencrypt/:/etc/letsencrypt:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    networks:
+      - name: containers
+    networks_cli_compatible: yes
+    restart_policy: "unless-stopped"
+
+- name: open ports for Traefik
+  ufw:
+    rule: allow
+    port: "{{ item | int }}"
+  loop:
+    - 80
+    - 443

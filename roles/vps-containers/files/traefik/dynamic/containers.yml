@@ -1,0 +1,53 @@
+http:
+  routers:
+    nextcloud:
+      rule: "Host(`nextcloud.fkoehler.xyz`)"
+      service: "nextcloud"
+      entrypoints:
+        - "https"
+      tls:
+        options: modern
+    nextcloud_http:
+      rule: "Host(`nextcloud.fkoehler.xyz`)"
+      service: "nextcloud"
+      entrypoints:
+        - "http"
+      middlewares:
+        - "redirect-to-https"
+    git:
+      rule: "Host(`git.fkoehler.xyz`)"
+      service: "gitea"
+      entrypoints:
+        - "https"
+      tls:
+        options: modern
+    git_http:
+      rule: "Host(`git.fkoehler.xyz`)"
+      service: "gitea"
+      entrypoints:
+        - "http"
+      middlewares:
+        - "redirect-to-https"
+  middlewares:
+    redirect-to-https:
+      redirectScheme:
+        scheme: https
+        permanent: true
+  services:
+    nextcloud:
+      loadBalancer:
+        servers:
+          - url: "http://nextcloud:80/"
+    gitea:
+      loadBalancer:
+        servers:
+          - url: "http://gitea:3000/"
+tls:
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /etc/letsencrypt/live/fkoehler.xyz/fullchain.pem
+        keyFile: /etc/letsencrypt/live/fkoehler.xyz/privkey.pem
+  options:
+    modern:
+      minVersion: VersionTLS13
