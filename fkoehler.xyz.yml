@@ -11,9 +11,9 @@
     # - localtime
     # - haveged
     # - docker
+    - netdata
     - vps-containers
 
-    # - netdata
     # - personal-vpn
     # - anki-sync-server
     # - logrotate
