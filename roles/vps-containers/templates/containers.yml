@@ -57,6 +57,9 @@ http:
       headers:
         stsSeconds: 63072000
         stsIncludeSubdomains: true
+        customResponseHeaders:
+          X-Powered-By: ""
+          Server: ""
   services:
     nextcloud:
       loadBalancer:
