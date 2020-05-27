@@ -1,5 +1,11 @@
 http:
+  #############################################################################
+  # Routers
+  #############################################################################
   routers:
+    #--------------------------------------------------------------------------
+    # Dashboard
+    #--------------------------------------------------------------------------
     dashboard:
       rule: "Host(`fkoehler.xyz`)"
       service: api@internal
@@ -10,6 +16,10 @@ http:
       middlewares:
         - "hsts-header"
         - "dashboard-auth"
+
+    #--------------------------------------------------------------------------
+    # Nextcloud
+    #--------------------------------------------------------------------------
     nextcloud:
       rule: "Host(`nextcloud.fkoehler.xyz`)"
       service: "nextcloud"
@@ -18,6 +28,7 @@ http:
       tls:
         options: modern
       middlewares:
+        - "nextcloud-caldav"
         - "hsts-header"
     nextcloud_http:
       rule: "Host(`nextcloud.fkoehler.xyz`)"
@@ -26,7 +37,12 @@ http:
         - "http"
       middlewares:
         - "redirect-to-https"
+        - "nextcloud-caldav"
         - "hsts-header"
+
+    #--------------------------------------------------------------------------
+    # Gitea
+    #--------------------------------------------------------------------------
     git:
       rule: "Host(`git.fkoehler.xyz`)"
       service: "gitea"
@@ -44,15 +60,21 @@ http:
       middlewares:
         - "redirect-to-https"
         - "hsts-header"
+
+  #############################################################################
+  # Middlewares
+  #############################################################################
   middlewares:
     dashboard-auth:
       basicAuth:
         users:
           - "{{traefik_dashboard_auth}}"
+
     redirect-to-https:
       redirectScheme:
         scheme: https
         permanent: true
+
     hsts-header:
       headers:
         stsSeconds: 63072000
@@ -60,6 +82,16 @@ http:
         customResponseHeaders:
           X-Powered-By: ""
           Server: ""
+
+    nextcloud-caldav:
+      redirectRegex:
+        regex: "^https://(.*)/.well-known/(card|cal)dav"
+        replacement: "https://${1}/remote.php/dav/"
+        permanent: true
+
+  #############################################################################
+  # Services
+  #############################################################################
   services:
     nextcloud:
       loadBalancer:
