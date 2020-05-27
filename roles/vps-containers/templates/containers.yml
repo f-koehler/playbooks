@@ -1,5 +1,15 @@
 http:
   routers:
+    dashboard:
+      rule: "Host(`fkoehler.xyz`)"
+      service: api@internal
+      entrypoints:
+        - "dashboard"
+      tls:
+        options: modern
+      middlewares:
+        - "hsts-header"
+        - "dashboard-auth"
     nextcloud:
       rule: "Host(`nextcloud.fkoehler.xyz`)"
       service: "nextcloud"
@@ -7,6 +17,8 @@ http:
         - "https"
       tls:
         options: modern
+      middlewares:
+        - "hsts-header"
     nextcloud_http:
       rule: "Host(`nextcloud.fkoehler.xyz`)"
       service: "nextcloud"
@@ -14,6 +26,7 @@ http:
         - "http"
       middlewares:
         - "redirect-to-https"
+        - "hsts-header"
     git:
       rule: "Host(`git.fkoehler.xyz`)"
       service: "gitea"
@@ -22,7 +35,7 @@ http:
       tls:
         options: modern
       middlewares:
-        - "hsts-headers"
+        - "hsts-header"
     git_http:
       rule: "Host(`git.fkoehler.xyz`)"
       service: "gitea"
@@ -32,13 +45,18 @@ http:
         - "redirect-to-https"
         - "hsts-header"
   middlewares:
+    dashboard-auth:
+      basicAuth:
+        users:
+          - "{{traefik_dashboard_auth}}"
     redirect-to-https:
       redirectScheme:
         scheme: https
         permanent: true
     hsts-header:
       headers:
-        Strict-Transport-Security: "max-age=63072000"
+        stsSeconds: 63072000
+        stsIncludeSubdomains: true
   services:
     nextcloud:
       loadBalancer:

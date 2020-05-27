@@ -6,15 +6,17 @@
 
 - name: copy static Traefik config
   copy:
-    src: traefik/traefik.yml
+    src: traefik.yml
     dest: /srv/containers/traefik/config/traefik.yml
   notify:
     - restart Traefik container
 
 - name: copy dynamic Traefik config
-  copy:
-    src: traefik/dynamic/containers.yml
+  template:
+    src: containers.yml
     dest: /srv/containers/traefik/config/dynamic/containers.yml
+  notify:
+    - restart Traefik container
 
 - name: create Traefik container
   docker_container:
@@ -23,6 +25,7 @@
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
+      - "0.0.0.0:8080:8080"
     volumes:
       - "/srv/containers/traefik/config:/etc/traefik/:ro"
       - "/etc/letsencrypt/:/etc/letsencrypt:ro"
@@ -39,3 +42,4 @@
   loop:
     - 80
     - 443
+    - 8080
