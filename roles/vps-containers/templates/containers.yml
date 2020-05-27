@@ -51,6 +51,7 @@ http:
       tls:
         options: modern
       middlewares:
+        - "gitea-prefix"
         - "hsts-header"
     git_http:
       rule: "Host(`git.fkoehler.xyz`)"
@@ -59,6 +60,7 @@ http:
         - "http"
       middlewares:
         - "redirect-to-https"
+        - "gitea-prefix"
         - "hsts-header"
 
   #############################################################################
@@ -88,6 +90,11 @@ http:
         regex: "^https://(.*)/.well-known/(card|cal)dav"
         replacement: "https://${1}/remote.php/dav/"
         permanent: true
+
+    gitea-prefix:
+      stripPrefix:
+        prefixes:
+          - "/git.fkoehler.xyz"
 
   #############################################################################
   # Services
