@@ -1,3 +1,4 @@
 pacman -S certbot
 certbot register --agree-tos -m fabian.koehler@protonmail.ch
 certbot certonly --cert-name fkoehler.xyz -d fkoehler.xyz,www.fkoehler.xyz,git.fkoehler.xyz,nextcloud.fkoehler.xyz --standalone
+sudo docker exec -it gitea gitea admin create-user --username fkoehler --email "fabian.koehler@protonmail.ch" --admin --password <password>
