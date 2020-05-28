@@ -70,7 +70,7 @@ http:
     dashboard-auth:
       basicAuth:
         users:
-          - "{{traefik_dashboard_auth}}"
+          - "{{ traefik_dashboard_auth }}"
 
     redirect-to-https:
       redirectScheme:

@@ -1,3 +1,8 @@
+- name: check mandatory variables for Traefik
+  assert:
+    that:
+      - traefik_dashboard_auth
+
 - name: create directory for Traefik
   file:
     path: /srv/containers/traefik/config/dynamic

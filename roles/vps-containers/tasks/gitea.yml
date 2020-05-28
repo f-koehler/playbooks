@@ -1,3 +1,11 @@
+- name: check mandatory variables for Gitea
+  assert:
+    that:
+      - postgres_user_gitea
+      - postgres_password_gitea
+      - postgres_db_gitea
+      - gitea_secret_key
+
 - name: create directories for gitea
   file:
     path: "/srv/containers/gitea"
@@ -47,10 +55,3 @@
       - name: containers
     networks_cli_compatible: yes
     restart_policy: "unless-stopped"
-
-# - name: enable Gitea site
-#   copy:
-#     src: site-gitea.conf
-#     dest: /srv/containers/nginx/config/sites-enabled/gitea.conf
-#   notify:
-#     - restart nginx container
