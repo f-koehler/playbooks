@@ -27,10 +27,10 @@
     image: "gitea/gitea:latest"
     env:
       RUN_MODE: prod
-      # DOMAIN: git.fkoehler.xyz
-      # SSH_DOMAIN: git.fkoehler.xyz
+      DOMAIN: git.fkoehler.xyz
+      SSH_DOMAIN: git.fkoehler.xyz
       HTTP_PORT: "3000"
-      # ROOT_URL: "git.fkoehler.xyz"
+      ROOT_URL: "https://git.fkoehler.xyz"
       DB_TYPE: postgres
       DB_HOST: postgres
       DB_NAME: "{{ postgres_db_gitea }}"
