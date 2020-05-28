@@ -1,18 +1,7 @@
-- name: check mandatory variables for Nextcloud
-  assert:
-    that:
-      - postgres_user_nextcloud
-      - postgres_password_nextcloud
-      - postgres_db_nextcloud
-      - nextcloud_user_admin
-      - nextcloud_password_admin
-      - nextcloud_trusted_domains
-
 - name: create Nextcloud postgresql user
   postgresql_user:
     name: "{{ postgres_user_nextcloud }}"
     password: "{{ postgres_password_nextcloud }}"
-    role_attr_flags: NOSUPERUSER
     login_user: "{{ postgres_user_root }}"
     login_password: "{{ postgres_password_root }}"
     login_host: "127.0.0.1"
@@ -61,3 +50,10 @@
       - name: containers
     networks_cli_compatible: yes
     restart_policy: "unless-stopped"
+
+- name: enable Nextcloud site
+  copy:
+    src: site-nextcloud.conf
+    dest:  /srv/containers/nginx/config/sites-enabled/nextcloud.conf
+  notify:
+    - restart nginx container

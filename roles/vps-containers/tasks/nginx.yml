@@ -49,12 +49,12 @@
   notify:
     - restart nginx container
 
-# - name: enable default site
-#   copy:
-#     src: site-default.conf
-#     dest: /srv/containers/nginx/config/sites-enabled/default.conf
-#   notify:
-#     - restart nginx container
+- name: enable default site
+  copy:
+    src: site-default.conf
+    dest: /srv/containers/nginx/config/sites-enabled/default.conf
+  notify:
+    - restart nginx container
 
 - name: open ports for nginx
   ufw:

@@ -1,12 +1,7 @@
-- name: check mandatory variables for Postgres
-  assert:
-    that:
-      - postgres_user_root
-      - postgres_password_root
-
 - name: install the python postgres adapter
   package:
     name: python-psycopg2
+    state: present
 
 - name: create docker network
   docker_network:
