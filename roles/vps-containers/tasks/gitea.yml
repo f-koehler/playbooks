@@ -57,7 +57,6 @@
   notify:
     - restart nginx container
 
-
 - name: create directory for SSH forwarding script
   file:
     path: /app/gitea
