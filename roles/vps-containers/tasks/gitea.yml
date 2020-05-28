@@ -39,6 +39,9 @@
       INSTALL_LOCK: "true"
       SECRET_KEY: "{{ gitea_secret_key }}"
       DISABLE_REGISTRATION: "true"
+      SSH_LISTEN_PORT: "2222"
+    ports:
+      - "127.0.0.1:2222:22"
     volumes:
       - "/srv/containers/gitea:/data"
       - "/etc/localtime:/etc/localtime:ro"
@@ -53,3 +56,43 @@
     dest:  /srv/containers/nginx/config/sites-enabled/gitea.conf
   notify:
     - restart nginx container
+
+
+- name: create directory for SSH forwarding script
+  file:
+    path: /app/gitea
+    state: directory
+    recurse: yes
+
+- name: copy Gitea SSH forwarding script
+  copy:
+    src: gitea-ssh-forward.sh
+    dest: /app/gitea/gitea
+    mode: "755"
+
+- name: add git group
+  group:
+    name: git
+    state: present
+
+- name: add git user
+  user:
+    generate_ssh_key: yes
+    group: git
+    name: git
+    ssh_key_type: ed25519
+    home: /home/git
+    move_home: yes
+  register: git_user
+
+- name: symlink git user authorized keys file
+  file:
+    src: /srv/containers/gitea/git/.ssh/authorized_keys
+    dest: /home/git/.ssh/authorized_keys
+    state: link
+
+- name: authorized keys
+  lineinfile:
+    path: /srv/containers/gitea/git/.ssh/authorized_keys
+    owner: git
+    line: 'no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty {{ git_user["ssh_public_key"] }}'
