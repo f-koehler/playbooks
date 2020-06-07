@@ -41,7 +41,7 @@
 - name: create Telegraf InfluxDB user
   influxdb_user:
     user_name: "{{ influxdb_user_telegraf }}"
-    password: "{{ influxdb_password_telegraf }}"
+    user_password: "{{ influxdb_password_telegraf }}"
     login_username: "{{ influxdb_user_admin }}"
     login_password: "{{ influxdb_password_admin }}"
     grants:
@@ -65,3 +65,65 @@
       - name: containers
     networks_cli_compatible: yes
     restart_policy: "unless-stopped"
+
+- name: create Grafana InfluxDB user
+  influxdb_user:
+    user_name: "{{ influxdb_user_grafana }}"
+    user_password: "{{ influxdb_password_grafana }}"
+    login_username: "{{ influxdb_user_admin }}"
+    login_password: "{{ influxdb_password_admin }}"
+    grants:
+      - database: "{{ influxdb_db_telegraf }}"
+        privilege: "READ"
+
+- name: create Grafana postgresql user
+  postgresql_user:
+    name: "{{ postgres_user_grafana }}"
+    password: "{{ postgres_password_grafana }}"
+    login_user: "{{ postgres_user_root }}"
+    login_password: "{{ postgres_password_root }}"
+    login_host: "127.0.0.1"
+
+- name: create Nextcloud database
+  postgresql_db:
+    name: "{{ postgres_db_grafana }}"
+    owner: "{{ postgres_user_grafana }}"
+    encoding: UTF-8
+    login_user: "{{ postgres_user_root }}"
+    login_password: "{{ postgres_password_root }}"
+    login_host: "127.0.0.1"
+
+- name: create directories for grafana
+  file:
+    path: "/srv/containers/grafana/{{ item }}"
+    state: directory
+    recurse: yes
+    owner: "472"
+  loop:
+    - config
+    - data
+    - logs
+    - plugins
+
+- name: generate Grafana config
+  template:
+    src: grafana.ini
+    dest: /srv/containers/grafana/config/grafana.ini
+  notify:
+    - restart Grafana container
+
+- name: create Grafana container
+  docker_container:
+    name: grafana
+    image: "grafana/grafana:latest"
+    ports:
+      "3000:3000"
+    networks:
+      - name: containers
+    networks_cli_compatible: yes
+    restart_policy: "unless-stopped"
+    volumes:
+      - "/srv/containers/grafana/config:/etc/grafana"
+      - "/srv/containers/grafana/data:/var/lib/grafana/"
+      - "/srv/containers/grafana/logs:/var/log/grafana/"
+      - "/srv/containers/grafana/plugins:/var/lib/grafana/plugins/"

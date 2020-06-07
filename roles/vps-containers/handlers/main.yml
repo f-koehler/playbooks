@@ -13,6 +13,11 @@
     name: telegraf
     restart: yes
 
+- name: restart Grafana container
+  docker_container:
+    name: grafana
+    restart: yes
+
 - name: nextcloud add missing indicies
   command: docker exec -it --user www-data nextcloud php occ db:add-missing-indices
 
