@@ -53,7 +53,7 @@
 
 - name: enable Nextcloud site
   copy:
-    src: site-nextcloud.conf
+    src: nginx/nextcloud.conf
     dest:  /srv/containers/nginx/config/sites-enabled/nextcloud.conf
   notify:
     - restart nginx container
