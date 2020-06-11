@@ -3,7 +3,7 @@
   vars:
     timezone: "Europe/Berlin"
   vars_files:
-    - secrets.yml
+    - vps-secrets.yml
   roles:
     # - vps-kernel
     # - hardened-ssh-server
