@@ -42,16 +42,16 @@
     src: "{{ item }}"
     dest: "/srv/containers/nginx/config/{{ item }}"
   loop:
-    - nginx/mime.types
-    - nginx/nginx.conf
-    - nginx/proxy.conf
-    - nginx/ssl.conf
+    - mime.types
+    - nginx.conf
+    - proxy.conf
+    - ssl.conf
   notify:
     - restart nginx container
 
 - name: enable default site
   copy:
-    src: nginx/default.conf
+    src: default.conf
     dest: /srv/containers/nginx/config/sites-enabled/default.conf
   notify:
     - restart nginx container

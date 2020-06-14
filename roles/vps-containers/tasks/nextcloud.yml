@@ -50,10 +50,3 @@
       - name: containers
     networks_cli_compatible: yes
     restart_policy: "unless-stopped"
-
-- name: enable Nextcloud site
-  copy:
-    src: nginx/nextcloud.conf
-    dest:  /srv/containers/nginx/config/sites-enabled/nextcloud.conf
-  notify:
-    - restart nginx container

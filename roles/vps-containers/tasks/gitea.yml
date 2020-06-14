@@ -50,13 +50,6 @@
     networks_cli_compatible: yes
     restart_policy: "unless-stopped"
 
-- name: enable Gitea site
-  copy:
-    src: nginx/gitea.conf
-    dest:  /srv/containers/nginx/config/sites-enabled/gitea.conf
-  notify:
-    - restart nginx container
-
 - name: create directory for SSH forwarding script
   file:
     path: /app/gitea
