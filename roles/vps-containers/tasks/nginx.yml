@@ -49,13 +49,6 @@
   notify:
     - restart nginx container
 
-- name: enable default site
-  copy:
-    src: default.conf
-    dest: /srv/containers/nginx/config/sites-enabled/default.conf
-  notify:
-    - restart nginx container
-
 - name: open ports for nginx
   ufw:
     rule: allow

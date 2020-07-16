@@ -18,7 +18,7 @@
 - name: create Nextcloud container
   docker_container:
     name: nextcloud
-    image: "nextcloud:stable"
+    image: "nextcloud:latest"
     env:
       NEXTCLOUD_ADMIN_USER: "{{ nextcloud_user_admin }}"
       NEXTCLOUD_ADMIN_PASSWORD: "{{ nextcloud_password_admin }}"
