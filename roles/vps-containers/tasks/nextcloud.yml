@@ -38,15 +38,15 @@
   #   - nextcloud add missing indicies
   #   - nextcloud convert file cache
 
-- name: create Nextcloud News Updater container
-  docker_container:
-    name: nextcloud-news-updater
-    image: "fabiankoehler/nextcloud-news-updater:latest"
-    env:
-      UPDATER_USER: "{{ nextcloud_user_admin }}"
-      UPDATER_PASSWORD: "{{ nextcloud_password_admin }}"
-      UPDATER_URL: "https://nextcloud.fkoehler.xyz"
-    networks:
-      - name: containers
-    networks_cli_compatible: yes
-    restart_policy: "unless-stopped"
+# - name: create Nextcloud News Updater container
+#   docker_container:
+#     name: nextcloud-news-updater
+#     image: "fabiankoehler/nextcloud-news-updater:latest"
+#     env:
+#       UPDATER_USER: "{{ nextcloud_user_admin }}"
+#       UPDATER_PASSWORD: "{{ nextcloud_password_admin }}"
+#       UPDATER_URL: "https://nextcloud.fkoehler.xyz"
+#     networks:
+#       - name: containers
+#     networks_cli_compatible: yes
+#     restart_policy: "unless-stopped"
