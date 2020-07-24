@@ -1,16 +1,4 @@
-- name: gather haveged package names
-  include_vars: "{{ item }}"
+- name: get haveged installation tasks
+  include_tasks: "{{ item }}"
   with_first_found:
     - "{{ ansible_distribution|lower }}.yml"
-  tags: vars
-
-- name: install haveged
-  package:
-    name: "{{ haveged_packages }}"
-
-- name: start and enable haveged
-  service:
-    name: "{{ item }}"
-    state: started
-    enabled: yes
-  loop: "{{ haveged_services }}"

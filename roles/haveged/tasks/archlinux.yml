@@ -1,0 +1,10 @@
+- name: install haveged
+  package:
+    name: haveged
+    state: present
+
+- name: start/enable haveged
+  service:
+    name: haveged
+    state: started
+    enabled: yes

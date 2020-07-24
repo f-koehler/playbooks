@@ -1,4 +1,5 @@
 - name: get docker installation tasks
   include_tasks: "{{ item }}"
   with_first_found:
+    - "{{ ansible_distribution|lower }}-{{ ansible_distribution_version }}-{{ ansible_architecture|lower }}.yml"
     - "{{ ansible_distribution|lower }}.yml"
