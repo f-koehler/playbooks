@@ -1,0 +1,8 @@
+- package:
+    name:
+      linux-headers
+
+- aur:
+    name:
+      - openafs
+      - openafs-modules-dkms

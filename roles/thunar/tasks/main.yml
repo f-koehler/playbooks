@@ -1,0 +1,20 @@
+- name: install thunar and dependencies
+  package:
+    name:
+      - thunar
+      - gvfs
+      - gtk3
+      - gvfs-afc
+      - gvfs-gphoto2
+      - gvfs-mtp
+      - gvfs-nfs
+      - gvfs-smb
+      - thunar-archive-plugin
+      - thunar-media-tags-plugin
+      - thunar-volman
+      - tumbler
+      - ffmpegthumbnailer
+      - freetype2
+      - libgsf
+      - libopenraw
+      - poppler-glib

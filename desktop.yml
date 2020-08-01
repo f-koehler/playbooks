@@ -3,9 +3,14 @@
   become: yes
   vars:
     timezone: "Europe/Berlin"
-    kvm_users:
-      - fkoehler
+  vars_files:
+    - secrets/desktop.yml
   roles:
     - localtime
     - haveged
-    - kvm
+    - thunar
+    - yay
+    - openafs
+
+    - docker
+    - heimdall
