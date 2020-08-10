@@ -25,6 +25,7 @@
   docker_container:
     name: gitea
     image: "gitea/gitea:latest"
+    pull: yes
     env:
       RUN_MODE: prod
       DOMAIN: git.fkoehler.xyz

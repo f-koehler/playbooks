@@ -27,6 +27,7 @@
   docker_container:
     name: traefik
     image: "traefik:latest"
+    pull: yes
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"

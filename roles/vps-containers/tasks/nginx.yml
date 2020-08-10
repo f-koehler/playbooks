@@ -17,6 +17,7 @@
   docker_container:
     name: nginx
     image: "nginx:alpine"
+    pull: yes
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"

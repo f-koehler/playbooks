@@ -13,6 +13,7 @@
   docker_container:
     name: influxdb
     image: "influxdb:latest"
+    pull: yes
     env:
       INFLUXDB_HTTP_AUTH_ENABLED: "TRUE"
       INFLUXDB_ADMIN_USER: "{{ influxdb_user_admin }}"
@@ -59,6 +60,7 @@
   docker_container:
     name: telegraf
     image: "telegraf:latest"
+    pull: yes
     volumes:
       - "/srv/containers/telegraf/config/telegraf.conf:/etc/telegraf/telegraf.conf:ro"
     networks:
@@ -104,6 +106,7 @@
   docker_container:
     name: grafana
     image: "grafana/grafana:latest"
+    pull: yes
     networks:
       - name: containers
     networks_cli_compatible: yes
