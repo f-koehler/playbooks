@@ -16,11 +16,13 @@
   copy:
     src: modules_intel.conf
     dest: /etc/modules-load.d/kvm_intel.conf
+    mode: "660"
 
 - name: "set module options"
   copy:
     src: options_intel.conf
     dest: /etc/modprobe.d/kvm_intel.conf
+    mode: "660"
 
 
 - name: "install qemu and libvirt"
@@ -44,6 +46,7 @@
   copy:
     src: libvirt.rules
     dest: /etc/polkit-1/rules.d/50-libvirt.rules
+    mode: "660"
 
 - name: "create kvm group"
   group:

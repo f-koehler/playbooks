@@ -1,10 +1,8 @@
-- hosts: 127.0.0.1
+- hosts: desktops
   connection: local
   become: yes
   vars:
     timezone: "Europe/Berlin"
-  vars_files:
-    - secrets/desktop.yml
   roles:
     - localtime
     - haveged
@@ -13,4 +11,5 @@
     - openafs
 
     - docker
+    - kvm
     - heimdall
