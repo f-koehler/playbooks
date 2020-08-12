@@ -1,0 +1,138 @@
+- name: install cifs utils
+  package:
+    name: cifs-utils
+    state: present
+
+- name: create mount point
+  file:
+    path: /stash
+    state: directory
+
+- name: create credentials folder
+  file:
+    path: /etc/samba/credentials/
+    mode: "700"
+    state: directory
+
+- name: create credentials file
+  template:
+    src: credentials
+    dest: /etc/samba/credentials/stash
+    mode: "600"
+
+- name: create mount
+  template:
+    src: mount.mount
+    dest: /etc/systemd/system/stash.mount
+    mode: "600"
+  register: created_mount
+
+- name: reload systemd daemon
+  systemd:
+    daemon_reload: yes
+  when: created_mount.changed
+
+- name: mount samba share
+  systemd:
+    name: stash.mount
+    state: started
+    enabled: yes
+
+
+- name: create container dirs
+  file:
+    path: "/srv/containers/{{ item }}"
+    state: directory
+    recurse: yes
+    owner: "1000"
+    group: "1000"
+  loop:
+    - "transmission/config"
+    - "jackett/config"
+    - "radarr/config"
+    - "sonarr/config"
+
+- name: docker network for download stack
+  docker_network:
+    name: download_stack
+
+- name: install transmission
+  docker_container:
+    name: transmission
+    image: "linuxserver/transmission:latest"
+    pull: yes
+    ports:
+      - "9091:9091"
+      - "51413:51413"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "Europe/Berlin"
+      USER: "{{ transmission_user }}"
+      PASS: "{{ transmission_pass }}"
+    volumes:
+      - "/srv/containers/transmission/config:/config"
+      - "/stash/transmission:/downloads"
+    restart_policy: "unless-stopped"
+    networks:
+      - name: download_stack
+    networks_cli_compatible: yes
+
+- name: install jackett
+  docker_container:
+    name: jackett
+    image: "linuxserver/jackett:latest"
+    pull: yes
+    ports:
+      - "9117:9117"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "Europe/Berlin"
+      AUTO_UPDATE: "true"
+    volumes:
+      - "/srv/containers/jackett/config:/config"
+    restart_policy: "unless-stopped"
+    networks:
+      - name: download_stack
+    networks_cli_compatible: yes
+
+- name: install radarr
+  docker_container:
+    name: radarr
+    image: "linuxserver/radarr:latest"
+    pull: yes
+    ports:
+      - "7878:7878"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "Europe/Berlin"
+    volumes:
+      - "/srv/containers/radarr/config:/config"
+      - "/stash/Media:/movies"
+      - "/stash/transmission:/downloads"
+    restart_policy: "unless-stopped"
+    networks:
+      - name: download_stack
+    networks_cli_compatible: yes
+
+- name: install sonarr
+  docker_container:
+    name: sonarr
+    image: "linuxserver/sonarr:latest"
+    pull: yes
+    ports:
+      - "8989:8989"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "Europe/Berlin"
+    volumes:
+      - "/srv/containers/sonarr/config:/config"
+      - "/stash/Media:/tv"
+      - "/stash/transmission:/downloads"
+    restart_policy: "unless-stopped"
+    networks:
+      - name: download_stack
+    networks_cli_compatible: yes
