@@ -1,0 +1,10 @@
+- name: install virtualenv
+  package:
+    name: python-virtualenv
+
+- name: install wgadmin
+  pip:
+    name:
+      - wgadmin
+    state: latest
+    virtualenv: ~/wgadmin/
