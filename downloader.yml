@@ -1,14 +1,10 @@
-- hosts: desktops
+- hosts: downloader
   become: yes
   vars:
     timezone: "Europe/Berlin"
   roles:
     - localtime
     - haveged
-    - thunar
-    - yay
-    - openafs
 
     - docker
-    - kvm
-    - heimdall
+    - mullvad-wg

@@ -4,5 +4,8 @@ fkoehler.xyz
 [desktops]
 desktop.lan
 
+[downloader]
+192.168.178.249
+
 [personalvpn]
 fkoehler.xyz

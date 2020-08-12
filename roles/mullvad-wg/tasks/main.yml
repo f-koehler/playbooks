@@ -1,0 +1,25 @@
+- name: install wireguard
+  package:
+    name:
+      - linux-raspberrypi-headers
+      - wireguard-dkms
+      - wireguard-tools
+    state: present
+
+- name: enable systemd-resolved
+  systemd:
+    name: systemd-resolved.service
+    enabled: yes
+    state: started
+
+- name: configure wireguard
+  template:
+    src: wg0.conf
+    dest: /etc/wireguard/wg0.conf
+    mode: "660"
+
+- name: enable wireguard connection
+  systemd:
+    name: wg-quick@wg0.service
+    enabled: yes
+    state: started
