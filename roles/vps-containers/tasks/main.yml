@@ -10,4 +10,5 @@
 - include_tasks: nextcloud.yml
 - include_tasks: gitea.yml
 - include_tasks: nginx.yml
+- include_tasks: firefox-sync.yml
 # - include_tasks: tig.yml
