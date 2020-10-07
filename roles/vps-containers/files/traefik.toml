@@ -132,7 +132,7 @@
   # Optional
   # Default: true
   #
-  # dashboard = false
+  dashboard = true
 
 ################################################################
 # Ping configuration
