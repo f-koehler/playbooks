@@ -52,6 +52,10 @@
       SYNCSERVER_SQLURI: "sqlite:////data/syncserver.db"
       SYNCSERVER_BATCH_UPLOAD_ENABLED: "true"
       SYNCSERVER_FORCE_WSGI_ENVIRON: "true"
+    labels:
+      traefik.http.routers.firefox.rule: "Host(`firefox.fkoehler.xyz`)"
+      traefik.http.routers.firefox.tls: "true"
+      traefik.http.routers.firefox.tls.certresolver: "letsencrypt"
     volumes:
       - "/srv/containers/firefoxsync:/data"
     ports:

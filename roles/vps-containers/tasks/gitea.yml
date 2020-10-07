@@ -41,6 +41,11 @@
       SECRET_KEY: "{{ gitea_secret_key }}"
       DISABLE_REGISTRATION: "true"
       SSH_LISTEN_PORT: "2222"
+    labels:
+      traefik.http.routers.git.rule: "Host(`git.fkoehler.xyz`)"
+      traefik.http.routers.git.tls: "true"
+      traefik.http.routers.git.tls.certresolver: "letsencrypt"
+      traefik.http.services.git.loadbalancer.server.port: "3000"
     ports:
       - "127.0.0.1:2222:22"
     volumes:

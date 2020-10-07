@@ -4,11 +4,11 @@
     recurse: yes
     path: /srv/containers
 
-# - include_tasks: traefik.yml
 
 - include_tasks: postgres.yml
 - include_tasks: nextcloud.yml
 - include_tasks: gitea.yml
-- include_tasks: nginx.yml
+# - include_tasks: nginx.yml
 - include_tasks: firefox-sync.yml
+- include_tasks: traefik.yml
 # - include_tasks: tig.yml

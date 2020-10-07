@@ -1,25 +1,18 @@
-- name: check mandatory variables for Traefik
-  assert:
-    that:
-      - traefik_dashboard_auth
-
 - name: create directory for Traefik
   file:
-    path: /srv/containers/traefik/config/dynamic
+    path: /srv/containers/traefik/
     state: directory
     recurse: yes
 
+- name: create an empty acme.json
+  file:
+    path: /srv/containers/traefik/acme.json
+    state: touch
+
 - name: copy static Traefik config
   copy:
-    src: traefik.yml
-    dest: /srv/containers/traefik/config/traefik.yml
-  notify:
-    - restart Traefik container
-
-- name: copy dynamic Traefik config
-  template:
-    src: containers.yml
-    dest: /srv/containers/traefik/config/dynamic/containers.yml
+    src: traefik.toml
+    dest: /srv/containers/traefik/traefik.toml
   notify:
     - restart Traefik container
 
@@ -31,11 +24,14 @@
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
-      - "0.0.0.0:8080:8080"
+      # - "0.0.0.0:8080:8080"
     volumes:
-      - "/srv/containers/traefik/config:/etc/traefik/:ro"
+      - "/srv/containers/traefik/traefik.toml:/etc/traefik/traefik.toml:ro"
+      - "/srv/containers/traefik/acme.json:/etc/traefik/acme.json:ro"
       - "/etc/letsencrypt/:/etc/letsencrypt:ro"
       - "/etc/localtime:/etc/localtime:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    command: --providers.docker
     networks:
       - name: containers
     networks_cli_compatible: yes
@@ -48,4 +44,3 @@
   loop:
     - 80
     - 443
-    - 8080
