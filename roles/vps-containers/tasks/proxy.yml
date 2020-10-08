@@ -12,10 +12,13 @@
 
 - name: copy static Traefik config
   copy:
-    src: traefik.toml
-    dest: /srv/containers/traefik/traefik.toml
+    src: "{{ item }}"
+    dest: "/srv/containers/traefik/{{ item }}"
   notify:
     - restart Traefik container
+  loop:
+    - traefik.toml
+    - traefik-dynamic.toml
 
 - name: create Traefik container
   docker_container:
@@ -27,6 +30,7 @@
       - "0.0.0.0:443:443"
     volumes:
       - "/srv/containers/traefik/traefik.toml:/etc/traefik/traefik.toml:ro"
+      - "/srv/containers/traefik/traefik-dynamic.toml:/etc/traefik/traefik-dynamic.toml:ro"
       - "/srv/containers/traefik/acme.json:/acme.json"
       - "/etc/localtime:/etc/localtime:ro"
       - "/var/run/docker.sock:/var/run/docker.sock"
