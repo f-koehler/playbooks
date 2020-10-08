@@ -29,10 +29,7 @@
       traefik.http.routers.bitwarden.rule: "Host(`bitwarden.fkoehler.xyz`)"
       traefik.http.routers.bitwarden.tls: "true"
       traefik.http.routers.bitwarden.tls.certresolver: "letsencrypt"
-      traefik.http.services.bitwarden.loadbalancer.server.port: "7000"
       traefik.http.routers.bitwarden.middlewares: "customHeaders"
-    ports:
-      - "7000:80"
     volumes:
       - "/srv/containers/bitwarden:/data"
     networks:
