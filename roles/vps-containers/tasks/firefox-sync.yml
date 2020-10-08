@@ -56,6 +56,7 @@
       traefik.http.routers.firefox.rule: "Host(`firefox.fkoehler.xyz`)"
       traefik.http.routers.firefox.tls: "true"
       traefik.http.routers.firefox.tls.certresolver: "letsencrypt"
+      traefik.http.routers.firefox.middlewares: "customHeaders"
     volumes:
       - "/srv/containers/firefoxsync:/data"
     ports:

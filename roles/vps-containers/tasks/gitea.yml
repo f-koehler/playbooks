@@ -46,6 +46,7 @@
       traefik.http.routers.git.tls: "true"
       traefik.http.routers.git.tls.certresolver: "letsencrypt"
       traefik.http.services.git.loadbalancer.server.port: "3000"
+      traefik.http.routers.git.middlewares: "customHeaders"
     ports:
       - "127.0.0.1:2222:22"
     volumes:

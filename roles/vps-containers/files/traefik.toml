@@ -41,15 +41,6 @@
   [certificatesResolvers.letsencrypt.acme.httpChallenge]
     entryPoint = "web"
 
-[http.middlewares]
-  [http.middlewares.customHeaders.headers]
-    frameDeny = true
-    stsSeconds = 63072000
-    stsPreload = true
-    stsIncludeSubdomains = true
-    browserXssFilter = true
-    contentTypeNosniff = true
-
 ################################################################
 # Traefik logs configuration
 ################################################################
