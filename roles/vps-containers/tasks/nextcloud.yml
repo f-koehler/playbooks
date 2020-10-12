@@ -33,7 +33,10 @@
       traefik.http.routers.nextcloud.rule: "Host(`nextcloud.fkoehler.xyz`)"
       traefik.http.routers.nextcloud.tls: "true"
       traefik.http.routers.nextcloud.tls.certresolver: "letsencrypt"
-      traefik.http.routers.nextcloud.middlewares: "customHeaders"
+      traefik.http.routers.nextcloud.middlewares: "customHeaders, nextcloud-dav"
+      traefik.http.middlewares.nextcloud-dav.redirectRegex.permanent: "true"
+      traefik.http.middlewares.nextcloud-dav.redirectRegex.replacement: "https://${1}/remote.php/dav/"
+      traefik.http.middlewares.nextcloud-dav.redirectRegex.regex: "https://(.*)/.well-known/(card|cal)dav"
     volumes:
       - "/srv/containers/nextcloud:/var/www/html/"
     networks:
