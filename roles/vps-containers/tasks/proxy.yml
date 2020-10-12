@@ -41,7 +41,7 @@
       traefik.http.routers.dashboard.tls.certresolver: "letsencrypt"
       traefik.http.routers.dashboard.middlewares: "auth"
       traefik.http.middlewares.auth.basicauth.users: "{{ traefik_dashboard_auth }}"
-      traefik.http.middlewares.customHeaders.headers.frameDeny: "true"
+      traefik.http.middlewares.customHeaders.headers.customFrameOptionsValue: "SAMEORIGIN"
       traefik.http.middlewares.customHeaders.headers.stsSeconds: "63072000"
       traefik.http.middlewares.customHeaders.headers.stsPreload: "true"
       traefik.http.middlewares.customHeaders.headers.stsIncludeSubdomains: "true"
