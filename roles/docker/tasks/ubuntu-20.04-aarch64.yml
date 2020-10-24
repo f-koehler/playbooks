@@ -32,7 +32,7 @@
 
 - name: add docker PPA
   apt_repository:
-    repo: "deb [arch=armhf] https://download.docker.com/linux/ubuntu focal stable"
+    repo: "deb [arch=arm64] https://download.docker.com/linux/ubuntu focal stable"
     state: present
 
 - name: install docker

@@ -27,30 +27,43 @@
     mode: "600"
   register: created_mount
 
+- name: create automount
+  copy:
+    src: stash.automount
+    dest: /etc/systemd/system/stash.automount
+    mode: "600"
+  register: created_mount
+
 - name: reload systemd daemon
   systemd:
     daemon_reload: yes
   when: created_mount.changed
 
-- name: mount samba share
+- name: disable mount
   systemd:
-    name: stash.mount
+    name: stash.automount
+    state: stopped
+    enabled: no
+
+- name: enable automount
+  systemd:
+    name: stash.automount
     state: started
     enabled: yes
-
 
 - name: create container dirs
   file:
     path: "/srv/containers/{{ item }}"
     state: directory
     recurse: yes
-    owner: "1000"
-    group: "1000"
+    owner: "1001"
+    group: "1001"
   loop:
     - "transmission/config"
     - "jackett/config"
     - "radarr/config"
     - "sonarr/config"
+    - "bazarr/config"
 
 - name: docker network for download stack
   docker_network:
@@ -65,11 +78,11 @@
       - "9091:9091"
       - "51413:51413"
     env:
-      PUID: "1000"
-      PGID: "1000"
+      PUID: "1001"
+      PGID: "1001"
       TZ: "Europe/Berlin"
       USER: "{{ transmission_user }}"
-      PASS: "{{ transmission_pass }}"
+      PASS: "{{ transmission_password }}"
     volumes:
       - "/srv/containers/transmission/config:/config"
       - "/stash/transmission:/downloads"
@@ -86,8 +99,8 @@
     ports:
       - "9117:9117"
     env:
-      PUID: "1000"
-      PGID: "1000"
+      PUID: "1001"
+      PGID: "1001"
       TZ: "Europe/Berlin"
       AUTO_UPDATE: "true"
     volumes:
@@ -105,8 +118,8 @@
     ports:
       - "7878:7878"
     env:
-      PUID: "1000"
-      PGID: "1000"
+      PUID: "1001"
+      PGID: "1001"
       TZ: "Europe/Berlin"
     volumes:
       - "/srv/containers/radarr/config:/config"
@@ -125,11 +138,32 @@
     ports:
       - "8989:8989"
     env:
-      PUID: "1000"
-      PGID: "1000"
+      PUID: "1001"
+      PGID: "1001"
       TZ: "Europe/Berlin"
     volumes:
       - "/srv/containers/sonarr/config:/config"
+      - "/stash/Media:/tv"
+      - "/stash/transmission:/downloads"
+    restart_policy: "unless-stopped"
+    networks:
+      - name: download_stack
+    networks_cli_compatible: yes
+
+- name: install bazarr
+  docker_container:
+    name: bazarr
+    image: "linuxserver/bazarr:latest"
+    pull: yes
+    ports:
+      - "6767:6767"
+    env:
+      PUID: "1001"
+      PGID: "1001"
+      TZ: "Europe/Berlin"
+    volumes:
+      - "/srv/containers/bazarr/config:/config"
+      - "/stash/Media:/movies"
       - "/stash/Media:/tv"
       - "/stash/transmission:/downloads"
     restart_policy: "unless-stopped"

@@ -3,9 +3,8 @@
   vars:
     timezone: "Europe/Berlin"
   roles:
-    - localtime
-    - haveged
-
-    - docker
-    - mullvad-wg
+    # - localtime
+    # - haveged
+    # - docker
+    # - mullvad-wg
     - download-stack

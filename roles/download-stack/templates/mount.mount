@@ -4,7 +4,7 @@ Description=Mount samba share stash at boot
 [Mount]
 What=//{{ nas_ip }}/stash
 Where=/stash
-Options=_netdev,credentials=/etc/samba/credentials/stash,iocharset=utf8,rw,uid=1000,gid=1000
+Options=_netdev,credentials=/etc/samba/credentials/stash,iocharset=utf8,rw,uid=1001,gid=1001
 Type=cifs
 TimeoutSec=30
 

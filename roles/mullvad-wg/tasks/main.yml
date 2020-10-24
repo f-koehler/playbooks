@@ -1,25 +1,52 @@
-- name: install wireguard
-  package:
-    name:
-      - linux-raspberrypi-headers
-      - wireguard-dkms
-      - wireguard-tools
-    state: present
+- name: find mullvad config files
+  find:
+    path: "/etc/wireguard/"
+    file_type: "file"
+  register: config_files
 
-- name: enable systemd-resolved
-  systemd:
-    name: systemd-resolved.service
-    enabled: yes
-    state: started
+- name: add PostUp hook
+  community.general.ini_file:
+    path: "{{ item.path }}"
+    section: "Interface"
+    option: "PostUp"
+    value: "iptables -I OUTPUT ! -o %i -m mark ! --mark $(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT && ip6tables -I OUTPUT ! -o %i -m mark ! --mark $(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT && systemd-resolve -i %i --set-dns=193.138.218.74 --set-domain=~. && iptables -I OUTPUT -s 192.168.178.0/24 -j ACCEPT"
+    mode: "0600"
+  loop: "{{ config_files.files }}"
 
-- name: configure wireguard
-  template:
-    src: wg0.conf
-    dest: /etc/wireguard/wg0.conf
-    mode: "660"
+- name: add PreDown hook
+  community.general.ini_file:
+    path: "{{ item.path }}"
+    section: "Interface"
+    option: "PreDown"
+    value: "iptables -D OUTPUT ! -o %i -m mark ! --mark $(wg show  %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT && ip6tables -D OUTPUT ! -o %i -m mark ! --mark $(wg show  %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT"
+    mode: "0600"
+  loop: "{{ config_files.files }}"
 
-- name: enable wireguard connection
-  systemd:
-    name: wg-quick@wg0.service
-    enabled: yes
-    state: started
+
+# - name: install wireguard
+#   package:
+#     name: "{{ item }}"
+#     state: present
+#   loop:
+#     # - linux-raspberrypi-headers
+#     # - wireguard-dkms
+#     - wireguard-tools
+#     - resolvconf
+
+# - name: enable systemd-resolved
+#   systemd:
+#     name: systemd-resolved.service
+#     enabled: yes
+#     state: started
+
+# - name: configure wireguard
+#   template:
+#     src: wg0.conf
+#     dest: /etc/wireguard/wg0.conf
+#     mode: "660"
+
+# - name: enable wireguard connection
+#   systemd:
+#     name: wg-quick@wg0.service
+#     enabled: yes
+#     state: started
