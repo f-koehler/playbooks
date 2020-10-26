@@ -1,0 +1,8 @@
+- hosts: workstations
+  become: yes
+  vars:
+    timezone: "Europe/Berlin"
+  roles:
+    - localtime
+    - haveged
+    - desktop

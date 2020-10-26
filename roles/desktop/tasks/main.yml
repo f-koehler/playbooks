@@ -1,0 +1,140 @@
+- name: install lightdm
+  package:
+    name: "{{ item }}"
+  loop:
+    - accountsservice
+    - lightdm
+    - lightdm-gtk-greeter
+    - lightdm-gtk-greeter-settings
+    - xorg-server-xephyr
+
+- name: start lightdm
+  service:
+    name: lightdm
+    state: started
+    enabled: yes
+
+- name: install gvfs
+  package:
+    name: "{{ item }}"
+  loop:
+    - gvfs
+    - gvfs-afc
+    - gvfs-goa
+    - gvfs-google
+    - gvfs-gphoto2
+    - gvfs-mtp
+    - gvfs-nfs
+    - gvfs-smb
+
+- name: install i3
+  package:
+    name: "{{ item }}"
+  loop:
+    - i3-gaps
+    - i3lock
+    - perl-anyevent-i3
+    - perl-json-xs
+
+- name: install sway
+  package:
+    name: "{{ item }}"
+  loop:
+    - sway
+    - grim
+    - slurp
+    - swayidle
+    - swaylock
+    - xorg-server-xwayland
+
+- name: install alacritty
+  package:
+    name: "{{ item }}"
+  loop:
+    - alacritty
+    - ncurses
+
+- name: install thunar
+  package:
+    name: "{{ item }}"
+  loop:
+    - gtk3
+    - gvfs
+    - thunar
+    - thunar-archive-plugin
+    - thunar-media-tags-plugin
+    - thunar-volman
+    - tumbler
+
+- name: install file-roller
+  package:
+    name: "{{ item }}"
+  loop:
+    - file-roller
+    - lrzip
+    - p7zip
+    - squashfs-tools
+    - unace
+    - unrar
+
+- name: install firefox
+  package:
+    name: firefox-developer-edition
+
+- name: install thunderbird
+  package:
+    name: thunderbird
+
+- name: install gimp
+  package:
+    name: "{{ item }}"
+  loop:
+    - curl
+    - ghostscript
+    - gutenprint
+    - poppler-glib
+
+- name: install inkscape
+  package:
+    name: "{{ item }}"
+  loop:
+    - inkscape
+    - fig2dev
+    - pstoedit
+    - gvfs
+    - python-lxml
+    - python-numpy
+    - scour
+    - texlive-core
+
+- name: install evince
+  package:
+    name: "{{ item }}"
+  loop:
+    - evince
+    - gvfs
+    - texlive-bin
+
+- name: install nm-applet
+  package:
+    name: network-manager-applet
+
+- name: install nautilus
+  package:
+    name: "{{ item }}"
+  loop:
+    - easytag
+    - filemanager-actions
+    - nautilus
+    - nautilus-image-converter
+    - nautilus-sendto
+    - nautilus-share
+    - python-nautilus
+    - seahorse
+    - seahorse-nautilus
+    - sushi
+    - unoconv
+
+- name: install nextcloud
+  package:
+    name: nextcloud-client

@@ -1,8 +1,8 @@
 [webservers]
 fkoehler.xyz
 
-[desktops]
-desktop.lan
+[workstations]
+zoq45
 
 [downloader]
 downloader
