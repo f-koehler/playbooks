@@ -5,19 +5,10 @@
   vars_files:
     - secrets/vps.yml
   roles:
-    # - vps-kernel
-    # - hardened-ssh-server
-    # - firewall
-    # - localtime
-    # - haveged
-    # - docker
+    - vps-kernel
+    - firewall
+    - hardened-ssh-server
+    - localtime
+    - haveged
+    - docker
     - vps-containers
-
-    # - personal-vpn
-    # - anki-sync-server
-    # - logrotate
-    # - vps-nginx
-    # - vps-goaccess
-    # - netdata
-    # - netdata-config
-    # - heimdall

@@ -4,3 +4,10 @@
     dest: /etc/ssh/sshd_config
   notify:
     - restart ssh server
+
+- name: open ports for ssh server
+  ufw:
+    rule: allow
+    port: "{{ item | int }}"
+  loop:
+    - 20257
