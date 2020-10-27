@@ -1,3 +1,20 @@
+- name: create user to build AUR packages
+  user:
+    name: "{{ aur_user }}"
+    group: wheel
+    system: yes
+
+- name: make sure that the AUR user does not need a password for pacman
+  lineinfile:
+    path: /etc/sudoers.d/11-{{ aur_user }}
+    line: "{{ aur_user }} ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+    create: yes
+    validate: "visudo -cf %s"
+    user: root
+    group: root
+    mode: "600"
+
 - name: install yay
   aur:
     name: yay
+  become_user: "{{ aur_user }}"

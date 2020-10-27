@@ -142,11 +142,24 @@
 - name: install GTK nordic theme
   aur:
     name: nordic-theme-git
+  become_user: "{{ aur_user }}"
 
 - name: install linux notification center
   aur:
     name: deadd-notification-center-bin
+  become_user: "{{ aur_user }}"
 
 - name: install bitwarden
   aur:
-    name: bitwarden-bin
+    name: bitwarden
+  become_user: "{{ aur_user }}"
+
+- name: install mpv
+  package:
+    name: "{{ item }}"
+  loop:
+    - mpv
+    - youtube-dl
+    - ffmpeg
+    - python-pycryptodome
+    - rtmpdump

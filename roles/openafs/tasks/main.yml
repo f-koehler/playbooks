@@ -5,6 +5,7 @@
 - name: install openafs including kernel modules
   aur:
     name: "{{ item }}"
+  become_user: "{{ aur_user }}"
   loop:
     - openafs
     - openafs-modules-dkms
