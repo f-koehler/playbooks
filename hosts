@@ -1,11 +1,8 @@
 [webservers]
-fkoehler.xyz
+vps
 
 [workstations]
 zoq45
 
 [downloader]
 downloader
-
-[personalvpn]
-fkoehler.xyz

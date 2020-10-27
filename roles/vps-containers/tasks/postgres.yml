@@ -18,6 +18,8 @@
     name: postgres
     image: "postgres:13-alpine"
     pull: yes
+    container_default_behavior: no_defaults
+    network_mode: default
     ports:
       - "5432:5432"
     env:

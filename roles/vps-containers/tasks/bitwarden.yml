@@ -20,6 +20,8 @@
     name: bitwarden
     image: "bitwardenrs/server-postgresql:latest"
     pull: yes
+    container_default_behavior: no_defaults
+    network_mode: default
     env:
       ADMIN_TOKEN: "{{ bitwarden_admin_token }}"
       DATABASE_URL: "postgresql://{{ postgres_user_bitwarden }}:{{ postgres_password_bitwarden }}@postgres/{{ postgres_db_bitwarden }}"

@@ -25,6 +25,8 @@
     name: traefik
     image: "traefik:latest"
     pull: yes
+    container_default_behavior: no_defaults
+    network_mode: default
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"

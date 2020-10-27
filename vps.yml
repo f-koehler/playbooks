@@ -2,8 +2,6 @@
   become: yes
   vars:
     timezone: "Europe/Berlin"
-  vars_files:
-    - secrets/vps.yml
   roles:
     - vps-kernel
     - firewall

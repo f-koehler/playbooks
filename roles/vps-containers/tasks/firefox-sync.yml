@@ -45,6 +45,8 @@
     name: firefoxsync
     image: "mozilla/syncserver:latest"
     pull: yes
+    container_default_behavior: no_defaults
+    network_mode: default
     env:
       SYNCSERVER_PUBLIC_URL: "https://firefox.fkoehler.xyz"
       SYNCSERVER_SECRET: "{{ firefoxsync_secret_key }}"

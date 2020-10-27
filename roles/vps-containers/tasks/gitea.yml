@@ -26,6 +26,8 @@
     name: gitea
     image: "gitea/gitea:latest"
     pull: yes
+    container_default_behavior: no_defaults
+    network_mode: default
     env:
       RUN_MODE: prod
       DOMAIN: git.fkoehler.xyz
