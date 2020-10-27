@@ -1,21 +1,6 @@
-- name: restart nginx container
-  docker_container:
-    name: nginx
-    restart: yes
-
 - name: restart Traefik container
   docker_container:
     name: traefik
-    restart: yes
-
-- name: restart Telegraf container
-  docker_container:
-    name: telegraf
-    restart: yes
-
-- name: restart Grafana container
-  docker_container:
-    name: grafana
     restart: yes
 
 - name: nextcloud add missing indicies

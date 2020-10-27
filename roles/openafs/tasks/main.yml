@@ -1,7 +1,10 @@
-- package:
+- name: install linux headers
+  package:
     name: linux-headers
 
-- aur:
-    name:
-      - openafs
-      - openafs-modules-dkms
+- name: install openafs including kernel modules
+  aur:
+    name: "{{ item }}"
+  loop:
+    - openafs
+    - openafs-modules-dkms

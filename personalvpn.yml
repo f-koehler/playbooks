@@ -1,4 +1,0 @@
-- hosts: personalvpn
-  become: yes
-  roles:
-    - personalvpn

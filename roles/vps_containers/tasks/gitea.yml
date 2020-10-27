@@ -1,9 +1,3 @@
-- name: create directories for gitea
-  file:
-    path: "/srv/containers/gitea"
-    state: directory
-    recurse: yes
-
 - name: create Gitea postgresql user
   postgresql_user:
     name: "{{ postgres_user_gitea }}"
@@ -64,6 +58,7 @@
     path: /app/gitea
     state: directory
     recurse: yes
+    mode: "700"
 
 - name: copy Gitea SSH forwarding script
   copy:

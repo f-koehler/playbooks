@@ -1,2 +1,9 @@
+galaxy_info:
+  author: fkoehler
+  description: install software I use on my desktop
+  license: "license GPLv2"
+  min_ansible_version: 2.10
+  platforms:
+    - name: Archlinux
 dependencies:
   - kewlfft.aur

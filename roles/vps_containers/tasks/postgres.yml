@@ -7,12 +7,6 @@
   docker_network:
     name: containers
 
-- name: create data directory for postgres
-  file:
-    state: directory
-    recurse: yes
-    path: /srv/containers/postgres/data
-
 - name: create postgres container
   docker_container:
     name: postgres
@@ -32,13 +26,11 @@
     networks_cli_compatible: yes
     restart_policy: "unless-stopped"
 
-# - name: "Import backup"
-#   fail:
-#     msg: Import backup
-
 - name: wait for postgres to start
   shell: /usr/bin/pg_isready -U "{{ postgres_user_root }}" -h "127.0.0.1" -p 5432
   register: result
   until: result.rc == 0
   retries: 12
   delay: 10
+  tags:
+    - skip_ansible_lint

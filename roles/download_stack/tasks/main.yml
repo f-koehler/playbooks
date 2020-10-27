@@ -7,6 +7,7 @@
   file:
     path: /stash
     state: directory
+    mode: "700"
 
 - name: create credentials folder
   file:
@@ -25,19 +26,14 @@
     src: mount.mount
     dest: /etc/systemd/system/stash.mount
     mode: "600"
-  register: created_mount
+  notify: created_mount
 
 - name: create automount
   copy:
     src: stash.automount
     dest: /etc/systemd/system/stash.automount
     mode: "600"
-  register: created_mount
-
-- name: reload systemd daemon
-  systemd:
-    daemon_reload: yes
-  when: created_mount.changed
+  notify: created_mount
 
 - name: disable mount
   systemd:
@@ -50,20 +46,6 @@
     name: stash.automount
     state: started
     enabled: yes
-
-- name: create container dirs
-  file:
-    path: "/srv/containers/{{ item }}"
-    state: directory
-    recurse: yes
-    owner: "1001"
-    group: "1001"
-  loop:
-    - "transmission/config"
-    - "jackett/config"
-    - "radarr/config"
-    - "sonarr/config"
-    - "bazarr/config"
 
 - name: docker network for download stack
   docker_network:

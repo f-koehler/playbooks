@@ -3,6 +3,7 @@
     path: /srv/containers/traefik/
     state: directory
     recurse: yes
+    mode: "700"
 
 - name: create an empty acme.json
   file:
@@ -14,6 +15,7 @@
   copy:
     src: "{{ item }}"
     dest: "/srv/containers/traefik/{{ item }}"
+    mode: "600"
   notify:
     - restart Traefik container
   loop:

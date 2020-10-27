@@ -9,7 +9,10 @@
     path: "{{ item.path }}"
     section: "Interface"
     option: "PostUp"
-    value: "iptables -I OUTPUT ! -o %i -m mark ! --mark $(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT && ip6tables -I OUTPUT ! -o %i -m mark ! --mark $(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT && systemd-resolve -i %i --set-dns=193.138.218.74 --set-domain=~. && iptables -I OUTPUT -s 192.168.178.0/24 -j ACCEPT"
+    value: >
+      iptables -I OUTPUT ! -o %i -m mark ! --mark $(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT &&
+      ip6tables -I OUTPUT ! -o %i -m mark ! --mark $(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT &&
+      systemd-resolve -i %i --set-dns=193.138.218.74 --set-domain=~. && iptables -I OUTPUT -s 192.168.178.0/24 -j ACCEPT
     mode: "0600"
   loop: "{{ config_files.files }}"
 
@@ -18,7 +21,9 @@
     path: "{{ item.path }}"
     section: "Interface"
     option: "PreDown"
-    value: "iptables -D OUTPUT ! -o %i -m mark ! --mark $(wg show  %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT && ip6tables -D OUTPUT ! -o %i -m mark ! --mark $(wg show  %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT"
+    value: >
+      iptables -D OUTPUT ! -o %i -m mark ! --mark $(wg show  %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT &&
+      ip6tables -D OUTPUT ! -o %i -m mark ! --mark $(wg show  %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT
     mode: "0600"
   loop: "{{ config_files.files }}"
 # - name: install wireguard

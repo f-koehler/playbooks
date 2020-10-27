@@ -2,6 +2,9 @@
   copy:
     src: sshd_config
     dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: "600"
   notify:
     - restart ssh server
 
