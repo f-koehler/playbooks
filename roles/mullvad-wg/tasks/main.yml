@@ -21,8 +21,6 @@
     value: "iptables -D OUTPUT ! -o %i -m mark ! --mark $(wg show  %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT && ip6tables -D OUTPUT ! -o %i -m mark ! --mark $(wg show  %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT"
     mode: "0600"
   loop: "{{ config_files.files }}"
-
-
 # - name: install wireguard
 #   package:
 #     name: "{{ item }}"

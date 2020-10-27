@@ -48,7 +48,6 @@
   # notify:
   #   - nextcloud add missing indicies
   #   - nextcloud convert file cache
-
 # - name: create Nextcloud News Updater container
 #   docker_container:
 #     name: nextcloud-news-updater

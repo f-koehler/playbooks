@@ -1,6 +1,5 @@
 - package:
-    name:
-      linux-headers
+    name: linux-headers
 
 - aur:
     name:

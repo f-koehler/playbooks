@@ -1,4 +1,0 @@
-- pacman:
-    name: certbot
-    state: present
-  become: yes

@@ -1,5 +1,0 @@
-- include: archlinux.yml
-  when: ansible_distribution == "Archlinux"
-
-- include: ubuntu.yml
-  when: ansible_distribution == "Ubuntu"

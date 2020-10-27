@@ -1,5 +1,0 @@
-- name: install haveged
-  apt:
-    name: haveged
-    state: present
-  become: yes

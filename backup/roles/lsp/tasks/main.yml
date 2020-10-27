@@ -1,4 +1,0 @@
-# - aura:
-#     name: cquery
-#     state: present
-#   become: yes

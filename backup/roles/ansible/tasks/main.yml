@@ -1,5 +1,0 @@
-- name: install ansible
-  pacman:
-    name: ansible
-    state: present
-  become: yes

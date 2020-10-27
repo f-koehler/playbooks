@@ -24,7 +24,6 @@
     dest: /etc/modprobe.d/kvm_intel.conf
     mode: "660"
 
-
 - name: "install qemu and libvirt"
   package:
     name:
@@ -52,7 +51,6 @@
   group:
     name: kvm
 
-  
 - name: "add users to kvm group"
   user:
     name: "{{ item }}"

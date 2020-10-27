@@ -4,7 +4,6 @@
     recurse: yes
     path: /srv/containers
 
-
 - include_tasks: postgres.yml
 - include_tasks: nextcloud.yml
 - include_tasks: gitea.yml
