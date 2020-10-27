@@ -1,2 +1,3 @@
 #!/bin/sh
-pass ansible/vault
+set -euf -o pipefail
+gpg --decrypt vault-passphrase.pgp
