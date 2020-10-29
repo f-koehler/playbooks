@@ -26,15 +26,14 @@
       ip6tables -D OUTPUT ! -o %i -m mark ! --mark $(wg show  %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT
     mode: "0600"
   loop: "{{ config_files.files }}"
-# - name: install wireguard
-#   package:
-#     name: "{{ item }}"
-#     state: present
-#   loop:
-#     # - linux-raspberrypi-headers
-#     # - wireguard-dkms
-#     - wireguard-tools
-#     - resolvconf
+
+- name: install wireguard
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - wireguard-tools
+    - resolvconf
 
 # - name: enable systemd-resolved
 #   systemd:
@@ -48,8 +47,8 @@
 #     dest: /etc/wireguard/wg0.conf
 #     mode: "660"
 
-# - name: enable wireguard connection
-#   systemd:
-#     name: wg-quick@wg0.service
-#     enabled: yes
-#     state: started
+- name: enable wireguard connection
+  systemd:
+    name: "wg-quick@mullvad-{{ mullvad_wg_server }}.service"
+    enabled: yes
+    state: started
