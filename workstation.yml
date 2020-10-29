@@ -1,5 +1,6 @@
 - hosts: workstations
   become: yes
+  ignore_unreachable: yes
   roles:
     - localtime
     - haveged

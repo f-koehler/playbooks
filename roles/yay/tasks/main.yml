@@ -10,7 +10,7 @@
     line: "{{ aur_user }} ALL=(ALL) NOPASSWD: /usr/bin/pacman"
     create: yes
     validate: "visudo -cf %s"
-    user: root
+    owner: root
     group: root
     mode: "600"
 
