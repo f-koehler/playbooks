@@ -149,9 +149,14 @@
     name: deadd-notification-center-bin
   become_user: "{{ aur_user }}"
 
+- name: install rofi
+  aur:
+    name: rofi-git
+  become_user: "{{ aur_user }}"
+
 - name: install bitwarden
   aur:
-    name: bitwarden
+    name: bitwarden-bin
   become_user: "{{ aur_user }}"
 
 - name: install mpv
@@ -163,3 +168,11 @@
     - ffmpeg
     - python-pycryptodome
     - rtmpdump
+
+- name: install icon theme
+  package:
+    name: papirus-icon-theme
+
+- name: install gobject introspection
+  package:
+    name: gobject-introspection
