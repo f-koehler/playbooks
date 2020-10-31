@@ -176,3 +176,15 @@
 - name: install gobject introspection
   package:
     name: gobject-introspection
+
+- name: install Hack Nerd Font
+  aur:
+    name: nerd-fonts-hack
+    state: present
+
+- name: install fonts
+  package:
+    name: "{{ item }}"
+  loop:
+    - ttf-hack
+    - ttf-ubuntu-font-family
