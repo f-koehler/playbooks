@@ -1,6 +1,15 @@
-- hosts: workstations
+- name: find reachable hosts
+  hosts: workstations
+  gather_facts: no
+  tasks:
+    - command: /bin/true
+      register: result
+      ignore_errors: yes
+    - group_by: key=reachable
+      when: result is success
+
+- hosts: reachable
   become: yes
-  ignore_unreachable: yes
   roles:
     - localtime
     - haveged
