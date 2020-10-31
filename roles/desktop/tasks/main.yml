@@ -8,6 +8,54 @@
     - lightdm-gtk-greeter-settings
     - xorg-server-xephyr
 
+- name: configure lightdm
+  block:
+    - name: enable GTK greeter
+      community.general.ini_file:
+        path: /etc/lightdm/lightdm.conf
+        section: "Seat:*"
+        option: "greeter-session"
+        value: "lightdm-gtk-greeter"
+        mode: "0644"
+        owner: root
+        group: root
+    - name: set GTK theme
+      community.general.ini_file:
+        path: /etc/lightdm/lightdm-gtk-greeter.conf
+        section: "greeter"
+        option: "theme-name"
+        value: "Nordic"
+        mode: "0644"
+        owner: root
+        group: root
+    - name: set icon theme
+      community.general.ini_file:
+        path: /etc/lightdm/lightdm-gtk-greeter.conf
+        section: "greeter"
+        option: "icon-theme-name"
+        value: "Papirus-Dark"
+        mode: "0644"
+        owner: root
+        group: root
+    - name: set font
+      community.general.ini_file:
+        path: /etc/lightdm/lightdm-gtk-greeter.conf
+        section: "greeter"
+        option: "font-name"
+        value: "Ubuntu 10"
+        mode: "0644"
+        owner: root
+        group: root
+    - name: enable antialias
+      community.general.ini_file:
+        path: /etc/lightdm/lightdm-gtk-greeter.conf
+        section: "greeter"
+        option: "xft-antialias"
+        value: "true"
+        mode: "0644"
+        owner: root
+        group: root
+
 - name: start lightdm
   service:
     name: lightdm
