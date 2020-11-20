@@ -47,3 +47,24 @@
       - name: firefly
     networks_cli_compatible: yes
     restart_policy: "unless-stopped"
+
+- name: create firefly csv importer container
+  docker_container:
+    name: firefly_csv_importer
+    image: "fireflyiii/csv-importer:latest"
+    pull: yes
+    container_default_behavior: no_defaults
+    network_mode: default
+    ports:
+      - "0.0.0.0:8081:8080"
+    env:
+      FIREFLY_III_URI: "http://firefly:8080"
+      FIREFLY_III_ACCESS_TOKEN: "{{ firefly_csv_importer_access_token }}"
+    volumes:
+      - "/srv/containers/firefly/upload:/var/www/html/storage/upload"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    networks:
+      - name: firefly
+    networks_cli_compatible: yes
+    restart_policy: "unless-stopped"
