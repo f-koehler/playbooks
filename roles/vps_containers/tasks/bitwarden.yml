@@ -1,31 +1,27 @@
-- name: create bitwarden postgresql user
-  postgresql_user:
-    name: "{{ postgres_user_bitwarden }}"
-    password: "{{ postgres_password_bitwarden }}"
-    login_user: "{{ postgres_user_root }}"
-    login_password: "{{ postgres_password_root }}"
-    login_host: "127.0.0.1"
-
-- name: create bitwarden database
-  postgresql_db:
-    name: "{{ postgres_db_bitwarden }}"
-    owner: "{{ postgres_user_bitwarden }}"
-    encoding: UTF-8
-    login_user: "{{ postgres_user_root }}"
-    login_password: "{{ postgres_password_root }}"
-    login_host: "127.0.0.1"
+- name: create postgres container
+  docker_container:
+    name: bitwarden_db
+    image: "postgres:latest"
+    pull: yes
+    env:
+      POSTGRES_USER: "{{ bitwarden_db_user }}"
+      POSTGRES_PASSWORD: "{{ bitwarden_db_password }}"
+      POSTGRES_DB: "{{ bitwarden_db_name }}"
+    volumes:
+      - "/srv/containers/bitwarden_db/data:/var/lib/postgresql/data"
+    networks:
+      - name: containers
+    restart_policy: "unless-stopped"
 
 - name: create bitwarden_rs container
   docker_container:
     name: bitwarden
     image: "bitwardenrs/server-postgresql:latest"
     pull: yes
-    container_default_behavior: no_defaults
-    network_mode: default
     env:
       ADMIN_TOKEN: "{{ bitwarden_admin_token }}"
-      DATABASE_URL: "postgresql://{{ postgres_user_bitwarden }}:{{ postgres_password_bitwarden }}@postgres/{{ postgres_db_bitwarden }}"
-      SIGNUPS_ALLOWD: "false"
+      DATABASE_URL: "postgresql://{{ bitwarden_db_user }}:{{ bitwarden_db_password }}@bitwarden_db/{{ bitwarden_db_name }}"
+      SIGNUPS_ALLOWED: "true"
       DOMAIN: "https://bitwarden.fkoehler.xyz"
     labels:
       traefik.http.routers.bitwarden.rule: "Host(`bitwarden.fkoehler.xyz`)"
@@ -36,5 +32,4 @@
       - "/srv/containers/bitwarden:/data"
     networks:
       - name: containers
-    networks_cli_compatible: yes
     restart_policy: "unless-stopped"

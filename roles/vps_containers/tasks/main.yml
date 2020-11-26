@@ -1,6 +1,3 @@
-- include_tasks: postgres.yml
-- include_tasks: nextcloud.yml
-- include_tasks: gitea.yml
-- include_tasks: firefox-sync.yml
-- include_tasks: bitwarden.yml
 - include_tasks: proxy.yml
+- include_tasks: nextcloud.yml
+- include_tasks: bitwarden.yml

@@ -22,13 +22,15 @@
     - traefik.toml
     - traefik-dynamic.toml
 
+- name: create docker network
+  docker_network:
+    name: containers
+
 - name: create Traefik container
   docker_container:
     name: traefik
     image: "traefik:latest"
     pull: yes
-    container_default_behavior: no_defaults
-    network_mode: default
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
@@ -54,7 +56,6 @@
     command: --providers.docker
     networks:
       - name: containers
-    networks_cli_compatible: yes
     restart_policy: "unless-stopped"
 
 - name: open ports for Traefik

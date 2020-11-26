@@ -10,7 +10,7 @@
 # Global configuration
 ################################################################
 [global]
-  checkNewVersion = true
+  checkNewVersion = false
   sendAnonymousUsage = false
 
 ################################################################
@@ -57,7 +57,7 @@
   # Optional
   # Default: "ERROR"
   #
-  # level = "DEBUG"
+  level = "DEBUG"
 
   # Sets the filepath for the traefik log. If not specified, stdout will be used.
   # Intermediate directories are created if necessary.
@@ -65,7 +65,7 @@
   # Optional
   # Default: os.Stdout
   #
-  # filePath = "log/traefik.log"
+  # filePath = "/traefik.log"
 
   # Format is either "json" or "common".
   #
@@ -84,7 +84,7 @@
 #
 # Optional
 #
-# [accessLog]
+[accessLog]
 
   # Sets the file path for the access log. If not specified, stdout will be used.
   # Intermediate directories are created if necessary.

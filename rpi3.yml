@@ -3,7 +3,7 @@
   vars:
     timezone: "Europe/Berlin"
   roles:
-    - docker
-    - localtime
-    - haveged
+    # - docker
+    # - localtime
+    # - haveged
     - docker_firefly

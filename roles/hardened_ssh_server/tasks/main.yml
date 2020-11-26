@@ -5,8 +5,13 @@
     owner: root
     group: root
     mode: "600"
-  notify:
-    - restart ssh server
+  register: ssh_config
+
+- name: restart ssh server
+  systemd:
+    name: sshd.service
+    state: restarted
+  when: ssh_config
 
 - name: open ports for ssh server
   ufw:

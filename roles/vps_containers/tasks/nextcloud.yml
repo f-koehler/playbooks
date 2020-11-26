@@ -1,35 +1,31 @@
-- name: create Nextcloud postgresql user
-  postgresql_user:
-    name: "{{ postgres_user_nextcloud }}"
-    password: "{{ postgres_password_nextcloud }}"
-    login_user: "{{ postgres_user_root }}"
-    login_password: "{{ postgres_password_root }}"
-    login_host: "127.0.0.1"
-
-- name: create Nextcloud database
-  postgresql_db:
-    name: "{{ postgres_db_nextcloud }}"
-    owner: "{{ postgres_user_nextcloud }}"
-    encoding: UTF-8
-    login_user: "{{ postgres_user_root }}"
-    login_password: "{{ postgres_password_root }}"
-    login_host: "127.0.0.1"
+- name: create postgres container
+  docker_container:
+    name: nextcloud_db
+    image: "postgres:latest"
+    pull: yes
+    env:
+      POSTGRES_USER: "{{ nextcloud_db_user }}"
+      POSTGRES_PASSWORD: "{{ nextcloud_db_password }}"
+      POSTGRES_DB: "{{ nextcloud_db_name }}"
+    volumes:
+      - "/srv/containers/nextcloud_db/data:/var/lib/postgresql/data"
+    networks:
+      - name: containers
+    restart_policy: "unless-stopped"
 
 - name: create Nextcloud container
   docker_container:
     name: nextcloud
     image: "nextcloud:latest"
     pull: yes
-    container_default_behavior: no_defaults
-    network_mode: default
     env:
-      NEXTCLOUD_ADMIN_USER: "{{ nextcloud_user_admin }}"
-      NEXTCLOUD_ADMIN_PASSWORD: "{{ nextcloud_password_admin }}"
+      NEXTCLOUD_ADMIN_USER: "{{ nextcloud_admin_user }}"
+      NEXTCLOUD_ADMIN_PASSWORD: "{{ nextcloud_admin_password }}"
       NEXTCLOUD_TRUSTED_DOMAINS: "{{ nextcloud_trusted_domains }}"
-      POSTGRES_DB: "{{ postgres_db_nextcloud }}"
-      POSTGRES_USER: "{{ postgres_user_nextcloud }}"
-      POSTGRES_PASSWORD: "{{ postgres_password_nextcloud }}"
-      POSTGRES_HOST: "postgres"
+      POSTGRES_DB: "{{ nextcloud_db_name }}"
+      POSTGRES_USER: "{{ nextcloud_db_user }}"
+      POSTGRES_PASSWORD: "{{ nextcloud_db_password }}"
+      POSTGRES_HOST: "nextcloud_db"
       OVERWRITEPROTOCOL: "https"
     labels:
       traefik.http.routers.nextcloud.rule: "Host(`nextcloud.fkoehler.xyz`)"
@@ -43,20 +39,4 @@
       - "/srv/containers/nextcloud:/var/www/html/"
     networks:
       - name: containers
-    networks_cli_compatible: yes
     restart_policy: "unless-stopped"
-  # notify:
-  #   - nextcloud add missing indicies
-  #   - nextcloud convert file cache
-# - name: create Nextcloud News Updater container
-#   docker_container:
-#     name: nextcloud-news-updater
-#     image: "fabiankoehler/nextcloud-news-updater:latest"
-#     env:
-#       UPDATER_USER: "{{ nextcloud_user_admin }}"
-#       UPDATER_PASSWORD: "{{ nextcloud_password_admin }}"
-#       UPDATER_URL: "https://nextcloud.fkoehler.xyz"
-#     networks:
-#       - name: containers
-#     networks_cli_compatible: yes
-#     restart_policy: "unless-stopped"
