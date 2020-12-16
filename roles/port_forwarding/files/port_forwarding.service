@@ -1,0 +1,12 @@
+[Unit]
+Description=Load iptables rules for ipv4 forwarding
+DefaultDependencies=no
+After=systemd-sysctl.service
+Before=sysinit.target
+
+[Service]
+Type=oneshot
+ExecStart=/root/port_forwarding.sh
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,8 @@
+- hosts: gateway0
+  become: yes
+  vars:
+    timezone: "Europe/Berlin"
+  roles:
+    # - docker
+    - localtime
+    - port_forwarding
