@@ -1,0 +1,8 @@
+- hosts: homectl
+  become: yes
+  vars:
+    timezone: "Europe/Berlin"
+  roles:
+    - localtime
+    - hostname
+    - docker

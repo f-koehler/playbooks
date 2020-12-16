@@ -8,3 +8,6 @@ latitude
 
 [home_gateways]
 gateway0
+
+[homectl]
+homectl0

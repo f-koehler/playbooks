@@ -1,9 +1,0 @@
-- hosts: rpi3
-  become: yes
-  vars:
-    timezone: "Europe/Berlin"
-  roles:
-    # - docker
-    # - localtime
-    # - haveged
-    - docker_firefly
