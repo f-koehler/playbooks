@@ -3,6 +3,7 @@
   vars:
     timezone: "Europe/Berlin"
   roles:
-    # - docker
     - localtime
+    - hostname
+    - docker
     - port_forwarding

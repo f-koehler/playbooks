@@ -1,0 +1,12 @@
+- name: set hostname
+  hostname:
+    name: "{{ inventory_hostname }}"
+    use: systemd
+
+- name: modify /etc/hosts
+  lineinfile:
+    line: "{{ item }}"
+    path: "/etc/hosts"
+  loop:
+    - "127.0.0.1 {{ inventory_hostname }}"
+    - "::1 {{ inventory_hostname }}"
