@@ -3,6 +3,11 @@
   with_first_found:
     - "{{ ansible_distribution | lower }}.yml"
 
+- name: remove old service
+  systemd:
+    name: wg-quick@wg0.conf.service
+    enabled: no
+
 - name: generate wireguard config
   template:
     src: wg0.conf.j2
