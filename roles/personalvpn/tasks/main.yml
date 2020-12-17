@@ -1,0 +1,24 @@
+- name: load package installation tasks
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution | lower }}.yml"
+
+- name: generate wireguard config
+  template:
+    src: wg0.conf.j2
+    dest: /etc/wireguard/wg0.conf
+    owner: root
+    group: root
+    mode: "0600"
+  notify: restart wireguard
+
+- name: start wireguard
+  systemd:
+    name: wg-quick@wg0.service
+    state: started
+    enabled: yes
+
+- name: open port for wireguard
+  ufw:
+    rule: allow
+    port: '{{ personalvpn["port"] }}'

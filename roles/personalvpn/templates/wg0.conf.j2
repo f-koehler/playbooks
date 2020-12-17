@@ -1,0 +1,19 @@
+[Interface]
+Address = {{ personalvpn["peers"][inventory_hostname]["ip"] }}/24
+ListenPort = {{ personalvpn["port"] }}
+PrivateKey = {{ personalvpn["private"][inventory_hostname] }}
+
+{% for peer in personalvpn["peers"] %}
+{% if peer != inventory_hostname %}
+
+[Peer]
+PublicKey = {{ personalvpn["public"][peer] }}
+PresharedKey = {{ personalvpn["psk"][inventory_hostname][peer] }}
+AllowedIPs = {{ personalvpn["peers"][peer]["ip"] }}/32
+{% if "endpoints" in personalvpn["peers"][inventory_hostname] %}
+{% if peer in personalvpn["peers"][inventory_hostname]["endpoints"] %}
+Endpoint = {{ personalvpn["peers"][inventory_hostname]["endpoints"][peer] }}:{{ personalvpn["port"] }}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
