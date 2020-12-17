@@ -1,21 +1,18 @@
 #!/bin/bash
 set -euf -o pipefail
 
-INTERFACE=eth0
-SOURCE_PORT=80
-DESTINATION_IP=192.168.0.109
-DESTINATION_PORT=5000
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables -t nat -A POSTROUTING -o wg0 -j MASQUERADE
 
-{% set interface = port_forwarding["interface"] %}
-{% for forward in port_forwarding["forwards"] %}
-    {% set local = forward["local"] %}
-    {% set remote = forward["remote"] %}
-    {% set address = forward["address"] %}
+iptables -A INPUT -i eth0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A INPUT -i tun0 -m state --state RELATED,ESTABLISHED -j ACCEPT
 
-    iptables -A FORWARD -i {{ interface }} -j ACCEPT
-    iptables -A FORWARD -o {{ interface }} -j ACCEPT
-    iptables -t nat -A POSTROUTING -o {{ interface }} -j MASQUERADE
+iptables -A PREROUTING -t nat -i wg0 -p udp --dport 137 -j DNAT --to 192.168.0.109:137
+iptables -A FORWARD -p udp -o eth0 -d 192.168.0.109 --dport 137 -j ACCEPT
+iptables -A PREROUTING -t nat -i wg0 -p udp --dport 138 -j DNAT --to 192.168.0.109:138
+iptables -A FORWARD -p udp -o eth0 -d 192.168.0.109 --dport 138 -j ACCEPT
 
-    iptables -t nat -A PREROUTING -i {{ interface }} -p tcp --dport {{ local }} -j DNAT --to {{ address }}:{{ remote }}
-    iptables -A FORWARD -i {{ interface }} -p tcp --dport {{ local }} -d {{ address }} -j ACCEPT
-{% endfor %}
+iptables -A PREROUTING -t nat -i wg0 -p tcp --dport 139 -j DNAT --to 192.168.0.109:139
+iptables -A FORWARD -p tcp -o eth0 -d 192.168.0.109 --dport 139 -j ACCEPT
+iptables -A PREROUTING -t nat -i wg0 -p tcp --dport 445 -j DNAT --to 192.168.0.109:445
+iptables -A FORWARD -p tcp -d 192.168.0.109 --dport 445 -j ACCEPT
