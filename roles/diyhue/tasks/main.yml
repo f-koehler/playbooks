@@ -1,0 +1,11 @@
+- name: install diyhue container
+  docker_container:
+    name: "diyhue"
+    image: "diyhue/core:latest"
+    pull: yes
+    restart_policy: "unless-stopped"
+    volumes:
+      - "/docker/diyhue/export:/opt/hue-emulator/export"
+    env:
+      MAC: "{{ diyhue_mac }}"
+    network_mode: "host"
