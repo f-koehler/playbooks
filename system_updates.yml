@@ -1,0 +1,14 @@
+- name: find reachable hosts
+  hosts: "webservers:home_gateways:homectl"
+  gather_facts: no
+  tasks:
+    - command: /bin/true
+      register: result
+      ignore_errors: yes
+    - group_by: key=reachable
+      when: result is success
+
+- hosts: reachable
+  become: yes
+  roles:
+    - system_updates

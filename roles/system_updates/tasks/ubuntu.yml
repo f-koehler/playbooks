@@ -1,0 +1,8 @@
+- name: update apt cache
+  apt:
+    update_cache: yes
+
+- name: install updates
+  apt:
+    upgrade: safe
+  notify: restart after updates
