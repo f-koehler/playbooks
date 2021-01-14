@@ -34,6 +34,10 @@ def default_config_path() -> Path:
     return Path("groupvars") / "personal.vpn"
 
 
+def default_template_path() -> Path:
+    return Path("roles") / "personalvpn" / "templates" / "wg0.conf.j2"
+
+
 @app.command()
 def list_peers(config: Path = default_config_path()):
     for peer in load_config(config)["peers"]:
@@ -41,17 +45,25 @@ def list_peers(config: Path = default_config_path()):
 
 
 @app.command()
-def regenerate(config: Path = default_config_path()):
+def regenerate_keys(config: Path = default_config_path()):
     pass
 
 
 @app.command()
-def peer_config(peer: str, config: Path = default_config_path()):
+def peer_config(
+    peer: str,
+    config: Path = default_config_path(),
+    template: Path = default_template_path(),
+):
     pass
 
 
 @app.command()
-def qr_code(peer: str, config: Path = default_config_path()):
+def qr_code(
+    peer: str,
+    config: Path = default_config_path(),
+    template: Path = default_template_path(),
+):
     pass
 
 
