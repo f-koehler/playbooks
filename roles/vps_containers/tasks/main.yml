@@ -1,3 +1,61 @@
-- include_tasks: proxy.yml
-- include_tasks: nextcloud.yml
-- include_tasks: bitwarden.yml
+- name: install certbot
+  package:
+    name: certbot
+
+- name: copy docker-compose files
+  copy:
+    src: docker-compose-files
+    dest: "~"
+    follow: yes
+
+- name: generate env file for bitwarden
+  ansible.builtin.template:
+    src: .env.bitwarden.j2
+    dest: "~/docker-compose-files/bitwarden/.env"
+
+- name: generate env file for nextcloud
+  ansible.builtin.template:
+    src: .env.nextcloud.j2
+    dest: "~/docker-compose-files/nextcloud/.env"
+
+- name: generate env file for pihole
+  ansible.builtin.template:
+    src: .env.pihole.j2
+    dest: "~/docker-compose-files/pihole/.env"
+
+- name: start bitwarden containers
+  community.docker.docker_compose:
+    project_src: "~/docker-compose-files/bitwarden"
+    pull: yes
+
+- name: start nextcloud containers
+  community.docker.docker_compose:
+    project_src: "~/docker-compose-files/nextcloud"
+    pull: yes
+
+- name: start pihole containers
+  community.docker.docker_compose:
+    project_src: "~/docker-compose-files/pihole"
+    pull: yes
+
+- name: start proxy containers
+  community.docker.docker_compose:
+    project_src: "~/docker-compose-files/proxy"
+    pull: yes
+
+- name: delete env files
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "~/docker-compose-files/bitwarden/.env"
+    - "~/docker-compose-files/nextcloud/.env"
+    - "~/docker-compose-files/pihole/.env"
+
+- name: open ports for HTTP server
+  ufw:
+    rule: allow
+    port: "{{ item | int }}"
+  loop:
+    - 80
+    - 443
