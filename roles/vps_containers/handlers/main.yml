@@ -1,7 +1,7 @@
-- name: restart Traefik container
-  docker_container:
-    name: traefik
-    restart: yes
+- name: restart containers
+  community.docker.docker_compose:
+    project_src: "~/docker-compose-files/vps"
+    restarted: yes
 
 - name: nextcloud add missing indicies
   command: docker exec -it --user www-data nextcloud php occ db:add-missing-indices

@@ -4,8 +4,8 @@
     timezone: "Europe/Berlin"
   roles:
     - firewall
-    # - hardened_ssh_server
-    # - localtime
-    # - haveged
-    # - docker
+    - hardened_ssh_server
+    - localtime
+    - haveged
+    - docker
     - vps_containers
