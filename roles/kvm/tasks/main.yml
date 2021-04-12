@@ -1,73 +1,75 @@
-- name: "load intel module"
-  modprobe:
-    name: kvm_intel
-    params: "nested=1"
+- name: install packages
+  ansible.builtin.package:
+    name:
+      - "{{ item }}"
+  loop:
+    - libvirt
+    - ebtables
+    - dnsmasq
+    - bridge-utils
+    - openbsd-netcat
+    - qemu
+    - qemu-arch-extra
+    - samba
+    - virt-install
 
-- name: "load virtio modules"
-  modprobe:
+- name: configure module loading
+  ansible.builtin.template:
+    src: modules-load.conf.j2
+    dest: /etc/modules-load.d/kvm.conf
+
+- name: configure module options
+  ansible.builtin.template:
+    src: modprobe.conf.j2
+    dest: /etc/modprobe.d/kvm.conf
+
+- name: load modules
+  community.general.modprobe:
     name: "{{ item }}"
   loop:
-    - virtio_net
-    - virtio_blk
-    - virtio_scsi
-    - virtio_balloon
+    - kvm
+    - "kvm_{{ kvm_provider }}"
 
-- name: "configure automatic module loading"
-  copy:
-    src: modules_intel.conf
-    dest: /etc/modules-load.d/kvm_intel.conf
-    mode: "660"
+- name: enable hugepages
+  when: kvm_hugepages
+  block:
+    - name: create fstab entry for hugepages
+      ansible.builtin.lineinfile:
+        path: /etc/fstab
+        regexp: '^\s*hugetlbfs\s+/dev/hugepages'
+        line: "hugetlbfs /dev/hugepages hugetlbfs mode{{'='}}01770,gid{{'='}}kvm 0 0"
+      register: hugepages_fstab
 
-- name: "set module options"
-  copy:
-    src: options_intel.conf
-    dest: /etc/modprobe.d/kvm_intel.conf
-    mode: "660"
+    - name: remount hugepages
+      ansible.posix.mount:
+        path: /dev/hugepages
+        src: "hugetlbfs"
+        fstype: "hugetlbfs"
+        state: remounted
+      when: hugepages_fstab.changed
 
-- name: "install qemu and libvirt"
-  package:
-    name:
-      - qemu
-      - qemu-arch-extra
-      - qemu-block-iscsi
-      - qemu-block-rbd
-      - samba
-      - ebtables
-      - dnsmasq
-      - bridge-utils
-      - openbsd-netcat
-      - libvirt
-      - gnome-boxes
-      - virt-manager
-      - ovmf
+    - name: mount hugepages
+      ansible.posix.mount:
+        path: /dev/hugepages
+        src: "hugetlbfs"
+        fstype: "hugetlbfs"
+        state: mounted
 
-- name: "setup polkit rules"
-  copy:
-    src: libvirt.rules
-    dest: /etc/polkit-1/rules.d/50-libvirt.rules
-    mode: "660"
+- name: ensure that the libvirt group exists
+  ansible.builtin.group:
+    name: libvirt
+    system: yes
 
-- name: "create kvm group"
-  group:
-    name: kvm
-
-- name: "add users to kvm group"
-  user:
+- name: add users to the libvirt group
+  ansible.builtin.user:
     name: "{{ item }}"
     append: yes
     groups:
-      - kvm
+      - libvirt
   loop: "{{ kvm_users }}"
 
-- name: "start virt service"
-  service:
-    name: "{{ item }}"
+- name: enable libvirt service
+  ansible.builtin.systemd:
+    name: libvirtd.service
     state: started
-  loop:
-    - libvirtd
-    - virtlogd
-
-- name: "enable virt service"
-  service:
-    name: libvirtd
     enabled: yes
