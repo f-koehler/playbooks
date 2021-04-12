@@ -1,4 +1,0 @@
-- name: install wireguard packages
-  package:
-    name: wireguard
-    state: present
