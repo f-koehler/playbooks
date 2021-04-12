@@ -1,0 +1,16 @@
+- name: install packages
+  ansible.builtin.package:
+    name: "{{ item }}"
+  loop:
+    - cockpit
+    - cockpit-pcp
+    - cockpit-machines
+    - virt-install
+    - packagekit
+    - udisks2
+
+- name: enable cockpit
+  ansible.builtin.systemd:
+    name: cockpit.socket
+    state: started
+    enabled: yes
