@@ -11,7 +11,12 @@ repos:
     rev: v2.2.1
     hooks:
       - id: prettier
-  - repo: https://github.com/ansible/ansible-lint
-    rev: v5.0.7
-    hooks:
-      - id: ansible-lint
+  # - repo: https://github.com/ansible/ansible-lint
+  #   rev: v5.0.7
+  #   hooks:
+  #     - id: ansible-lint
+  #       exclude: |
+  #         (?x)^(
+  #           .pre-commit-config.yaml|
+  #           requirements.yml
+  #         )$
