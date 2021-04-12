@@ -3,13 +3,16 @@
     name:
       - "{{ item }}"
   loop:
-    - libvirt
-    - ebtables
-    - dnsmasq
     - bridge-utils
+    - dmidecode
+    - dnsmasq
+    - ebtables
+    - gettext
+    - libvirt
     - openbsd-netcat
     - qemu
     - qemu-arch-extra
+    - radvd
     - samba
     - virt-install
 
