@@ -9,14 +9,6 @@
     follow: yes
   notify: restart containers
 
-- name: open ports for HTTP server
-  ufw:
-    rule: allow
-    port: "{{ item | int }}"
-  loop:
-    - 80
-    - 443
-
 - name: symlink private key
   file:
     path: "~/docker-compose-files/vps/cert.key"

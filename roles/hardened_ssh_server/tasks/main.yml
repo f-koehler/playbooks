@@ -12,10 +12,3 @@
     name: sshd.service
     state: restarted
   when: ssh_config
-
-- name: open ports for ssh server
-  ufw:
-    rule: allow
-    port: "{{ item | int }}"
-  loop:
-    - 20257

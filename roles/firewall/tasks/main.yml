@@ -1,9 +1,0 @@
-- name: get ufw installation tasks
-  include_tasks: "{{ item }}"
-  with_first_found:
-    - "{{ ansible_distribution|lower }}.yml"
-
-- name: enable ufw and block all traffic by default
-  ufw:
-    policy: deny
-    state: enabled

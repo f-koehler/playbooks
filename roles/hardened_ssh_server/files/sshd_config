@@ -114,7 +114,7 @@ Subsystem	sftp	/usr/lib/ssh/sftp-server
 #	AllowTcpForwarding no
 #	PermitTTY no
 #	ForceCommand cvs server
-Port 20257
+Port 22
 Protocol 2
 PermitRootLogin no
 

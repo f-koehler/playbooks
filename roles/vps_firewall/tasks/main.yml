@@ -1,0 +1,63 @@
+- name: install ufw
+  ansible.builtin.package:
+    name: ufw
+
+- name: enable ufw
+  ansible.builtin.service:
+    name: ufw
+    state: started
+    enabled: yes
+
+- name: enable ufw
+  community.general.ufw:
+    state: enabled
+
+- name: set default policy
+  community.general.ufw:
+    policy: deny
+
+- name: allow HTTP
+  community.general.ufw:
+    port: http
+    rule: allow
+
+- name: allow HTTPS
+  community.general.ufw:
+    port: https
+    rule: allow
+
+- name: allow wireguard
+  community.general.ufw:
+    port: "20257"
+    proto: udp
+    rule: allow
+
+- name: route from wan to wireguard
+  community.general.ufw:
+    route: yes
+    rule: allow
+    interface_in: ens18
+    interface_out: dsnet
+
+- name: route from wireguard to wan
+  community.general.ufw:
+    route: yes
+    rule: allow
+    interface_in: dsnet
+    interface_out: ens18
+
+- name: allow SSH over wireguard
+  community.general.ufw:
+    to_port: ssh
+    interface_in: dsnet
+    rule: allow
+
+- name: allow DNS over wireguard
+  community.general.ufw:
+    to_port: "53"
+    interface_in: dsnet
+    rule: allow
+    proto: "{{ item }}"
+  loop:
+    - udp
+    - tcp
