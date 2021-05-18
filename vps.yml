@@ -3,9 +3,9 @@
   vars:
     timezone: "Europe/Berlin"
   roles:
-    - hardened_ssh_server
-    - localtime
-    - haveged
-    - docker
-    - vps_firewall
+    # - hardened_ssh_server
+    # - localtime
+    # - haveged
+    # - docker
+    # - vps_firewall
     - vps_containers

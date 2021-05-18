@@ -46,12 +46,6 @@
     interface_in: dsnet
     interface_out: ens18
 
-- name: allow SSH over wireguard
-  community.general.ufw:
-    to_port: ssh
-    interface_in: dsnet
-    rule: allow
-
 - name: allow DNS over wireguard
   community.general.ufw:
     to_port: "53"
@@ -61,3 +55,12 @@
   loop:
     - udp
     - tcp
+
+- name: allow services over wireguard
+  community.general.ufw:
+    to_port: "19999"
+    interface_in: dsnet
+    rule: allow
+  loop:
+    - "ssh"
+    - "19999"
