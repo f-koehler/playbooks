@@ -16,16 +16,6 @@
   community.general.ufw:
     policy: deny
 
-- name: allow HTTP
-  community.general.ufw:
-    port: http
-    rule: allow
-
-- name: allow HTTPS
-  community.general.ufw:
-    port: https
-    rule: allow
-
 - name: allow wireguard
   community.general.ufw:
     port: "20257"
@@ -58,9 +48,17 @@
 
 - name: allow services over wireguard
   community.general.ufw:
-    to_port: "19999"
+    to_port: "{{ item }}"
     interface_in: dsnet
     rule: allow
   loop:
     - "ssh"
     - "19999"
+
+- name: allow services
+  community.general.ufw:
+    port: "{{ item }}"
+    rule: allow
+  loop:
+    - "http"
+    - "https"
