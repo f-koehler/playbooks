@@ -11,21 +11,30 @@
 
 - name: symlink private key
   file:
-    path: "~/docker-compose-files/vps/cert.key"
+    path: "~/docker-compose-files/{{ item }}/cert.key"
     src: "/etc/letsencrypt/live/fkoehler.xyz/privkey.pem"
     state: link
+  loop:
+    - vps
+    - blog
 
 - name: symlink certificate
   file:
-    path: "~/docker-compose-files/vps/cert.pem"
+    path: "~/docker-compose-files/{{ item }}/cert.pem"
     src: "/etc/letsencrypt/live/fkoehler.xyz/fullchain.pem"
     state: link
+  loop:
+    - vps
+    - blog
 
 - name: symlink chain (OCSP stapling)
   file:
-    path: "~/docker-compose-files/vps/chain.pem"
+    path: "~/docker-compose-files/{{ item }}/chain.pem"
     src: "/etc/letsencrypt/live/fkoehler.xyz/chain.pem"
     state: link
+  loop:
+    - vps
+    - blog
 
 - name: generate env file for vps
   ansible.builtin.template:
@@ -37,9 +46,10 @@
     project_src: "~/docker-compose-files/vps"
     pull: yes
 
+- name: create/start containers (blog)
+  community.docker.docker_compose:
+    project_src: "~/docker-compose-files/blog"
+    pull: yes
+
 - name: flush handlers
   meta: flush_handlers
-# - name: delete env files
-#   file:
-#     path: "~/docker-compose-files/vps/.env"
-#     state: absent
