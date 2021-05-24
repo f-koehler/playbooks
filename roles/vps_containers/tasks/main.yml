@@ -53,3 +53,21 @@
 
 - name: flush handlers
   meta: flush_handlers
+
+- name: copy blog deploy script
+  ansible.builtin.copy:
+    src: deploy_blog
+    dest: /usr/local/bin/deploy_blog
+    mode: u=rwx,g=rx,o=rx
+
+- name: config sudo for blog deploy script
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    line: "fkoehler ALL=(ALL) NOPASSWD: /usr/local/bin/deploy_blog"
+    owner: root
+    group: root
+    mode: "440"
+
+- name: install rsync
+  package:
+    name: rsync

@@ -1,0 +1,21 @@
+#!/bin/bash
+set -eu -o pipefail
+
+ARCHIVE=/home/fkoehler/blog.tar.zst
+DEST=/containers/blog/data
+
+if [ ! -f  ${ARCHIVE} ]; then
+    echo "No blog archive present!"
+    exit
+fi
+
+cd $(dirname ${ARCHIVE})
+tar xf $(basename ${ARCHIVE})
+
+rm -rf ${DEST}/*
+mv output/* ${DEST}
+rmdir output
+
+docker restart blog_nginx_app_1
+
+rm ${ARCHIVE}
