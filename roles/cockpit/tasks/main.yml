@@ -1,16 +1,27 @@
-- name: install packages
+- name: install cockpit
   ansible.builtin.package:
     name: "{{ item }}"
   loop:
     - cockpit
-    - cockpit-pcp
     - cockpit-machines
-    - virt-install
+    - cockpit-pcp
     - packagekit
     - udisks2
+    - virt-install
 
-- name: enable cockpit
+- name: get package_facts
+  ansible.builtin.package_facts: {}
+
+- name: install cockpit-podman
+  ansible.builtin.package:
+    name: cockpit-podman
+  when: "'podman' in ansible_facts.packages"
+
+- name: enable cockpit services
   ansible.builtin.systemd:
-    name: cockpit.socket
+    name: "{{ item }}"
     state: started
     enabled: yes
+  loop:
+    - cockpit.socket
+    - pmlogger.service
