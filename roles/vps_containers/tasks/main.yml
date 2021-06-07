@@ -45,11 +45,13 @@
   community.docker.docker_compose:
     project_src: "~/docker-compose-files/vps"
     pull: yes
+    build: yes
 
 - name: create/start containers (blog)
   community.docker.docker_compose:
     project_src: "~/docker-compose-files/blog"
     pull: yes
+    build: yes
 
 - name: flush handlers
   meta: flush_handlers
