@@ -1,0 +1,13 @@
+- name: generate locale
+  community.general.locale_gen:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - "en_US.UTF-8"
+    - "en_DK.UTF-8"
+    - "de_DE.UTF-8"
+
+- name: copy locale.conf
+  ansible.builtin.copy:
+    src: locale.conf
+    dest: /etc/locale.conf

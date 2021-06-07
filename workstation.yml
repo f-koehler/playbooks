@@ -12,6 +12,7 @@
   become: yes
   roles:
     - localtime
+    - locale
     - haveged
     - kvm
     - cockpit
