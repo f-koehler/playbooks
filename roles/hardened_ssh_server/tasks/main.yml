@@ -1,5 +1,5 @@
 - name: copy ssh server config
-  copy:
+  ansible.builtin.copy:
     src: sshd_config
     dest: /etc/ssh/sshd_config
     owner: root
@@ -8,7 +8,7 @@
   register: ssh_config
 
 - name: restart ssh server
-  systemd:
+  ansible.builtin.systemd:
     name: sshd.service
     state: restarted
   when: ssh_config

@@ -10,10 +10,3 @@ gateway0
 
 [homectl]
 homectl0
-
-[personalvpn]
-desktop
-gateway0
-homectl0
-latitude
-vps

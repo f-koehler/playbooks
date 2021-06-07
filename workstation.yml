@@ -13,6 +13,7 @@
   roles:
     - localtime
     - haveged
-    - yay
-    - graphics_driver
+    - kvm
+    - cockpit
+    - netdata
     - desktop

@@ -1,0 +1,8 @@
+- ansible.builtin.include_tasks:
+    file: "{{ tasks }}.yml"
+  loop:
+    - kernel
+    - firewall
+    - containers
+  loop_control:
+    loop_var: tasks
