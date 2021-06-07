@@ -1,8 +1,0 @@
-- name: update pacman cache
-  community.general.pacman:
-    update_cache: yes
-
-- name: install updates
-  community.general.pacman:
-    upgrade: yes
-  notify: restart after updates

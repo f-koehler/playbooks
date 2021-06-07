@@ -1,3 +1,0 @@
-- name: restart after updates
-  reboot:
-    reboot_timeout: 3600
