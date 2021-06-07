@@ -1,10 +1,10 @@
 - name: install haveged
-  package:
+  ansible.builtin.package:
     name: haveged
     state: present
 
 - name: start/enable haveged
-  service:
+  ansible.builtin.service:
     name: haveged
     state: started
     enabled: yes
