@@ -1,0 +1,3 @@
+{% for user in podman_users %}
+{{ user }}:{{ 100000 + loop.index * 65536}}:65536
+{% endfor %}

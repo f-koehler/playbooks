@@ -18,3 +18,4 @@
     - cockpit
     - netdata
     - desktop
+    - rootless_podman
