@@ -19,3 +19,4 @@
     - netdata
     - desktop
     - rootless_podman
+    - cli
