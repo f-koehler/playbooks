@@ -20,4 +20,4 @@ jobs:
           python -m pip install -r requirements.txt
       - name: Run ansible-lint
         run: |
-          ansible-lint -v --show-relpath --exclude .pre-commit-config.yaml
+          ansible-lint -v --show-relpath --exclude .pre-commit-config.yaml --exclude roles/vps/files/docker-compose-files
