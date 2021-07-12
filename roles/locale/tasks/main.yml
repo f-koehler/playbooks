@@ -11,3 +11,4 @@
   ansible.builtin.copy:
     src: locale.conf
     dest: /etc/locale.conf
+    mode: 0644

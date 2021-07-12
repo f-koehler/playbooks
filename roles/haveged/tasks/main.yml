@@ -1,4 +1,5 @@
-- ansible.builtin.include_tasks: "{{ tasks }}"
+- name: "load tasks"
+  ansible.builtin.include_tasks: "{{ tasks }}"
   with_first_found:
     - "{{ ansible_distribution|lower }}.yml"
   loop_control:

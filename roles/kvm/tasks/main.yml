@@ -20,11 +20,13 @@
   ansible.builtin.template:
     src: modules-load.conf.j2
     dest: /etc/modules-load.d/kvm.conf
+    mode: 0644
 
 - name: configure module options
   ansible.builtin.template:
     src: modprobe.conf.j2
     dest: /etc/modprobe.d/kvm.conf
+    mode: 0644
 
 - name: load modules
   community.general.modprobe:

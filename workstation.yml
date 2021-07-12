@@ -2,10 +2,13 @@
   hosts: workstations
   gather_facts: no
   tasks:
-    - command: /bin/true
+    - name: dummy command to check if host is online
+      command: /bin/true # noqa no-changed-when
       register: result
       ignore_errors: yes
-    - group_by: key=reachable
+    - name: register reachable hosts
+      group_by:
+        key: reachable
       when: result is success
 
 - hosts: reachable

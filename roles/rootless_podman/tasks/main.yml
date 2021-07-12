@@ -24,8 +24,10 @@
   ansible.builtin.copy:
     src: sysctl.conf
     dest: /etc/sysctl.d/podman.conf
+    mode: 0644
 
-- ansible.builtin.meta: flush_handlers
+- name: flush handlers
+  ansible.builtin.meta: flush_handlers
 
 - name: make podman users lingering
   ansible.builtin.command: "loginctl enable-linger {{ item }}"

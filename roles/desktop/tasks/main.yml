@@ -1,4 +1,5 @@
-- ansible.builtin.include_tasks:
+- name: "load tasks"
+  ansible.builtin.include_tasks:
     file: "{{ tasks }}.yml"
   loop:
     - flatpak
