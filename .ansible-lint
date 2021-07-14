@@ -1,3 +1,5 @@
 exclude_paths:
   - ".pre-commit-config.yaml"
   - "roles/vps/files/docker-compose-files"
+  - "vps.yml"
+  - "workstation.yml"
