@@ -4,6 +4,7 @@
   loop:
     - kernel
     - firewall
+    - dns
     - containers
   loop_control:
     loop_var: tasks
