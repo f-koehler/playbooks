@@ -5,6 +5,7 @@
     - kernel
     - firewall
     - dns
+    - cert
     - containers
   loop_control:
     loop_var: tasks

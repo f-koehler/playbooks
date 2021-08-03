@@ -18,3 +18,15 @@
 - name: systemd reload
   ansible.builtin.systemd:
     daemon_reload: true
+
+- name: restart nginx
+  community.docker.docker_compose:
+    restarted: yes
+    services: nginx_app
+    project_src: "~/docker-compose-files/vps"
+
+- name: restart nginx (blog)
+  community.docker.docker_compose:
+    restarted: yes
+    services: nginx_app
+    project_src: "~/docker-compose-files/blog"

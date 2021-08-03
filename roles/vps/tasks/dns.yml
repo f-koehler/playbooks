@@ -2,7 +2,7 @@
   block:
     - name: MX record
       community.general.cloudflare_dns:
-        domain: fkoehler.xyz
+        domain: "{{ domain }}"
         record: "@"
         type: MX
         state: present
@@ -12,7 +12,7 @@
         account_email: "{{ cloudflare_email }}"
     - name: MX record 2
       community.general.cloudflare_dns:
-        domain: fkoehler.xyz
+        domain: "{{ domain }}"
         record: "@"
         type: MX
         state: present
@@ -22,7 +22,7 @@
         account_email: "{{ cloudflare_email }}"
     - name: TXT records
       community.general.cloudflare_dns:
-        domain: fkoehler.xyz
+        domain: "{{ domain }}"
         record: "@"
         type: TXT
         state: present
@@ -35,7 +35,7 @@
         - "v=spf1 include:_spf.protonmail.ch mx ~all"
     - name: CNAME record 1
       community.general.cloudflare_dns:
-        domain: fkoehler.xyz
+        domain: "{{ domain }}"
         record: "protonmail._domainkey"
         type: CNAME
         state: present
@@ -44,7 +44,7 @@
         account_email: "{{ cloudflare_email }}"
     - name: CNAME record 2
       community.general.cloudflare_dns:
-        domain: fkoehler.xyz
+        domain: "{{ domain }}"
         record: "protonmail2._domainkey"
         type: CNAME
         state: present
@@ -53,7 +53,7 @@
         account_email: "{{ cloudflare_email }}"
     - name: CNAME record 3
       community.general.cloudflare_dns:
-        domain: fkoehler.xyz
+        domain: "{{ domain }}"
         record: "protonmail3._domainkey"
         type: CNAME
         state: present
@@ -62,7 +62,7 @@
         account_email: "{{ cloudflare_email }}"
     - name: DMARC record
       community.general.cloudflare_dns:
-        domain: fkoehler.xyz
+        domain: "{{ domain }}"
         record: _dmarc
         type: TXT
         state: present
@@ -71,18 +71,11 @@
         account_email: "{{ cloudflare_email }}"
 - name: A records
   community.general.cloudflare_dns:
-    domain: fkoehler.xyz
+    domain: "{{ domain }}"
     record: "{{ item }}"
     type: A
     state: present
     value: "207.180.226.248"
     account_api_key: "{{ cloudflare_api_key }}"
     account_email: "{{ cloudflare_email }}"
-  loop:
-    - "@"
-    - "goaccess"
-    - "monica"
-    - "nextcloud"
-    - "pihole"
-    - "www"
-    - "xbrowsersync"
+  loop: "{{ ['@', ] + subdomains }}"

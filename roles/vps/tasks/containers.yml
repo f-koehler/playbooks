@@ -1,7 +1,3 @@
-- name: install certbot
-  package:
-    name: certbot
-
 - name: copy docker-compose files
   copy:
     src: docker-compose-files
