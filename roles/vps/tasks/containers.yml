@@ -75,3 +75,52 @@
 - name: install rsync
   package:
     name: rsync
+
+- name: create goaccess directory
+  ansible.builtin.file:
+    path: /srv/goaccess
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: install goaccess
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - goaccess
+    - libmaxminddb
+    - geoipupdate
+
+- name: configure GeoIP update
+  ansible.builtin.template:
+    src: GeoIP.conf
+    dest: /etc/GeoIP.conf
+    owner: root
+    group: root
+    mode: 0600
+
+- name: copy systemd units
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/etc/systemd/system/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  loop:
+    - goaccess.service
+    - goaccess.timer
+  notify: systemd reload
+
+- name: flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: enable systemd timers
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    enabled: yes
+    state: started
+  loop:
+    - geoipupdate.timer
+    - goaccess.timer
