@@ -97,20 +97,28 @@
     group: root
     mode: 0600
 
-- name: copy systemd units
+- name: copy systemd unit
   ansible.builtin.copy:
-    src: "{{ item }}"
-    dest: "/etc/systemd/system/{{ item }}"
+    src: "goaccess.service"
+    dest: "/etc/systemd/system/goaccess.service"
     owner: root
     group: root
     mode: 0644
-  loop:
-    - goaccess.service
-    - goaccess.timer
-  notify: systemd reload
+  register: systemd_unit_copied
 
-- name: flush handlers
-  ansible.builtin.meta: flush_handlers
+- name: copy systemd timer
+  ansible.builtin.copy:
+    src: "goaccess.timer"
+    dest: "/etc/systemd/system/goaccess.timer"
+    owner: root
+    group: root
+    mode: 0644
+  register: systemd_timer_copied
+
+- name: systemd reload
+  ansible.builtin.systemd:
+    daemon_reload: true
+  when: systemd_unit_copied or systemd_timer_copied
 
 - name: enable systemd timers
   ansible.builtin.systemd:

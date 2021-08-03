@@ -38,3 +38,32 @@
   notify:
     - restart nginx
     - restart nginx (blog)
+
+- name: copy systemd unit
+  ansible.builtin.copy:
+    src: "certbot.service"
+    dest: "/etc/systemd/system/certbot.service"
+    owner: root
+    group: root
+    mode: 0644
+  register: systemd_unit_copied
+
+- name: copy systemd timer
+  ansible.builtin.copy:
+    src: "certbot.timer"
+    dest: "/etc/systemd/system/certbot.timer"
+    owner: root
+    group: root
+    mode: 0644
+  register: systemd_timer_copied
+
+- name: systemd reload
+  ansible.builtin.systemd:
+    daemon_reload: true
+  when: systemd_unit_copied or systemd_timer_copied
+
+- name: enable systemd timers
+  ansible.builtin.systemd:
+    name: "certbot.timer"
+    enabled: yes
+    state: started
