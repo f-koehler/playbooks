@@ -1,0 +1,16 @@
+---
+# defaults file for mkinitcpio
+mkinitcpio_hooks_base:
+  - base
+  - udev
+  - autodetect
+  - microcode
+  - modconf
+  - kms
+  - keyboard
+  - keymap
+  - consolefont
+  - block
+  - filesystems
+  - fsck
+mkinitcpio_modules_base: []
