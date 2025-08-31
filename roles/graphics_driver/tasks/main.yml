@@ -1,2 +1,0 @@
-- name: load specific tasks
-  include_tasks: "{{ graphics_driver_config }}.yml"

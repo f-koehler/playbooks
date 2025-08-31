@@ -1,4 +1,0 @@
-haveged_packages:
-  - haveged
-haveged_services:
-  - haveged

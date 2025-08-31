@@ -1,9 +1,0 @@
-- name: install netdata
-  ansible.builtin.package:
-    name: netdata
-
-- name: start/enable netdata
-  ansible.builtin.service:
-    name: netdata
-    state: started
-    enabled: yes

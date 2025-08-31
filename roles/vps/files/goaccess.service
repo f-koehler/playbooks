@@ -1,6 +1,0 @@
-[Unit]
-Description=Create goaccess report
-
-[Service]
-Type=oneshot
-ExecStart=/bin/bash -c "cat /containers/blog/logs/fkoehler.xyz-access.log | goaccess -a --geoip-database=/var/lib/GeoIP/GeoLite2-City.mmdb -o html --log-format=COMBINED - > /srv/goaccess/index.html"

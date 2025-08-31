@@ -1,9 +1,0 @@
-galaxy_info:
-  author: fkoehler
-  description: install openafs
-  license: "license GPLv2"
-  min_ansible_version: 2.10
-  platforms:
-    - name: Archlinux
-dependencies:
-  - kewlfft.aur
