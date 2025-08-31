@@ -1,0 +1,8 @@
+---
+- name: merge mkinitcpio hooks
+  set_fact:
+    mkinitcpio_hooks: "{{ mkinitcpio_hooks_base | union(mkinitcpio_hooks_extra | default([])) }}"
+
+- name: merge mkinitcpio modules
+  set_fact:
+    mkinitcpio_modules: "{{ mkinitcpio_modules_base | union(mkinitcpio_modules_extra | default([])) }}"
