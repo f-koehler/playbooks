@@ -1,0 +1,6 @@
+---
+- name: install starship (pacman)
+  community.general.pacman:
+    name: starship
+    state: present
+  become: true

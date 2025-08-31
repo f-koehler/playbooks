@@ -1,0 +1,7 @@
+---
+- name: install nvidia-open
+  community.general.pacman:
+    name:
+      - nvidia-open
+    state: present
+  become: true
