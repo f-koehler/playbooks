@@ -1,3 +1,0 @@
-[submodule "roles/vps/files/docker-compose-files"]
-	path = roles/vps/files/docker-compose-files
-	url = git@github.com:f-koehler/docker-compose-files.git

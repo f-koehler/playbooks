@@ -1,3 +1,0 @@
-kvm_provider: intel
-kvm_users: []
-kvm_hugepages: yes
