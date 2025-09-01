@@ -1,4 +1,3 @@
-#SPDX-License-Identifier: MIT-0
 ---
 fzf_hook_bash: |
   eval "$(fzf --bash)"
