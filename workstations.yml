@@ -1,8 +1,9 @@
 ---
-- name: setup workstations
+- name: Setup workstations
   hosts: workstations
   pre_tasks:
-    - ansible.builtin.include_vars:
+    - name: Load global variables
+      ansible.builtin.include_vars:
         file: ./vars/main.yml
   roles:
     - gpu-nvidia
