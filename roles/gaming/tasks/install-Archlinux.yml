@@ -1,0 +1,8 @@
+- name: Install steam and friends
+  community.general.pacman:
+    name:
+      - steam
+      - gamescope
+      - mangohud
+      - ttf-liberation
+    state: present
