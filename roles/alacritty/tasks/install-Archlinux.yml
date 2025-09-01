@@ -1,0 +1,8 @@
+---
+- name: install alacritty
+  become: true
+  community.general.pacman:
+    name:
+      - alacritty
+      - ttf-cascadia-code-nerd
+    state: present
