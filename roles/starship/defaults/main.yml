@@ -1,2 +1,7 @@
 ---
-# defaults file for starship
+starship_hook_bash: |
+  eval "$(starship init bash)"
+starship_hook_fish: |
+  starship init fish | source
+starship_hook_zsh: |
+  eval "$(starship init zsh)"
