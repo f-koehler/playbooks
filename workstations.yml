@@ -13,6 +13,7 @@
     - ssh-server
 
     - omarchy
+    - ssh
 
     - alacritty
     - desktop-programs
