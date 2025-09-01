@@ -1,0 +1,18 @@
+#SPDX-License-Identifier: MIT-0
+---
+- include_tasks: "install-{{ ansible_os_family }}.yml"
+
+- name: remove default sway session
+  become: true
+  ansible.builtin.file:
+    path: /usr/share/wayland-sessions/sway.desktop
+    state: absent
+
+- name: create uwsm sway session
+  become: true
+  ansible.builtin.copy:
+    src: sway-uwsm.desktop
+    dest: /usr/share/wayland-sessions/sway-uwsm.desktop
+    owner: root
+    group: root
+    mode: "0644"
