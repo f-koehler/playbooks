@@ -1,9 +1,5 @@
 #SPDX-License-Identifier: MIT-0
 ---
-- name: merge bash hooks
-  ansible.builtin.set_fact:
-    bash_hooks_merged: "{{[] | union(bash_hooks | default([])) }}"
-
 - name: configure bash
   ansible.builtin.template:
     src: bashrc.j2
