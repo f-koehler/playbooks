@@ -1,0 +1,6 @@
+# skip bashrc when not running interactively
+[[ $- != *i* ]] && return
+
+{% for hook in bash_hooks_merged %}
+{{ hook }}
+{% endfor %}
