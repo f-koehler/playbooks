@@ -11,7 +11,10 @@
 
     - alacritty
     - flatpak
+    - fzf
     - starship
     - sway
+    - zoxide
 
     - mkinitcpio
+    - bash
