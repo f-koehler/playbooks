@@ -1,6 +1,6 @@
 ---
 - name: Load installation tasks
-  ansible.builtin.load_tasks: "install-{{ ansible_os_family }}.yml"
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
 
 - name: Install flatpaks
   become: true
@@ -8,3 +8,4 @@
     method: system
     name:
       - com.super_productivity.SuperProductivity
+      - net.werwolv.ImHex

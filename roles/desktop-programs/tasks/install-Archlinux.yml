@@ -8,7 +8,6 @@
       - drawio-desktop
       - firefox
       - gimp
-      - imhex
       - inkscape
       - mpv
       - nextcloud-client
@@ -28,7 +27,7 @@
       - hunspell-en_us
       - libreoffice-still
       - noto-fonts
-      - ttf-caldea
+      - ttf-caladea
       - ttf-carlito
       - ttf-dejavu
       - ttf-liberation
