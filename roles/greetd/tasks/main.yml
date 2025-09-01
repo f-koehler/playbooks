@@ -1,0 +1,20 @@
+---
+- name: Load installation tasks
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family}}.yml"
+
+- name: Configure greetd
+  become: true
+  notify: Restart greetd
+  ansible.builtin.template:
+    src: config.toml.j2
+    dest: /etc/greetd/config.toml
+    owner: greeter
+    group: greeter
+    mode: "0644"
+
+- name: Enable greetd
+  become: true
+  ansible.builtin.systemd_service:
+    name: greetd.service
+    state: started
+    enabled: true

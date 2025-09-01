@@ -1,0 +1,7 @@
+---
+- name: Install greetd
+  become: true
+  community.general.pacman:
+    name:
+      - greetd
+      - greetd-tuigreet
