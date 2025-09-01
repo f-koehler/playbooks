@@ -1,8 +1,7 @@
 ---
-galaxy_info:
-  author: Fabian Koehler
-  description: Fetch omarchy resources
-  license: MIT
-  min_ansible_version: "2.1"
-  galaxy_tags: []
-dependencies: []
+- name: Clone my omarchy fork
+  ansible.builtin.git:
+    repo: https://github.com/f-koehler/omarchy
+    dest: ~/.local/share/omarchy
+    version: fk
+    accept_hostkey: true
