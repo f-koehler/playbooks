@@ -4,9 +4,11 @@
     name:
       - dbus-broker
       - dbus-broker-units
+      - mako
       - noto-fonts
       - sway
       - uwsm
+      - swayosd
       - xdg-desktop-portal
       - xdg-desktop-portal-kde
       - xdg-desktop-portal-wlr

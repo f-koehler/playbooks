@@ -16,3 +16,10 @@
     owner: root
     group: root
     mode: "0644"
+
+- name: Load configuration tasks
+  ansible.builtin.include_tasks: "configure-{{ item }}.yml"
+  loop:
+    - sway
+    - swayosd
+    - mako

@@ -1,0 +1,29 @@
+---
+- name: Start SwayOSD libinput backend
+  become: true
+  ansible.builtin.systemd_service:
+    name: swayosd-libinput-backend.service
+    state: started
+    enabled: true
+
+- name: Create swayosd config dir
+  ansible.builtin.file:
+    path: ~/.config/swayosd
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0755"
+
+- name: Link omarchy swayosd config
+  ansible.builtin.file:
+    src: "{{ omarchy_config_path }}/swayosd/{{ file }}"
+    dest: "~/.config/swayosd/{{ file }}"
+    state: "link"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0644"
+  loop_control:
+    loop_var: file
+  loop:
+    - config.toml
+    - style.css

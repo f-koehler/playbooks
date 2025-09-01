@@ -1,0 +1,8 @@
+---
+- name: Configure sway
+  ansible.builtin.copy:
+    src: sway
+    dest: ~/.config/sway
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "preserve"
