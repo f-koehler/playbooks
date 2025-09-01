@@ -1,0 +1,13 @@
+- name: install sway packages
+  become: true
+  community.general.pacman:
+    name:
+      - dbus-broker
+      - dbus-broker-units
+      - noto-fonts
+      - sway
+      - uwsm
+      - xdg-desktop-portal
+      - xdg-desktop-portal-kde
+      - xdg-desktop-portal-wlr
+    state: present
