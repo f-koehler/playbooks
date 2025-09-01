@@ -9,6 +9,8 @@
     - pipewire
     - ssh-server
 
+    - omarchy
+
     - alacritty
     - flatpak
     - fzf
