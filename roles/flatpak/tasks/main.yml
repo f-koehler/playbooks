@@ -1,0 +1,18 @@
+#SPDX-License-Identifier: MIT-0
+---
+- include_tasks: "install-{{ ansible_os_family }}.yml"
+
+- name: setup flathub
+  become: true
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    method: system
+
+- name: install flatseal
+  become: true
+  community.general.flatpak:
+    name: com.github.tchx84.Flatseal
+    state: present
+    method: system

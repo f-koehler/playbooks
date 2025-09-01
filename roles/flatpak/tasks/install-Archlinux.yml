@@ -1,0 +1,8 @@
+- name: install flatpak
+  become: true
+  community.general.pacman:
+    name:
+      - flatpak
+      - flatpak-builder
+      - xdg-desktop-portal
+    state: present
