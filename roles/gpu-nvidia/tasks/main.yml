@@ -1,2 +1,2 @@
 ---
-# tasks file for gpu-nvidia
+- include_tasks: "install-{{ ansible_os_family }}.yml"
