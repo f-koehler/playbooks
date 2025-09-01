@@ -1,0 +1,6 @@
+---
+- name: Refresh pacman cache
+  become: true
+  changed_when: true
+  community.general.pacman:
+    update_cache: true

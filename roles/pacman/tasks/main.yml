@@ -1,0 +1,14 @@
+---
+- name: Configure pacman
+  become: true
+  notify: Refresh pacman cache
+  when: ansible_os_family == "Archlinux"
+  ansible.builtin.template:
+    src: pacman.conf.j2
+    dest: /etc/pacman.conf
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Flush handlers
+  meta: flush_handlers
