@@ -1,0 +1,19 @@
+---
+- include_tasks: "install-{{ ansible_os_family }}.yml"
+
+- name: configure ssh-server
+  become: true
+  notify: restart ssh-server
+  ansible.builtin.template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: enable ssh-server
+  become: true
+  ansible.builtin.service:
+    name: "{{ ssh_server_service_name }}"
+    enabled: true
+    state: started

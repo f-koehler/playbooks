@@ -1,0 +1,6 @@
+---
+- name: install openssh
+  community.general.pacman:
+    name: openssh
+    state: present
+  become: true
