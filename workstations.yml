@@ -1,6 +1,9 @@
 ---
 - name: setup workstations
   hosts: workstations
+  pre_tasks:
+    - ansible.builtin.include_vars:
+        file: ./vars/main.yml
   roles:
     - gpu-nvidia
     - pipewire
