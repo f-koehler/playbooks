@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Sway (with UWSM)
 Comment=Sway session managed by UWSM
-Exec=uwsm start -N "Sway" -D sway:wlroots -C "sway" -- sway
+Exec=uwsm start -N "Sway" -D sway:wlroots -C "sway" -- sway --unsupported-gpu
 DesktopNames=sway;wlroots
 Type=Application
