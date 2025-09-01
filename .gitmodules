@@ -1,0 +1,3 @@
+[submodule "external/omarchy"]
+	path = external/omarchy
+	url = git@github.com:f-koehler/omarchy.git

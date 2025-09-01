@@ -1,0 +1,6 @@
+---
+- name: install fzf
+  community.general.pacman:
+    name: fzf
+    state: present
+  become: true
