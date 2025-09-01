@@ -1,0 +1,14 @@
+---
+- name: setup workstations
+  hosts: workstations
+  roles:
+    - gpu-nvidia
+    - pipewire
+    - ssh-server
+
+    - alacritty
+    - flatpak
+    - starship
+    - sway
+
+    - mkinitcpio
