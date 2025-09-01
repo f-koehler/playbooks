@@ -7,6 +7,7 @@
       - mako
       - noto-fonts
       - sway
+      - swaybg
       - uwsm
       - swayosd
       - xdg-desktop-portal
