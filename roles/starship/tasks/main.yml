@@ -1,2 +1,8 @@
 ---
 - include_tasks: "install-{{ ansible_os_family }}.yml"
+
+- name: register starship hooks
+  ansible.builtin.set_fact:
+    bash_hooks: "{{ (bash_hooks | default([])) + [starship_hook_bash] }}"
+    fish_hooks: "{{ (fish_hooks | default([])) + [starship_hook_fish] }}"
+    zsh_hooks: "{{ (zsh_hooks | default([])) + [starship_hook_zsh] }}"
