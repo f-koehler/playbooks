@@ -6,6 +6,8 @@
       ansible.builtin.include_vars:
         file: ./vars/main.yml
   roles:
+    - pacman
+
     - gpu-nvidia
     - pipewire
     - ssh-server
