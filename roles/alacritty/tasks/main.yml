@@ -7,7 +7,7 @@
     path: ~/.config/alacritty
     state: directory
     owner: "{{ username }}"
-    # group: "{{ groupname }}"
+    group: "{{ groupname }}"
     mode: "0755"
 
 - name: configure alacritty
@@ -15,5 +15,5 @@
     src: alacritty.toml.j2
     dest: ~/.config/alacritty/alacritty.toml
     owner: "{{ username }}"
-    # group: "{{ groupname }}"
+    group: "{{ groupname }}"
     mode: "0644"
