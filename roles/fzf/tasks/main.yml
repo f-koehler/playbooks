@@ -1,8 +1,9 @@
 ---
-galaxy_info:
-  author: Fabian Koehler
-  description: Setup fzf
-  license: MIT
-  min_ansible_version: "2.1"
-  galaxy_tags: []
-dependencies: []
+- name: Load installation tasks
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
+
+- name: Register fzf hooks
+  ansible.builtin.set_fact:
+    bash_hooks: "{{ (bash_hooks | default([])) + [fzf_hook_bash] }}" # noqa: var-naming[no-role-prefix]
+    fish_hooks: "{{ (fish_hooks | default([])) + [fzf_hook_fish] }}" # noqa: var-naming[no-role-prefix]
+    zsh_hooks: "{{ (zsh_hooks | default([])) + [fzf_hook_zsh] }}" # noqa: var-naming[no-role-prefix]

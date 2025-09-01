@@ -4,6 +4,6 @@
 
 - name: Register starship hooks
   ansible.builtin.set_fact:
-    bash_hooks: "{{ (bash_hooks | default([])) + [starship_hook_bash] }}"
-    fish_hooks: "{{ (fish_hooks | default([])) + [starship_hook_fish] }}"
-    zsh_hooks: "{{ (zsh_hooks | default([])) + [starship_hook_zsh] }}"
+    bash_hooks: "{{ (bash_hooks | default([])) + [starship_hook_bash] }}" # noqa: var-naming[no-role-prefix]
+    fish_hooks: "{{ (fish_hooks | default([])) + [starship_hook_fish] }}" # noqa: var-naming[no-role-prefix]
+    zsh_hooks: "{{ (zsh_hooks | default([])) + [starship_hook_zsh] }}" # noqa: var-naming[no-role-prefix]
