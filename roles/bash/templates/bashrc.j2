@@ -1,6 +1,10 @@
 # skip bashrc when not running interactively
 [[ $- != *i* ]] && return
 
-{% for hook in bash_hooks_merged %}
+{% for old in bash_aliases %}
+alias {{ old }}="{{ bash_aliases[old] }}"
+{% endfor %}
+
+{% for hook in bash_hooks %}
 {{ hook }}
 {% endfor %}
