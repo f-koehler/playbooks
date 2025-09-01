@@ -1,0 +1,25 @@
+[commit]
+gpgSign = {{ git_enable_gpg }}
+verbose = true
+
+[fetch]
+all = true
+prune = true
+pruneTags = true
+
+[help]
+autoCorrect = "prompt"
+
+[init]
+defaultBranch = "main"
+
+[push]
+autoSetupRemote = true
+
+[tag]
+gpgSign = {{ git_enable_gpg }}
+
+[user]
+email = "fabian.koehler@proton.me"
+name = "Fabian Koehler"
+signingKey = "C5DC80511469AD81C84E3564D55A35AFB2900A11"

@@ -15,6 +15,7 @@
     - alacritty
     - flatpak
     - fzf
+    - git
     - starship
     - sway
     - zoxide
