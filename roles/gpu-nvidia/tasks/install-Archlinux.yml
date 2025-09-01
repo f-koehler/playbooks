@@ -4,6 +4,8 @@
   community.general.pacman:
     name:
       - nvidia-open
+      - nvidia-utils
+      - lib32-nvidia-utils
     state: present
 
 - name: Create pacman hook dir

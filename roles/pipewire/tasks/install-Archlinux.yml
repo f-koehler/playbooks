@@ -10,4 +10,5 @@
       - pipewire-alsa
       - pipewire-jack
       - pipewire-audio
+      - lib32-pipewire
     state: present
