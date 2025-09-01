@@ -1,0 +1,13 @@
+---
+- name: install pipewire
+  become: true
+  community.general.pacman:
+    name:
+      - pipewire
+      - wireplumber
+      - wiremix
+      - pipewire-pulse
+      - pipewire-alsa
+      - pipewire-jack
+      - pipewire-audio
+    state: present
