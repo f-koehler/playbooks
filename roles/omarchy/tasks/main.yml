@@ -1,0 +1,7 @@
+#SPDX-License-Identifier: MIT-0
+---
+- name: clone my omarchy fork
+  ansible.builtin.git:
+    repo: https://github.com/f-koehler/omarchy
+    dest: ~/.local/share/omarchy
+    accept_hostkey: true
