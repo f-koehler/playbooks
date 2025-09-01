@@ -1,5 +1,5 @@
 ---
-- name: install zoxide
+- name: Install zoxide
   community.general.pacman:
     name: zoxide
     state: present

@@ -1,12 +1,11 @@
-#SPDX-License-Identifier: MIT-0
 ---
-- include_tasks: "install-{{ ansible_os_family }}.yml"
-
-- name: register zoxide hooks
+- name: Load installation tasks
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
+- name: Register zoxide hooks
   ansible.builtin.set_fact:
-    bash_hooks: "{{ (bash_hooks | default([])) + [zoxide_hook_bash] }}"
-    fish_hooks: "{{ (fish_hooks | default([])) + [zoxide_hook_fish] }}"
-    zsh_hooks: "{{ (zsh_hooks | default([])) + [zoxide_hook_zsh] }}"
-    bash_aliases: "{{ (bash_aliases | default({})) | combine({'cd': 'z'}) }}"
-    fish_aliases: "{{ (fish_aliases | default({})) | combine({'cd': 'z'}) }}"
-    zsh_aliases: "{{ (zsh_aliases | default({})) | combine({'cd': 'z'}) }}"
+    bash_hooks: "{{ (bash_hooks | default([])) + [zoxide_hook_bash] }}" # noqa: var-naming[no-role-prefix]
+    fish_hooks: "{{ (fish_hooks | default([])) + [zoxide_hook_fish] }}" # noqa: var-naming[no-role-prefix]
+    zsh_hooks: "{{ (zsh_hooks | default([])) + [zoxide_hook_zsh] }}" # noqa: var-naming[no-role-prefix]
+    bash_aliases: "{{ (bash_aliases | default({})) | combine({'cd': 'z'}) }}" # noqa: var-naming[no-role-prefix]
+    fish_aliases: "{{ (fish_aliases | default({})) | combine({'cd': 'z'}) }}" # noqa: var-naming[no-role-prefix]
+    zsh_aliases: "{{ (zsh_aliases | default({})) | combine({'cd': 'z'}) }}" # noqa: var-naming[no-role-prefix]
