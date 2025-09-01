@@ -1,0 +1,35 @@
+---
+- name: Install common desktop programs
+  become: true
+  community.general.pacman:
+    state: present
+    name:
+      - bitwarden
+      - drawio-desktop
+      - firefox
+      - gimp
+      - imhex
+      - inkscape
+      - mpv
+      - nextcloud-client
+      - obsidian
+      - papers
+
+- name: Install libreoffice
+  become: true
+  community.general.pacman:
+    state: present
+    name:
+      - adobe-source-code-pro-fonts
+      - adobe-source-sans-fonts
+      - adobe-source-serif-fonts
+      - hunspell
+      - hunspell-de
+      - hunspell-en_us
+      - libreoffice-still
+      - noto-fonts
+      - ttf-caldea
+      - ttf-carlito
+      - ttf-dejavu
+      - ttf-liberation
+      - ttf-linux-libertine-g
