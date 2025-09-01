@@ -1,5 +1,5 @@
 ---
-- name: generate initramfs
+- name: Generate initramfs
   become: true
   ansible.builtin.command:
     cmd: /usr/bin/mkinitcpio -P

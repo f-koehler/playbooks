@@ -1,5 +1,5 @@
 ---
-- name: configure bash
+- name: Configure bash
   ansible.builtin.template:
     src: bashrc.j2
     dest: ~/.bashrc

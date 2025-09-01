@@ -1,7 +1,8 @@
 ---
-- include_tasks: "install-{{ ansible_os_family }}.yml"
+- name: Load installation tasks
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
 
-- name: configure ssh-server
+- name: Configure ssh-server
   become: true
   notify: restart ssh-server
   ansible.builtin.template:
@@ -11,7 +12,7 @@
     group: root
     mode: "0644"
 
-- name: enable ssh-server
+- name: Enable ssh-server
   become: true
   ansible.builtin.service:
     name: "{{ ssh_server_service_name }}"

@@ -1,7 +1,8 @@
 ---
-- include_tasks: "install-{{ ansible_os_family }}.yml"
+- name: "Load installation tasks"
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
 
-- name: create alacritty config dir
+- name: Create alacritty config dir
   ansible.builtin.file:
     path: ~/.config/alacritty
     state: directory
@@ -9,7 +10,7 @@
     group: "{{ groupname }}"
     mode: "0755"
 
-- name: configure alacritty
+- name: Configure alacritty
   ansible.builtin.template:
     src: alacritty.toml.j2
     dest: ~/.config/alacritty/alacritty.toml
