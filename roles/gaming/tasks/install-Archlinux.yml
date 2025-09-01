@@ -1,4 +1,5 @@
 - name: Install steam and friends
+  become: true
   community.general.pacman:
     name:
       - steam
