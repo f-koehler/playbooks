@@ -1,5 +1,5 @@
 ---
-- name: restart ssh-server
+- name: Restart ssh-server
   become: true
   ansible.builtin.service:
     name: "{{ ssh_server_service_name }}"

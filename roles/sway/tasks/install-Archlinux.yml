@@ -1,4 +1,4 @@
-- name: install sway packages
+- name: Install sway packages
   become: true
   community.general.pacman:
     name:

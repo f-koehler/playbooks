@@ -1,5 +1,5 @@
 ---
-- name: install alacritty
+- name: Install alacritty
   become: true
   community.general.pacman:
     name:
