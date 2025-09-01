@@ -1,0 +1,25 @@
+---
+- name: install nvidia GPU driver
+  become: true
+  community.general.pacman:
+    name:
+      - nvidia-open
+    state: present
+
+- name: create pacman hook dir
+  become: true
+  ansible.builtin.file:
+    path: /etc/pacman.d/hooks
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: setup nvidia pacman hook
+  become: true
+  ansible.builtin.copy:
+    src: nvidia.hook
+    dest: /etc/pacman.d/hooks/nvidia.hook
+    owner: root
+    group: root
+    mode: "0644"
