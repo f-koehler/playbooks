@@ -5,3 +5,11 @@
     dest: ~/.local/share/omarchy
     version: fk
     accept_hostkey: true
+
+- name: Configure omarchy theme
+  ansible.builtin.file:
+    src: ~/.local/share/omarchy/themes/catppuccin
+    dest: ~/.config/omarchy
+    state: link
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
