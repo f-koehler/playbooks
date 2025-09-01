@@ -2,10 +2,18 @@
 ---
 - include_tasks: "install-{{ ansible_os_family }}.yml"
 
+- name: create alacritty config dir
+  ansible.builtin.file:
+    path: ~/.config/alacritty
+    state: directory
+    owner: "{{ username }}"
+    # group: "{{ groupname }}"
+    mode: "0755"
+
 - name: configure alacritty
   ansible.builtin.template:
     src: alacritty.toml.j2
     dest: ~/.config/alacritty/alacritty.toml
-    owner: ansible_user
-    group: ansible_user
+    owner: "{{ username }}"
+    # group: "{{ groupname }}"
     mode: "0644"
