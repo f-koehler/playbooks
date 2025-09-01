@@ -222,4 +222,7 @@ bindsym $mod+r mode "resize"
 #     }
 # }
 
+exec systemctl --user set-environment XDG_CURRENT_DESKTOP=sway
+exec uwsm finalize DISPLAY SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+
 include ~/.config/sway/config.d/*
