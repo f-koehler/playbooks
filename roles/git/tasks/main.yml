@@ -1,0 +1,19 @@
+---
+- name: Load installation tasks
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
+
+- name: Create git config dir
+  ansible.builtin.file:
+    path: ~/.config/git/
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0755"
+
+- name: Configure git
+  ansible.builtin.template:
+    src: config.j2
+    dest: ~/.config/git/config
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0644"

@@ -1,0 +1,9 @@
+---
+- name: Install git
+  become: true
+  community.general.pacman:
+    name:
+      - git
+      - gnupg
+      - lazygit
+    state: present
