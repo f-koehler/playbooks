@@ -3,7 +3,7 @@
   ansible.builtin.git:
     repo: https://github.com/catppuccin/{{ repo_name }}
     dest: ~/.local/share/catppuccin/{{ repo_name }}
-    version: fk
+    version: main
     accept_hostkey: true
   async: 300
   poll: 1
