@@ -1,0 +1,11 @@
+---
+- name: Load installation tasks
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
+
+- name: Configure zed
+  ansible.builtin.template:
+    src: settings.json.j2
+    dest: ~/.config/zed/settings.json
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0644"

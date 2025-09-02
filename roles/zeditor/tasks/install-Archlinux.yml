@@ -1,0 +1,10 @@
+---
+- name: Install zed
+  become: true
+  community.general.pacman:
+    state: present
+    name:
+      - zed
+      - clang
+      - pyright
+      - rust-analyzer
