@@ -2,6 +2,6 @@ username: fkoehler
 groupname: fkoehler
 omarchy_theme_path: ~/.local/share/omarchy/themes/catppuccin
 omarchy_config_path: ~/.local/share/omarchy/config
-font_family_monospace: "CaskaydiaCode Nerd Font"
+font_family_monospace: "Caskaydia Cove Nerd Font"
 font_family_serif: "Noto Serif"
 font_family_sans: "Noto Sans"
