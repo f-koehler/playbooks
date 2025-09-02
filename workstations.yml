@@ -28,6 +28,7 @@
     - greetd
     - starship
     - sway
+    - zeditor
     - zoxide
 
     - mkinitcpio
