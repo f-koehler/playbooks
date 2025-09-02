@@ -1,8 +1,8 @@
 ---
 - name: Clone catppuccin modules
   ansible.builtin.git: # TODO(fk): run in parallel
-    repo: https://github.com/catppuccin/{{ repo_name }}
-    dest: ~/.local/share/catppuccin/{{ repo_name }}
+    repo: "https://github.com/catppuccin/{{ repo_name }}"
+    dest: "~/.local/share/catppuccin/{{ repo_name }}"
     version: main
     accept_hostkey: true
   loop_control:
@@ -22,3 +22,16 @@
     - yazi
     - zathura
     - zsh-syntax-highlighting
+
+- name: Configure Alacritty theme
+  block:
+    - name: Create Alacritty config dir
+      ansible.builtin.file:
+        path: "~/.config/alacritty/"
+        state: directory
+
+    - name: Link Alacritty theme
+      ansible.builtin.file:
+        src: "~/.local/share/catppuccin/alacritty/catppuccin-mocha.toml"
+        dest: "~/.config/alacritty/theme.toml"
+        state: link
