@@ -13,4 +13,5 @@
       - xdg-desktop-portal
       - xdg-desktop-portal-kde
       - xdg-desktop-portal-wlr
+      - rofi # TODO(fk): replace with walker later
     state: present
