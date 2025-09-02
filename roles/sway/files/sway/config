@@ -15,7 +15,7 @@ set $up k
 set $right l
 # Your preferred terminal emulator
 # set $term uwsm app -- alacritty
-set $term alacritty
+set $term uwsm app -- Alacritty.desktop
 # Your preferred application launcher
 set $menu rofi -show drun -run-command "uwsm app -- {cmd}"
 
