@@ -1,0 +1,33 @@
+---
+- name: Install CUDA development tools
+  become: true
+  community.general.pacman:
+    state: present
+    name:
+      - base-devel
+      - cuda
+      - cuda-tools
+      - cudnn
+      - cudss
+
+- name: Install HIP/ROCm development tools
+  become: true
+  community.general.pacman:
+    state: present
+    name:
+      - rocthrust
+      - hipblas
+      - hipblaslt
+      - hipcub
+      - hipsolver
+      - hipsparse
+      - hip-runtime-nvidia
+      - hip-runtime-amd
+
+- name: Install OpenCL development tools
+  become: true
+  community.general.pacman:
+    state: present
+    name:
+      - opencl-headers
+      - ocl-icd

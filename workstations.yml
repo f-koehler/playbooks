@@ -13,10 +13,14 @@
     - ssh-server
 
     - omarchy
+    - catppuccin
     - ssh
 
     - alacritty
     - desktop-programs
+    - dev-cpp
+    - dev-gpu
+    - dev-python
     - flatpak
     - fzf
     - gaming

@@ -1,0 +1,14 @@
+---
+- name: Install C++ development tools
+  become: true
+  community.general.pacman:
+    state: present
+    name:
+      - base-devel
+      - clang
+      - cmake
+      - gcc
+      - gdb
+      - make
+      - ninja
+      - vcpkg
