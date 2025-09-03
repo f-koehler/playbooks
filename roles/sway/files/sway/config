@@ -204,6 +204,9 @@ bindsym $mod+r mode "resize"
     # Special key to take a screenshot with grim
     bindsym Print exec grim
 
+focus_follows_mouse no
+hide_edge_borders smart_no_gaps
+
 #
 # Status Bar:
 #
