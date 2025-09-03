@@ -1,0 +1,4 @@
+---
+- name: "Load installation tasks"
+  ansible.builtin.load_tasks: "install-{{ ansible_os_family }}.yml"
+

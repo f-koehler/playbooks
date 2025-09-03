@@ -1,0 +1,11 @@
+---
+- name: Install neovim
+  become: true
+  community.general.pacman:
+    name:
+      - neovim
+      - fd
+      - ripgrep
+      - stylua
+      - lua-language-server
+      - selene
