@@ -3,9 +3,10 @@
   become: true
   community.general.pacman:
     name:
-      - neovim
       - fd
-      - ripgrep
-      - stylua
       - lua-language-server
+      - neovim
+      - nodejs
+      - ripgrep
       - selene
+      - stylua

@@ -2,3 +2,9 @@
 - name: "Load installation tasks"
   ansible.builtin.load_tasks: "install-{{ ansible_os_family }}.yml"
 
+- name: Clone neovim config
+  ansible.builtin.git:
+    repo: "git@github.com:f-koehler/neovim-config.git"
+    dest: "~/.config/nvim"
+    version: main
+    accept_hostkey: true
