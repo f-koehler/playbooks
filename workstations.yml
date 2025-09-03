@@ -17,6 +17,7 @@
     - ssh
 
     - alacritty
+    - bluetooth
     - desktop-programs
     - dev-cpp
     - dev-gpu
@@ -26,6 +27,7 @@
     - gaming
     - git
     - greetd
+    - neovim
     - starship
     - sway
     - zeditor
