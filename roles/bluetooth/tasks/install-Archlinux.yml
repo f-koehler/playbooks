@@ -1,0 +1,10 @@
+---
+- name: Install bluez
+  become: true
+  community.general.pacman:
+    name:
+      - bluez
+      - bluez-utils
+      - bluetui
+    state: present
+

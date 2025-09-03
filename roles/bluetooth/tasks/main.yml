@@ -1,0 +1,12 @@
+---
+- name: Load installation tasks
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
+
+- name: Start bluetooth service
+  become: true
+  ansible.builtin.systemd_service:
+    name: "bluetooth.service"
+    state: started
+    enabled: true
+
+# TODO: might be relevant for desktop: https://wiki.archlinux.org/title/Bluetooth#Dual_boot_pairing
