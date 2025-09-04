@@ -1,6 +1,7 @@
+---
 galaxy_info:
   author: Fabian Koehler
-  description: Install and configure C++ development tools and environment
+  description: Install and configure Neovim text editor
   license: MIT
 
   min_ansible_version: "2.1"
