@@ -1,0 +1,14 @@
+---
+- name: Install rust toolchains
+  block:
+    - name: Install rust toolchains
+      ansible.builtin.command:
+        cmd: "rustup toolchain install {{ toolchain }}"
+      loop_control:
+        loop_var: toolchain
+      loop:
+        - stable
+        - nightly
+    - name: Set default toolchain
+      ansible.builtin.command:
+        cmd: "rustup default stable"

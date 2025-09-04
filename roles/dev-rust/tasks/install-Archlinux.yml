@@ -1,0 +1,20 @@
+---
+# - name: Remove system rust development tools
+#   become: true
+#   community.general.pacman:
+#     state: absent
+#     name:
+#       - rust
+#       - rust-src
+#       - rust-analyzer
+
+- name: Install rust development tools
+  become: true
+  notify:
+    - Install rust toolchains
+  community.general.pacman:
+    state: present
+    name:
+      - base-devel
+      - rustup
+      - cargo
