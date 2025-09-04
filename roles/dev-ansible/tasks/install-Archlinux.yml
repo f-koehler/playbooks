@@ -5,6 +5,6 @@
     state: present
     name:
       - ansible
-      - anisble-lint
+      - ansible-lint
       - ansible-language-server
       - yamllint
