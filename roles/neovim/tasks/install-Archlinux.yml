@@ -10,3 +10,5 @@
       - ripgrep
       - selene
       - stylua
+      - prettier
+      - taplo-cli
