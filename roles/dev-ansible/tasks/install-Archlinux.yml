@@ -1,0 +1,10 @@
+---
+- name: Install ansible development tools
+  become: true
+  community.general.pacman:
+    state: present
+    name:
+      - ansible
+      - anisble-lint
+      - ansible-language-server
+      - yamllint

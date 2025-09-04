@@ -4,11 +4,9 @@
   community.general.pacman:
     name:
       - fd
-      - lua-language-server
       - neovim
       - nodejs
       - ripgrep
-      - selene
-      - stylua
       - prettier
       - taplo-cli
+

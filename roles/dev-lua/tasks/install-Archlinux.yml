@@ -1,0 +1,10 @@
+---
+- name: Install lua development tools
+  become: true
+  community.general.pacman:
+    state: present
+    name:
+      - lua
+      - lua-language-server
+      - selene
+      - stylua

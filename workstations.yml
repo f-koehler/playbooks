@@ -19,8 +19,10 @@
     - alacritty
     - bluetooth
     - desktop-programs
+    - dev-ansible
     - dev-cpp
     - dev-gpu
+    - dev-lua
     - dev-python
     - flatpak
     - fzf
