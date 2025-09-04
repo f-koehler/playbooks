@@ -12,3 +12,8 @@
       - pipewire-audio
       - lib32-pipewire
     state: present
+
+- name: Disabe bluetooth hardwre volume
+  ansible.builtin.copy:
+    src: 80-bluez-properties.conf
+    dest: /etc/pipewire/80-bluez-properties.conf
