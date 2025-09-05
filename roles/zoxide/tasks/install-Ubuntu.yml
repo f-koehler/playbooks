@@ -1,0 +1,5 @@
+---
+- name: Install zoxide using Homebrew
+  community.general.homebrew:
+    name: zoxide
+    state: present
