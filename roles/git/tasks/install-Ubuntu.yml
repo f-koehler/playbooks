@@ -1,0 +1,8 @@
+---
+- name: Install git via apt
+  become: true
+  ansible.builtin.apt:
+    name:
+      - git
+      - gnupg
+    state: present
