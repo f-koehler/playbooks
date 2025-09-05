@@ -5,7 +5,6 @@ setw -g clock-mode-style 24
 set  -g history-limit 50000
 
 {% if tmux_theme_path is not none %}
-run ~/.config/tmux/plugins/catppuccin/tmux/catppuccin.tmux
+run {{ tmux_theme_path }}
 set  -g @catppuccin_flavor '{{ catppuccin_flavor | lower }}'
 {% endif %}
-
