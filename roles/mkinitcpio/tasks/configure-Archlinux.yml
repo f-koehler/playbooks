@@ -1,0 +1,18 @@
+---
+- name: Merge mkinitcpio hooks
+  ansible.builtin.set_fact:
+    mkinitcpio_hooks: "{{ mkinitcpio_hooks_base | union(mkinitcpio_hooks_extra | default([])) }}"
+
+- name: Merge mkinitcpio modules
+  ansible.builtin.set_fact:
+    mkinitcpio_modules: "{{ mkinitcpio_modules_base | union(mkinitcpio_modules_extra | default([])) }}"
+
+- name: Configure mkinitcpio
+  become: true
+  notify: Generate initramfs
+  ansible.builtin.template:
+    src: mkinitcpio.conf.j2
+    dest: /etc/mkinitcpio.conf
+    owner: root
+    group: root
+    mode: "0644"
