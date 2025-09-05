@@ -1,0 +1,6 @@
+---
+- name: Load installation tasks
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
+- name: Register zoxide hooks
+  ansible.builtin.set_fact:
+    shell_aliases: "{{ (shell_aliases | default({})) | combine({'tw': 'taskwarrior-tui'}) }}" # noqa: var-naming[no-role-prefix]
