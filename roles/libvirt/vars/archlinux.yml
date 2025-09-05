@@ -1,0 +1,14 @@
+---
+libvirt_service: "libvirtd"
+libvirt_groups:
+  - "libvirt"
+  - "kvm"
+libvirt_packages:
+  - libvirt
+  - qemu-full
+  - virt-manager
+  - dnsmasq
+  - iptables-nft
+  - bridge-utils
+  - edk2-ovmf
+  - dmidecode

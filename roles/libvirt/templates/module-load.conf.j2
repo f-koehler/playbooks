@@ -1,0 +1,5 @@
+# Modules required for libvirt/KVM virtualization
+kvm
+{% if libvirt_kvm_vendor_module %}
+{{ libvirt_kvm_vendor_module }}
+{% endif %}

@@ -1,0 +1,59 @@
+---
+- name: Load libvirt variables
+  ansible.builtin.include_vars:
+    file: "{{ ansible_os_family | lower }}.yml"
+    dir: vars
+
+- name: Install libvirt, qemu, and related packages
+  become: true
+  ansible.builtin.package:
+    name: "{{ libvirt_packages }}"
+    state: present
+  when: libvirt_packages is defined
+
+- name: Enable and start libvirt service
+  become: true
+  ansible.builtin.systemd:
+    name: "{{ libvirt_service }}"
+    enabled: yes
+    state: started
+
+- name: Ensure user is in all required libvirt groups
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    groups: "{{ libvirt_groups }}"
+    append: yes
+
+- name: Get CPU vendor from /proc/cpuinfo
+  ansible.builtin.shell: "grep -m1 'vendor_id' /proc/cpuinfo | awk '{print $3}'"
+  register: cpu_vendor
+  changed_when: false
+
+- name: Set kvm vendor module fact based on CPU vendor
+  ansible.builtin.set_fact:
+    libvirt_kvm_vendor_module: >-
+      {{ 'kvm_intel' if cpu_vendor.stdout == 'GenuineIntel' else
+         'kvm_amd' if cpu_vendor.stdout == 'AuthenticAMD' else '' }}
+
+- name: Persistently load kvm and vendor module
+  become: true
+  ansible.builtin.template:
+    src: module-load.conf.j2
+    dest: /etc/modules-load.d/libvirt.conf
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Load kvm base module
+  become: true
+  community.general.modprobe:
+    name: kvm
+    state: present
+
+- name: Load vendor-specific kvm module
+  become: true
+  community.general.modprobe:
+    name: "{{ libvirt_kvm_vendor_module }}"
+    state: present
+  when: libvirt_kvm_vendor_module != ''
