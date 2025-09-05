@@ -4,7 +4,7 @@
   community.general.snap:
     name: nvim
     state: present
-    classic: yes
+    classic: true
 
 - name: Install dependencies via apt
   become: true

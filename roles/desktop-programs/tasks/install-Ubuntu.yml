@@ -4,7 +4,7 @@
   community.general.snap:
     name: firefox
     state: present
-    classic: yes
+    classic: true
 
 - name: Install desktop programs via flatpak (system)
   become: true

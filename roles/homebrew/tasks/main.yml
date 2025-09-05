@@ -21,6 +21,16 @@
         group: "{{ groupname }}"
         mode: "0755"
 
-    - name: Install homebrew
+    - name: Download homebrew tarball
+      ansible.builtin.get_url:
+        url: https://github.com/Homebrew/brew/tarball/master
+        dest: /tmp/homebrew.tar.gz
+        mode: "0644"
+
+    - name: Extract homebrew tarball
       ansible.builtin.shell: |
-        curl -fsSL https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C {{ homebrew_root }}
+        set -o pipefail
+        tar xz --strip 1 -C {{ homebrew_root }} < /tmp/homebrew.tar.gz
+      args:
+        executable: /bin/bash
+      changed_when: true
