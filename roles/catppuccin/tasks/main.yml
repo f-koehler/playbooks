@@ -2,7 +2,7 @@
 - name: Clone catppuccin modules
   ansible.builtin.git: # TODO(fk): run in parallel
     repo: "https://github.com/catppuccin/{{ repo_name }}"
-    dest: "~/.local/share/catppuccin/{{ repo_name }}"
+    dest: "{{ catppuccin_clone_path }}/{{ repo_name }}"
     version: main
     accept_hostkey: true
   loop_control:
@@ -26,5 +26,6 @@
 
 - name: Set theme variables
   ansible.builtin.set_fact:
-    alacritty_theme_path: "~/.local/share/catppuccin/alacritty/catppuccin-{{ catppuccin_flavor|lower }}.toml" # noqa: var-naming[no-role-prefix]
-    bat_theme_path: "~/.local/share/catppuccin/bat/themes/Cattppuccin {{ catppuccin_flavor }}.tmTheme" # noqa: var-naming[no-role-prefix]
+    alacritty_theme_path: "{{ catppuccin_clone_path }}/alacritty/catppuccin-{{ catppuccin_flavor|lower }}.toml" # noqa: var-naming[no-role-prefix]
+    bat_theme_path:       "{{ catppuccin_clone_path }}/bat/themes/Cattppuccin {{ catppuccin_flavor }}.tmTheme" # noqa: var-naming[no-role-prefix]
+    lazygit_theme_path:   "{{ catppuccin_clone_path }}/lazygit/themes/{{ catppuccin_flavor | lower }}/{{ actppuccin_accent | lower }}.yml" # noqa: var-naming[no-role-prefix]
