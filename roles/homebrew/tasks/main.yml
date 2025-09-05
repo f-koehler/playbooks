@@ -1,12 +1,8 @@
 ---
-- name: Load homebrew variables
-  ansible.builtin.include_vars:
-    file: "{{ ansible_os_family }}.yml"
-
 - name: Install homebrew dependencies
   become: true
   ansible.builtin.package:
-    name: "{{ homebrew_dependencies }}"
+    name: "{{ homebrew_dependencies[ansible_os_family | lower] }}"
     state: present
 
 - name: Check if homebrew already installed
@@ -28,4 +24,3 @@
     - name: Install homebrew
       ansible.builtin.shell: |
         curl -fsSL https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C {{ homebrew_root }}
-
