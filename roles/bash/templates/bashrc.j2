@@ -1,6 +1,9 @@
 # skip bashrc when not running interactively
 [[ $- != *i* ]] && return
 
+{% for old in shell_aliases|default([]) %}
+alias {{ old }}="{{ shell_aliases[old] }}"
+{% endfor %}
 {% for old in bash_aliases %}
 alias {{ old }}="{{ bash_aliases[old] }}"
 {% endfor %}
