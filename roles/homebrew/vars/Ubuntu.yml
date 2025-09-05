@@ -1,7 +1,0 @@
----
-homebrew_dependencies:
-  - build-essential
-  - curl
-  - file
-  - git
-  - procps
