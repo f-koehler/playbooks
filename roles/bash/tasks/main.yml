@@ -1,4 +1,7 @@
 ---
+- name: Load Archlinux install tasks
+  ansible.builtin.include_tasks: install-Archlinux.yml
+
 - name: Configure bash
   ansible.builtin.template:
     src: bashrc.j2

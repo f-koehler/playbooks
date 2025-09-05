@@ -1,0 +1,8 @@
+---
+- name: Install bash and bash-completion
+  become: true
+  community.general.pacman:
+    name:
+      - bash
+      - bash-completion
+    state: present
