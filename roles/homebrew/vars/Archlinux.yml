@@ -1,0 +1,7 @@
+---
+homebrew_dependencies:
+  - base-devel
+  - curl
+  - file
+  - git
+  - procps-ng
