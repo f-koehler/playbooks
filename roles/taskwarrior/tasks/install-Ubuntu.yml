@@ -1,0 +1,8 @@
+---
+- name: Install taskwarrior, taskwarrior-tui, and timewarrior via homebrew
+  community.general.homebrew:
+    state: present
+    name:
+      - task
+      - taskwarrior-tui
+      - timewarrior
