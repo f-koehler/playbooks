@@ -7,4 +7,3 @@
       - bluez-utils
       - bluetui
     state: present
-

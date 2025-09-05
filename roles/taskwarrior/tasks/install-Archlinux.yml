@@ -8,12 +8,11 @@
       - task
       - taskwarrior-tui
       - timew
-
 - name: Create taskwarrior dirs
   ansible.builtin.file:
     path: "{{ directory }}"
     state: directory
-    mode: 0755
+    mode: "0755"
     owner: "{{ username }}"
     group: "{{ groupname }}"
     recurse: true
@@ -22,12 +21,10 @@
   loop:
     - "~/.config/taskw"
     - "~/.local/share/task/hooks"
-
 - name: Copy timewarrior hook
   ansible.builtin.copy:
     src: /usr/share/doc/timew/ext/on-modify.timewarrior
     dest: ~/.local/share/task/hooks/on-modify.timewarrior
-    mode: 0744
+    mode: "0744"
     owner: "{{ username }}"
     group: "{{ groupname }}"
-  

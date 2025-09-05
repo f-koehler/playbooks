@@ -3,4 +3,10 @@
   ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
 - name: Add eza aliases
   ansible.builtin.set_fact:
-    shell_aliases: "{{ (shell_aliases | default({})) | combine({'ls': 'eza --icons=never', 'la': 'eza -a --icons=never', 'll': 'eza -lg --icons=always', 'lla': 'eza -lag --icons=always'}) }}" # noqa: var-naming[no-role-prefix]
+    shell_aliases: >
+      {{ (shell_aliases | default({})) | combine({
+        'ls': 'eza --icons=never',
+        'la': 'eza -a --icons=never',
+        'll': 'eza -lg --icons=always',
+        'lla': 'eza -lag --icons=always'
+      }) }}

@@ -3,7 +3,8 @@
   ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
 
 - name: Get lazygit config dir
-  ansible.builtin.shell:
+  changed_when: false
+  ansible.builtin.command:
     cmd: lazygit --print-config-dir
   register: lazygit_config_dir
 
