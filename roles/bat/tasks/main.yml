@@ -16,12 +16,19 @@
   register: bat_config_dir
   ansible.builtin.command:
     cmd: "bat --config-dir"
+- name: Make sure config dir exists
+  ansible.builtin.file:
+    path: "{{ bat_config_dir.stdout | trim }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0755"
 - name: Link bat theme
-  when: bat_theme_path
+  when: bat_theme_path != None
   notify: Rebuild bat cache
   ansible.builtin.file:
     src: "{{ bat_theme_path }}"
-    dest: "{{ bat_config_dir.stdout }}/{{ bat_theme_path | basename }}"
+    dest: "{{ bat_config_dir.stdout | trim }}/{{ bat_theme_path | basename }}"
     state: link
     owner: "{{ username }}"
     group: "{{ groupname }}"
@@ -29,7 +36,7 @@
 - name: Configure bat
   ansible.builtin.template:
     src: config.j2
-    dest: "{{ bat_config_dir.stdout }}/config"
+    dest: "{{ bat_config_dir.stdout | trim }}/config"
     owner: "{{ username }}"
     group: "{{ groupname }}"
     mode: "0644"
