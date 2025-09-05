@@ -24,7 +24,7 @@
     mode: "0755"
 
 - name: Read lazygit theme content
-  when: lazygit_theme_path
+  when: lazygit_theme_path != None
   ansible.builtin.set_fact:
     lazygit_theme_content: "{{ lookup('ansible.builtin.file', lazygit_theme_path) }}"
 
