@@ -1,0 +1,5 @@
+---
+- name: Install lazygit using Homebrew
+  community.general.homebrew:
+    name: lazygit
+    state: present
