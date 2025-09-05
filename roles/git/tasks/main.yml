@@ -17,29 +17,3 @@
     owner: "{{ username }}"
     group: "{{ groupname }}"
     mode: "0644"
-
-- name: Get lazygit config dir
-  ansible.builtin.shell:
-    cmd: lazygit --print-config-dir
-  register: lazygit_config_dir
-
-- name: Create lazygit config dir
-  ansible.builtin.file:
-    path: "{{ lazygit_config_dir.stdout | dirname }}"
-    state: directory
-    owner: "{{ username }}"
-    group: "{{ groupname }}"
-    mode: "0755"
-
-- name: Read lazygit theme content
-  when: lazygit_theme_path
-  ansible.builtin.set_fact:
-    lazygit_theme_content: "{{ lookup('ansible.builtin.file', lazygit_theme_path) }}"
-
-- name: Configure lazygit
-  ansible.builtin.template:
-    src: lazygit.yml.j2
-    dest: "{{ lazygit_config_dir.stdout | dirname }}"
-    owner: "{{ username }}"
-    group: "{{ groupname }}"
-    mode: "0644"
