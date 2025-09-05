@@ -34,6 +34,9 @@
     owner: "{{ username }}"
     group: "{{ groupname }}"
     mode: "0644"
+- name: Ensure bat cache is rebuilt before validation
+  ansible.builtin.meta: flush_handlers
+
 - name: Configure bat
   ansible.builtin.template:
     src: config.j2
@@ -41,3 +44,4 @@
     owner: "{{ username }}"
     group: "{{ groupname }}"
     mode: "0644"
+    validate: 'bat --list-themes | grep "Catppuccin {{ catppuccin_flavor }}"'
