@@ -1,0 +1,22 @@
+---
+- name: Install Firefox via snap
+  become: true
+  community.general.snap:
+    name: firefox
+    state: present
+    classic: yes
+
+- name: Install desktop programs via flatpak (system)
+  become: true
+  community.general.flatpak:
+    method: system
+    name:
+      - com.bitwarden.desktop
+      - io.github.jgraph.drawio.desktop
+      - org.gimp.GIMP
+      - org.inkscape.Inkscape
+      - io.mpv.Mpv
+      - com.nextcloud.desktopclient.nextcloud
+      - md.obsidian.Obsidian
+      - org.libreoffice.LibreOffice
+      - net.werwolv.ImHex
