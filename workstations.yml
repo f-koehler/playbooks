@@ -26,6 +26,7 @@
     - dev-gpu
     - dev-lua
     - dev-python
+    - dev-rust
     - eza
     - flatpak
     - fzf
