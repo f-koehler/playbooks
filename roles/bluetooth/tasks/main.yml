@@ -8,5 +8,4 @@
     name: "bluetooth.service"
     state: started
     enabled: true
-
 # TODO: might be relevant for desktop: https://wiki.archlinux.org/title/Bluetooth#Dual_boot_pairing
