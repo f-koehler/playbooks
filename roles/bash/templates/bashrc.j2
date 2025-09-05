@@ -1,4 +1,8 @@
-# skip bashrc when not running interactively
+{% for variable in environment_variables %}
+export {{ variable }}="{{ environment_variables[variable] }}"
+{% endfor %}
+
+# skip rest of bashrc when not running interactively
 [[ $- != *i* ]] && return
 
 {% for old in shell_aliases|default([]) %}

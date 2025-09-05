@@ -12,3 +12,7 @@ shell_aliases:
   la: "ls -a"
   ll: "ls -lh"
   lla: "ls -lah"
+catppuccin_clone_path: ~/.local/share/catppuccin
+alacritty_theme_path: "{{ catppuccin_clone_path }}/alacritty/catppuccin-{{ catppuccin_flavor | lower }}.toml"
+bat_theme_path: "{{ catppuccin_clone_path }}/bat/themes/Catppuccin {{ catppuccin_flavor }}.tmTheme"
+lazygit_theme_path: "{{ catppuccin_clone_path }}/lazygit/themes/{{ catppuccin_flavor | lower }}/{{ catppuccin_accent | lower }}.yml"

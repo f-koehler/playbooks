@@ -23,8 +23,3 @@
     - yazi
     - zathura
     - zsh-syntax-highlighting
-- name: Set theme variables
-  ansible.builtin.set_fact: # noqa: var-naming[no-role-prefix]
-    alacritty_theme_path: "{{ catppuccin_clone_path }}/alacritty/catppuccin-{{ catppuccin_flavor | lower }}.toml"
-    bat_theme_path: "{{ catppuccin_clone_path }}/bat/themes/Catppuccin {{ catppuccin_flavor }}.tmTheme"
-    lazygit_theme_path: "{{ catppuccin_clone_path }}/lazygit/themes/{{ catppuccin_flavor | lower }}/{{ catppuccin_accent | lower }}.yml"
