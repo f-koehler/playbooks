@@ -1,18 +1,12 @@
 ---
-- name: "Load installation tasks"
-  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
+- name: Install flatpak and dependencies
+  ansible.builtin.package:
+    name: "{{ flatpak_dependencies[ansible_os_family | lower] }}"
+    state: present
 
-- name: Setup flathub
-  become: true
+- name: Add flathub remote (system)
   community.general.flatpak_remote:
     name: flathub
     state: present
-    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
     method: system
-
-- name: Install flatseal
-  become: true
-  community.general.flatpak:
-    name: com.github.tchx84.Flatseal
-    state: present
-    method: system
+    url: https://flathub.org/repo/flathub.flatpakrepo
