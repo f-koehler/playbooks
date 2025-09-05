@@ -9,3 +9,6 @@ shell_aliases:
   cp: "cp -i"
   mv: "mv -i"
   rm: "rm -i"
+  la: "ls -a"
+  ll: "ls -lh"
+  lla: "ls -lah"
