@@ -24,19 +24,7 @@
     - zathura
     - zsh-syntax-highlighting
 
-- name: Configure Alacritty theme
-  block:
-    - name: Create Alacritty config dir
-      ansible.builtin.file:
-        path: "~/.config/alacritty/"
-        state: directory
-
-    - name: Link Alacritty theme
-      ansible.builtin.file:
-        src: "~/.local/share/catppuccin/alacritty/catppuccin-{{ catppuccin_flavor | lower }}.toml"
-        dest: "~/.config/alacritty/theme.toml"
-        state: link
-
 - name: Set theme variables
   ansible.builtin.set_fact:
+    alacritty_theme_path: "~/.local/share/catppuccin/alacritty/{{ catppuccin_flavor|lower }}.toml" # noqa: var-naming[no-role-prefix]
     bat_theme_path: "~/.local/share/catppuccin/bat/themes/Cattppuccin {{ catppuccin_flavor }}.tmTheme" # noqa: var-naming[no-role-prefix]
