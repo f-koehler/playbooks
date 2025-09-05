@@ -16,3 +16,11 @@
     dest: "~/.config/nvim"
     version: main
     accept_hostkey: true
+
+- name: Set nvim as default editor
+  ansible.builtin.set_fact: # noqa: var-naming[no-role-prefix]
+    environment_variables: >
+      {{ (environment_variables | default({})) | combine({
+        'EDITOR': 'nvim',
+        'VISUAL': 'nvim'
+      }) }}
