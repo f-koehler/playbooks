@@ -1,6 +1,13 @@
 ---
 - name: Load installation tasks
-  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
+  ansible.builtin.include_tasks: "{{ lookup('ansible.builtin.first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "install-{{ ansible_os_family }}.yml"
+        - "install-fallback.yml"
+      paths:
+        - "{{ role_path }}/tasks"
 
 - name: Create git config dir
   ansible.builtin.file:
