@@ -1,0 +1,10 @@
+---
+- name: Install openssh-server
+  become: true
+  ansible.builtin.apt:
+    name: openssh-server
+    state: present
+
+- name: Set openssh service name
+  ansible.builtin.set_fact:
+    ssh_server_service_name: ssh
