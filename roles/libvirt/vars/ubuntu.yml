@@ -1,0 +1,13 @@
+---
+libvirt_service: "libvirtd"
+libvirt_groups:
+  - "libvirt"
+  - "kvm"
+libvirt_packages:
+  - libvirt-daemon-system
+  - libvirt-clients
+  - qemu-kvm
+  - virt-manager
+  - bridge-utils
+  - ovmf
+  - dnsmasq-base
