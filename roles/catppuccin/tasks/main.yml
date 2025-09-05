@@ -26,5 +26,5 @@
 
 - name: Set theme variables
   ansible.builtin.set_fact:
-    alacritty_theme_path: "~/.local/share/catppuccin/alacritty/{{ catppuccin_flavor|lower }}.toml" # noqa: var-naming[no-role-prefix]
+    alacritty_theme_path: "~/.local/share/catppuccin/alacritty/catppuccin-{{ catppuccin_flavor|lower }}.toml" # noqa: var-naming[no-role-prefix]
     bat_theme_path: "~/.local/share/catppuccin/bat/themes/Cattppuccin {{ catppuccin_flavor }}.tmTheme" # noqa: var-naming[no-role-prefix]
