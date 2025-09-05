@@ -4,3 +4,25 @@
 - name: Add bat alias
   ansible.builtin.set_fact:
     shell_aliases: "{{ (shell_aliases | default({})) | combine({'cat': 'bat --style=plain --paging=never'}) }}" # noqa: var-naming[no-role-prefix]
+- name: Obtain bat config dir
+  changed_when: false
+  register: bat_config_dir
+  ansible.builtin.command:
+    cmd: "bat --config-dir"
+- name: Link bat theme
+  when: bat_theme_path
+  notify: Rebuild bat cache
+  ansible.builtin.file:
+    src: "{{ bat_theme_path }}"
+    dest: "{{ bat_config_dir.stdout }}/{{ bat_theme_path | basename }}"
+    state: link
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0644"
+- name: Configure bat
+  ansible.builtin.template:
+    src: config.j2
+    dest: "{{ bat_config_dir.stdout }}/config"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0644"

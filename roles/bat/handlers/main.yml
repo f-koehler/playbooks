@@ -1,1 +1,5 @@
 ---
+- name: Rebuild bat cache
+  changed_when: true
+  ansible.builtin.command:
+    cmd: bat cache --build

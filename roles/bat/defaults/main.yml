@@ -1,7 +1,2 @@
 ---
-zoxide_hook_bash: |
-  eval "$(zoxide init bash)"
-zoxide_hook_fish: |
-  zoxide init fish | source
-zoxide_hook_zsh: |
-  eval "$(zoxide init zsh)"
+bat_theme_path: null
