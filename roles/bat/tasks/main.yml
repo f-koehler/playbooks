@@ -18,17 +18,18 @@
     cmd: "bat --config-dir"
 - name: Make sure config dir exists
   ansible.builtin.file:
-    path: "{{ bat_config_dir.stdout | trim }}"
+    path: "{{ bat_config_dir.stdout | trim }}/themes"
     state: directory
     owner: "{{ username }}"
     group: "{{ groupname }}"
     mode: "0755"
+    recurse: true
 - name: Link bat theme
   when: bat_theme_path != None
   notify: Rebuild bat cache
   ansible.builtin.file:
     src: "{{ bat_theme_path }}"
-    dest: "{{ bat_config_dir.stdout | trim }}/{{ bat_theme_path | basename }}"
+    dest: "{{ bat_config_dir.stdout | trim }}/themes/{{ bat_theme_path | basename }}"
     state: link
     owner: "{{ username }}"
     group: "{{ groupname }}"
