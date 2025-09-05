@@ -17,6 +17,7 @@
     - ssh
 
     - alacritty
+    - bat
     - bluetooth
     - desktop-programs
     - dev-ansible
