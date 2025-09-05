@@ -1,4 +1,4 @@
 ---
-alcacritty_theme_path: null
+alacritty_theme_path: null
 alacritty_font_family: "{{ font_family_monospace | default('monospace') }}"
 alacritty_font_size: 9
