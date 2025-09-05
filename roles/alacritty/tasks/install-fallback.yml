@@ -4,7 +4,7 @@
   community.general.snap:
     name: alacritty
     state: present
-    classic: yes
+    classic: true
 
 - name: Install Cascadia Code Nerd Font via apt
   become: true
