@@ -1,6 +1,7 @@
 ---
 - name: Load Archlinux install tasks
-  ansible.builtin.include_tasks: install-Archlinux.yml
+  when: ansible_os_family == 'Archlinux'
+  ansible.builtin.include_tasks: install-archlinux.yml
 
 - name: Configure bash
   ansible.builtin.template:

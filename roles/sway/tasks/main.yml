@@ -1,6 +1,6 @@
 ---
 - name: Load installation tasks
-  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family | lower }}.yml"
 
 - name: Remove default sway session
   become: true
