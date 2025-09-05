@@ -1,0 +1,13 @@
+---
+- name: Install alacritty via snap
+  become: true
+  community.general.snap:
+    name: alacritty
+    state: present
+    classic: yes
+
+- name: Install Cascadia Code Nerd Font via apt
+  become: true
+  ansible.builtin.apt:
+    name: fonts-cascadia-code
+    state: present
