@@ -1,0 +1,18 @@
+---
+- name: Load installation tasks
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
+- name: Create tmux config dir
+  ansible.builtin.file:
+    path: ~/.config/tmux/plugins
+    state: directory
+    recurse: true
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0755"
+- name: Configure tmux
+  ansible.builtin.template:
+    src: tmux.conf.j2
+    dest: "~/.config/tmux/tmux.conf"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0644"

@@ -1,0 +1,11 @@
+set  -g default-terminal "tmux-256color"
+set  -g mouse on
+setw -g aggressive-resize on
+setw -g clock-mode-style 24
+set  -g history-limit 50000
+
+{% if tmux_theme_path is not none %}
+run ~/.config/tmux/plugins/catppuccin/tmux/catppuccin.tmux
+set  -g @catppuccin_flavor '{{ catppuccin_flavor | lower }}'
+{% endif %}
+
