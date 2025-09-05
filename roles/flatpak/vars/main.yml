@@ -1,1 +1,8 @@
 ---
+flatpak_dependencies:
+  archlinux:
+    - flatpak
+    - flatpak-builder
+    - xdg-desktop-portal
+  ubuntu:
+    - flatpak
