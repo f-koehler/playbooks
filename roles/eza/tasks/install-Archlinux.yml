@@ -1,0 +1,6 @@
+---
+- name: Install eza
+  community.general.pacman:
+    name: eza
+    state: present
+  become: true

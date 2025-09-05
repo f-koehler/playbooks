@@ -1,0 +1,6 @@
+---
+- name: Load installation tasks
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
+- name: Add eza aliases
+  ansible.builtin.set_fact:
+    shell_aliases: "{{ (shell_aliases | default({})) | combine({'ls': 'eza', 'la': 'eza -a', 'll': 'eza -lg', 'lla': 'eza -lag'}) }}" # noqa: var-naming[no-role-prefix]
