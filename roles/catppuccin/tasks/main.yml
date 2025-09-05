@@ -24,7 +24,7 @@
     - zathura
     - zsh-syntax-highlighting
 - name: Set theme variables
-  ansible.builtin.set_fact:
+  ansible.builtin.set_fact: # noqa: var-naming[no-role-prefix]
     alacritty_theme_path: >
       {{ catppuccin_clone_path }}/alacritty/catppuccin-{{ catppuccin_flavor | lower }}.toml
     bat_theme_path: >
