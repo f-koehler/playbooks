@@ -1,0 +1,16 @@
+---
+- name: Create mako config directory
+  ansible.builtin.file:
+    path: "~/.config/mako"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0755"
+
+- name: Configure mako
+  ansible.builtin.file:
+    src: "{{ catppuccin_clone_path }}/mako/catppuccin-{{ catppuccin_flavour | lower }}-{{ catppuccin_accent | lower }}"
+    dest: "~/.config/mako/config"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0644"
