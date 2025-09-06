@@ -32,3 +32,33 @@
       - ttf-dejavu
       - ttf-liberation
       - ttf-linux-libertine-g
+
+- name: Install dolphin
+  become: true
+  community.general.pacman:
+    state: present
+    name:
+      - dolphin
+      - ffmpegthumbs
+      - icoutils
+      - kdegraphics-thumbnailers
+      - kdesdk-thumbnailers
+      - kimageformats
+      - libheif
+      - libappimage
+      - qt6-imageformats
+      - resvg
+      - taglib
+
+- name: Install ark
+  become: true
+  community.general.pacman:
+    state: present
+    name:
+      - ark
+      - 7zip
+      - arj
+      - lrzip
+      - lzop
+      - unarchiver
+      - unrar
