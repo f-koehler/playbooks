@@ -9,8 +9,9 @@
 
 - name: Configure mako
   ansible.builtin.file:
-    src: "{{ catppuccin_clone_path }}/mako/catppuccin-{{ catppuccin_flavour | lower }}-{{ catppuccin_accent | lower }}"
+    src: "{{ catppuccin_clone_path }}/mako/themes/catppuccin-{{ catppuccin_flavor | lower }}/catppuccin-{{ catppuccin_flavor | lower }}-{{ catppuccin_accent | lower }}"
     dest: "~/.config/mako/config"
+    state: link
     owner: "{{ username }}"
     group: "{{ groupname }}"
     mode: "0644"
