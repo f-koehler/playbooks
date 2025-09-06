@@ -6,24 +6,11 @@
     state: started
     enabled: true
 
-- name: Create swayosd config dir
+- name: Configure swayosd
   ansible.builtin.file:
-    path: ~/.config/swayosd
-    state: directory
-    owner: "{{ username }}"
-    group: "{{ groupname }}"
-    mode: "0755"
-
-- name: Link omarchy swayosd config
-  ansible.builtin.file:
-    src: "{{ omarchy_config_path }}/swayosd/{{ file }}"
-    dest: "~/.config/swayosd/{{ file }}"
-    state: "link"
+    src: "swayosd"
+    dest: ~/.config/
     owner: "{{ username }}"
     group: "{{ groupname }}"
     mode: "0644"
-  loop_control:
-    loop_var: file
-  loop:
-    - config.toml
-    - style.css
+    directory_mode: "0755"
