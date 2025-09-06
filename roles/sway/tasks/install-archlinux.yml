@@ -14,4 +14,7 @@
       - xdg-desktop-portal-kde
       - xdg-desktop-portal-wlr
       - rofi # TODO(fk): replace with walker later
+      - waybar
+      - impala
+      - btop
     state: present

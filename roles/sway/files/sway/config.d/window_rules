@@ -1,0 +1,3 @@
+for_window [class="Impala"] floating enable
+for_window [class="Wiremix"] floating enable
+for_window [class="Bluetui"] floating enable

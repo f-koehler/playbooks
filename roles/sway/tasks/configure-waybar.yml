@@ -1,0 +1,29 @@
+---
+- name: Create waybar config dir
+  ansible.builtin.file:
+    path: ~/.config/waybar
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0755"
+- name: Generate waybar config
+  ansible.builtin.template:
+    src: waybar/config.jsonc.j2
+    dest: ~/.config/waybar/config.jsonc
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0644"
+- name: Generate waybar style
+  ansible.builtin.template:
+    src: waybar/style.css.j2
+    dest: ~/.config/waybar/style.css
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0644"
+- name: Copy waybar theme
+  ansible.builtin.copy:
+    src: "{{ catppuccin_clone_path }}/waybar/themes/{{ catppuccin_flavor | lower }}.css"
+    dest: ~/.config/waybar/theme.css
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0644"
