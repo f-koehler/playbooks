@@ -1,8 +1,10 @@
-set  -g default-terminal "tmux-256color"
 set  -g mouse on
 setw -g aggressive-resize on
 setw -g clock-mode-style 24
 set  -g history-limit 50000
+
+set -g default-terminal "tmux-256color"
+set -ag terminal-overrides ",xterm-256color:RGB"
 
 {% if tmux_theme_path is not none %}
 run {{ tmux_theme_path }}
