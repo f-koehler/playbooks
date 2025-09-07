@@ -15,6 +15,5 @@
       - xdg-desktop-portal-wlr
       - rofi # TODO(fk): replace with walker later
       - waybar
-      - impala
-      - btop
+      - kanshi
     state: present

@@ -20,8 +20,9 @@
 - name: Load configuration tasks
   ansible.builtin.include_tasks: "configure-{{ item }}.yml"
   loop:
-    - sway
-    - swayosd
+    - kanshi
     - mako
     - rofi
+    - sway
+    - swayosd
     - waybar

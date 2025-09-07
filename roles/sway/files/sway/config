@@ -227,5 +227,6 @@ hide_edge_borders smart_no_gaps
 
 exec systemctl --user set-environment XDG_CURRENT_DESKTOP=sway
 exec uwsm finalize DISPLAY SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec uwsm app -- kanshi
 
 include ~/.config/sway/config.d/*

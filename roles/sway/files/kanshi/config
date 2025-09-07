@@ -1,0 +1,9 @@
+output "LG Electronics LG ULTRAGEAR+ 202NTDV2S306" {
+    mode 3840x2160@120Hz
+    alias $HOME_LG
+    adaptive_sync on
+    scale 1.25
+}
+profile home_desktop {
+    output $HOME_LG enable
+}
