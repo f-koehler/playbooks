@@ -1,0 +1,25 @@
+---
+- name: Load installation tasks
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family | lower }}.yml"
+
+- name: Set default shell to fish
+  become: true
+  ansible.builtin.user:
+    name: "{{ username }}"
+    shell: /bin/fish
+
+- name: Create fish config directory
+  ansible.builtin.file:
+    path: ~/.config/fish
+    state: directory
+    mode: "0755"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+
+- name: Generate fish config
+  ansible.builtin.template:
+    src: config.fish.j2
+    dest: ~/.config/fish/config.fish
+    mode: "0644"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"

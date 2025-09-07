@@ -1,0 +1,29 @@
+set -U fish_greeting
+
+{% for variable in environment_variables|default({}) %}
+set -gx {{ variable }} "{{ environment_variables[variable] }}"
+{% endfor %}
+
+if status is-login
+    if not set -q __sourced_profile
+        set -x __sourced_profile 1
+        exec bash -c "\
+            test -e /etc/profile && source /etc/profile
+            test -e $HOME/.bash_profile && source $HOME/.bash_profile
+            exec fish --login
+        "
+    end
+    
+    set -e __sourced_profile
+end
+
+{% for name in shell_aliases|default([]) %}
+alias {{ name }}="{{ shell_aliases[name] }}"
+{% endfor %}
+{% for name in fish_aliases|default([]) %}
+alias {{ name }}="{{ fish_aliases[name] }}"
+{% endfor %}
+
+{% for hook in fish_hooks|default([]) %}
+{{ hook }}
+{% endfor %}
