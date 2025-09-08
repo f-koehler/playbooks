@@ -4,7 +4,6 @@
     name:
       - dbus-broker
       - dbus-broker-units
-      - mako
       - noto-fonts
       - sway
       - swaybg

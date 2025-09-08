@@ -21,7 +21,6 @@
   ansible.builtin.include_tasks: "configure-{{ item }}.yml"
   loop:
     - kanshi
-    - mako
     - rofi
     - sway
     - swayosd
