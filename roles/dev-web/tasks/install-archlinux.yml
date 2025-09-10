@@ -1,0 +1,8 @@
+---
+- name: Install python development tools
+  become: true
+  community.general.pacman:
+    state: present
+    name:
+      - nodejs
+      - yarn
