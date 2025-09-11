@@ -4,6 +4,7 @@
   vars:
     params:
       files:
+        - "install-{{ ansible_distribution | lower }}.yml"
         - "install-{{ ansible_os_family | lower }}.yml"
         - "install-fallback.yml"
       paths:

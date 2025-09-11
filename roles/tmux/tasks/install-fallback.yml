@@ -1,6 +1,5 @@
 ---
-- name: Install tmux via apt
-  become: true
-  ansible.builtin.apt:
+- name: Install tmux using Homebrew
+  community.general.homebrew:
     name: tmux
     state: present

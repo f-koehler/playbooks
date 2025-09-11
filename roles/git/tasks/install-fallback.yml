@@ -1,7 +1,6 @@
 ---
-- name: Install git via apt
-  become: true
-  ansible.builtin.apt:
+- name: Install git using Homebrew
+  community.general.homebrew:
     name:
       - git
       - gnupg

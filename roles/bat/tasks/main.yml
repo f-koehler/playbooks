@@ -44,4 +44,3 @@
     owner: "{{ username }}"
     group: "{{ groupname }}"
     mode: "0644"
-    validate: 'bat --list-themes | grep "Catppuccin {{ catppuccin_flavor }}"'
