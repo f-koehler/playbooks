@@ -1,0 +1,100 @@
+---
+- name: Create navidrome group
+  become: true
+  ansible.builtin.group:
+    name: "{{ navidrome_group }}"
+
+- name: Create navidrome user
+  become: true
+  ansible.builtin.user:
+    name: "{{ navidrome_user }}"
+    group: "{{ navidrome_group }}"
+    state: present
+    create_home: true
+    home: "{{ navidrome_home }}"
+
+- name: Enable linger for navidrome user
+  become: true
+  ansible.builtin.command:
+    cmd: loginctl enable-linger "{{ navidrome_user }}"
+
+- name: Create quadlet directory
+  become: true
+  become_user: "{{ navidrome_user }}"
+  ansible.builtin.file:
+    path: "{{ navidrome_home }}/.config/containers/systemd"
+    state: directory
+    owner: "{{ navidrome_user }}"
+    group: "{{ navidrome_group }}"
+    mode: 0755
+    recurse: true
+
+- name: Generate quadlet files
+  become: true
+  become_user: "{{ navidrome_user }}"
+  notify: Restart navidrome containers
+  register: quadlet_result
+  ansible.builtin.template:
+    src: "{{ template }}"
+    dest: "{{ navidrome_home }}/.config/containers/systemd/{{ template }}"
+    owner: "{{ navidrome_user }}"
+    group: "{{ navidrome_group }}"
+    mode: 0644
+  loop_control:
+    loop_var: template
+  loop:
+    - navidrome.container
+    - navidrome.pod
+    - navidrome.network
+
+- name: Generate environment file
+  become: true
+  become_user: "{{ navidrome_user }}"
+  notify: Restart navidrome containers
+  register: env_result
+  ansible.builtin.template:
+    src: "navidrome.env"
+    dest: "{{ navidrome_home }}/.env"
+    owner: "{{ navidrome_user }}"
+    group: "{{ navidrome_group }}"
+    mode: 0600
+
+- name: Reload systemd daemon
+  become: true
+  become_user: "{{ navidrome_user }}"
+  when: quadlet_result.changed or env_result.changed
+  ansible.builtin.systemd:
+    daemon_reload: true
+    scope: user
+
+- name: Validate quadlet files
+  become: true
+  become_user: "{{ navidrome_user }}"
+  changed_when: false
+  ansible.builtin.command:
+    cmd: /usr/lib/podman/quadlet -dryrun -user
+
+- name: Create volumes
+  become: true
+  notify: Restart navidrome containers
+  ansible.builtin.file:
+    path: "{{ volume }}"
+    state: directory
+    owner: "{{ navidrome_user }}"
+    group: "{{ navidrome_group }}"
+    mode: 0700
+  loop_control:
+    loop_var: volume
+  loop:
+    - "{{ navidrome_volume_data }}"
+
+- name: Enable navidrome containers
+  become: true
+  become_user: "{{ navidrome_user }}"
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+    scope: user
+  loop:
+    - navidrome.service
