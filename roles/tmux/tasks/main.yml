@@ -9,6 +9,7 @@
         - "install-fallback.yml"
       paths:
         - "{{ role_path }}/tasks"
+
 - name: Create tmux config dir
   ansible.builtin.file:
     path: ~/.config/tmux/plugins
@@ -17,6 +18,10 @@
     owner: "{{ username }}"
     group: "{{ groupname }}"
     mode: "0755"
+
+- name: Load theme tasks
+  ansible.builtin.include_tasks: "theme-{{ alacritty_theme }}.yml"
+
 - name: Configure tmux
   ansible.builtin.template:
     src: tmux.conf.j2

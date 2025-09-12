@@ -6,7 +6,7 @@ set  -g history-limit 50000
 set -g default-terminal "tmux-256color"
 set -ag terminal-overrides ",xterm-256color:RGB"
 
-{% if tmux_theme_path is not none %}
-run {{ tmux_theme_path }}
+{% if tmux_theme == "catppuccin" %}
+run ~/.config/tmux/plugins/catppuccin/catppuccin.tmux
 set  -g @catppuccin_flavor '{{ catppuccin_flavor | lower }}'
 {% endif %}
