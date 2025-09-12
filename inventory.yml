@@ -1,3 +1,7 @@
 workstations:
   hosts:
     desktop.corgi-dojo.ts.net:
+homeservers:
+  hosts:
+    homeserver-dev:
+      ansible_host: homeserver2.corgi-dojo.ts.net
