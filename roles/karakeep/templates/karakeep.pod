@@ -1,0 +1,14 @@
+[Unit]
+Description=Karakeep Bookmark manager
+
+[Pod]
+PodName=karakeep
+PublishPort=3095:3000
+Network=karakeep.network
+
+[Service]
+Restart=on-failure
+TimeoutStartSec=90
+
+[Install]
+WantedBy=default.target
