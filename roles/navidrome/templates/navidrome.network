@@ -1,0 +1,4 @@
+[Network]
+Subnet={{ navidrome_network | ansible.utils.ipv4 }}
+Gateway={{ navidrome_network | ansible.utils.ipv4('1') | ansible.utils.ipv4('address') }}
+Label=navidrome

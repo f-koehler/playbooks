@@ -1,0 +1,9 @@
+[Unit]
+Description=Navidrome Music Server
+
+[Container]
+ContainerName=navidrome
+Image=docker.io/deluan/navidrome:0.58.0
+Pod=navidrome.pod
+EnvironmentFile=%h/.env
+Volume={{ navidrome_volume_data }}:/data:Z
