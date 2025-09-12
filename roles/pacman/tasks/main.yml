@@ -4,7 +4,7 @@
   notify: Refresh pacman cache
   when: ansible_os_family == "Archlinux"
   ansible.builtin.template:
-    src: pacman.conf.j2
+    src: pacman.conf
     dest: /etc/pacman.conf
     owner: root
     group: root
