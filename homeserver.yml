@@ -1,0 +1,20 @@
+---
+- name: Setup homeserver
+  hosts: homeservers
+  pre_tasks:
+    - name: Load global variables
+      ansible.builtin.include_vars:
+        file: ./vars/main.yml
+  roles:
+    - pacman
+
+    - catppuccin
+    - podman
+
+    # - karakeep
+    - navidrome
+
+    - ssh-server
+    - tmux
+
+    # - mkinitcpio
