@@ -1,0 +1,16 @@
+---
+- name: Clone catppuccin theme
+  ansible.builtin.git:
+    repo: https://github.com/catppuccin/fish.git
+    dest: ~/.config/fish/catppuccin/
+    version: main
+    accept_hostkey: yes
+
+- name: Link catppuccin theme
+  ansible.builtin.file:
+    src: "~/.config/fish/catppuccin/themes/Catppuccin {{ catppuccin_flavor | default('Mocha') }}.theme"
+    dest: "~/.config/fish/themes/Catppuccin {{ catppuccin_flavor | default('Mocha') }}.theme"
+    state: link
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: 0644

@@ -13,7 +13,7 @@ if status is-login
             exec fish --login
         "
     end
-    
+
     set -e __sourced_profile
 end
 
@@ -27,3 +27,7 @@ alias {{ name }}="{{ fish_aliases[name] }}"
 {% for hook in fish_hooks|default([]) %}
 {{ hook }}
 {% endfor %}
+
+{% if fish_theme == "catppuccin" %}
+fish_config theme choose "{{ catppuccin_flavor }}"
+{% endif %}

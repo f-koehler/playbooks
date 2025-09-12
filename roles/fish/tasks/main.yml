@@ -10,11 +10,15 @@
 
 - name: Create fish config directory
   ansible.builtin.file:
-    path: ~/.config/fish
+    path: ~/.config/fish/themes
     state: directory
     mode: "0755"
     owner: "{{ username }}"
     group: "{{ groupname }}"
+    recurse: true
+
+- name: Load theme tasks
+  ansible.builtin.include_tasks: "theme-{{ fish_theme }}.yml"
 
 - name: Generate fish config
   ansible.builtin.template:
