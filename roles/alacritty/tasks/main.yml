@@ -17,6 +17,9 @@
     group: "{{ groupname }}"
     mode: "0755"
 
+- name: Load theme tasks
+  ansible.builtin.include_tasks: "theme-{{ alacritty_theme }}.yml"
+
 - name: Configure alacritty
   ansible.builtin.template:
     src: alacritty.toml.j2

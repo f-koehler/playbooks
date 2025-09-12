@@ -1,0 +1,16 @@
+---
+- name: Clone catppuccin theme
+  ansible.builtin.git:
+    repo: https://github.com/catppuccin/alacritty.git
+    dest: ~/.config/alacritty/catppuccin/
+    version: main
+    accept_hostkey: yes
+
+- name: Link catppuccin theme
+  ansible.builtin.file:
+    src: "~/.config/alacritty/catppuccin/catppuccin-{{ catppuccin_theme | default('mocha') | lower }}.toml"
+    dest: ~/.config/alacritty/theme.toml
+    state: link
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: 0644
