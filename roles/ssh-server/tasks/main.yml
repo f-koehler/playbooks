@@ -11,7 +11,7 @@
 
 - name: Configure ssh-server
   become: true
-  notify: restart ssh-server
+  notify: Restart ssh-server
   ansible.builtin.template:
     src: sshd_config.j2
     dest: /etc/ssh/sshd_config
