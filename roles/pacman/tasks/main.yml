@@ -10,5 +10,14 @@
     group: root
     mode: "0644"
 
+- name: Fetch archzfs key
+  become: true
+  notify: Refresh pacman cache
+  when: pacman_enable_zfs
+  community.general.pacman_key:
+    state: present
+    id: 3A9917BF0DED5C13F69AC68FABEC0A1208037BE9
+    keyserver: keyserver.ubuntu.com
+
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
