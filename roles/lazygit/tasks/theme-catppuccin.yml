@@ -1,0 +1,16 @@
+---
+- name: Clone catppuccin theme
+  ansible.builtin.git:
+    repo: https://github.com/catppuccin/lazygit.git
+    dest: "{{ lazygit_config_dir }}/catppuccin"
+    version: main
+    accept_hostkey: yes
+
+- name: Link catppuccin theme
+  ansible.builtin.file:
+    src: "{{ lazygit_config_dir }}/catppuccin/themes-mergable/{{ catppuccin_flavor | lower }}/{{ catppuccin_accent | lower }}.yml"
+    dest: "{{ lazygit_config_dir }}/theme.yml"
+    state: link
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: 0644

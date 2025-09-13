@@ -27,8 +27,11 @@
     group: "{{ groupname }}"
     mode: "0755"
 
+- name: Load theme tasks
+  ansible.builtin.include_tasks: "theme-{{ lazygit_theme }}.yml"
+
 - name: Configure lazygit
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: config.yml
     dest: "{{ lazygit_config_dir }}/config.yml"
     owner: "{{ username }}"
