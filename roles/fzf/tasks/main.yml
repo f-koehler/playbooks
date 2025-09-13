@@ -9,6 +9,9 @@
       paths:
         - "{{ role_path }}/tasks"
 
+- name: Load theme tasks
+  ansible.builtin.include_tasks: "theme-{{ fish_theme }}.yml"
+
 - name: Register fzf hooks
   ansible.builtin.set_fact:
     bash_hooks: "{{ (bash_hooks | default([])) + [fzf_hook_bash] }}" # noqa: var-naming[no-role-prefix]

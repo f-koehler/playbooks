@@ -1,0 +1,26 @@
+---
+- name: Create fzf config directory
+  ansible.builtin.file:
+    path: "{{ directory }}"
+    state: directory
+    mode: "0755"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+  loop_control:
+    loop_var: directory
+  loop:
+    - ~/.config
+    - ~/.config/fzf
+
+- name: Clone catppuccin theme
+  ansible.builtin.git:
+    repo: https://github.com/catppuccin/fzf.git
+    dest: ~/.config/fzf/catppuccin
+    version: main
+    accept_hostkey: yes
+
+- name: Register fzf catppuccin hooks
+  ansible.builtin.set_fact:
+    bash_hooks: "{{ (bash_hooks | default([])) + ['source ~/.config/fzf/catppuccin/themes/catppuccin-fzf-'+(catpuccin_flavor|default('mocha')|lower)+'.sh'] }}"
+    fish_hooks: "{{ (fish_hooks | default([])) + ['source ~/.config/fzf/catppuccin/themes/catppuccin-fzf-'+(catpuccin_flavor|default('mocha')|lower)+'.fish'] }}"
+    zsh_hooks: "{{ (zsh_hooks | default([])) + ['source ~/.config/fzf/catppuccin/themes/catppuccin-fzf-'+(catpuccin_flavor|default('mocha')|lower)+'.sh'] }}"
