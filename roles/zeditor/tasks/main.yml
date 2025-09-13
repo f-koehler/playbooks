@@ -1,13 +1,20 @@
 ---
 - name: Load installation tasks
   ansible.builtin.include_tasks: "install-{{ ansible_os_family | lower }}.yml"
+
 - name: Create zed config dir
   ansible.builtin.file:
-    path: ~/.config/zed
+    path: "{{ directory }}"
     state: directory
+    mode: "0755"
     owner: "{{ username }}"
     group: "{{ groupname }}"
-    mode: "0755"
+  loop_control:
+    loop_var: directory
+  loop:
+    - ~/.config
+    - ~/.config/zed
+
 - name: Configure zed
   ansible.builtin.template:
     src: settings.json.j2

@@ -2,7 +2,7 @@
 - name: Clone catppuccin theme
   ansible.builtin.git:
     repo: https://github.com/catppuccin/fish.git
-    dest: ~/.config/fish/catppuccin/
+    dest: ~/.config/fish/catppuccin
     version: main
     accept_hostkey: yes
 

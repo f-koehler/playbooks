@@ -12,15 +12,20 @@
 
 - name: Create tmux config dir
   ansible.builtin.file:
-    path: ~/.config/tmux/plugins
+    path: "{{ directory }}"
     state: directory
-    recurse: true
+    mode: "0755"
     owner: "{{ username }}"
     group: "{{ groupname }}"
-    mode: "0755"
+  loop_control:
+    loop_var: directory
+  loop:
+    - ~/.config
+    - ~/.config/tmux
+    - ~/.config/tmux/plugins
 
 - name: Load theme tasks
-  ansible.builtin.include_tasks: "theme-{{ alacritty_theme }}.yml"
+  ansible.builtin.include_tasks: "theme-{{ tmux_theme }}.yml"
 
 - name: Configure tmux
   ansible.builtin.template:

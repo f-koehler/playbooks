@@ -1,11 +1,17 @@
 ---
 - name: Create rofi configuration directory
   ansible.builtin.file:
-    path: "~/.config/rofi"
+    path: "{{ directory }}"
     state: directory
     mode: "0755"
     owner: "{{ username }}"
     group: "{{ groupname }}"
+  loop_control:
+    loop_var: directory
+  loop:
+    - ~/.config
+    - ~/.config/rofi
+
 - name: Generate rofi config file
   ansible.builtin.template:
     src: rofi/config.rasi.j2
@@ -13,6 +19,7 @@
     mode: "0644"
     owner: "{{ username }}"
     group: "{{ groupname }}"
+
 - name: Link rofi theme
   ansible.builtin.file:
     src: "{{ catppuccin_clone_path }}/rofi/themes/catppuccin-{{ catppuccin_flavor | lower }}.rasi"

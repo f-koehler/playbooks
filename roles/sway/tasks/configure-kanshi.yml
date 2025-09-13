@@ -1,11 +1,17 @@
 ---
 - name: Create kanshi config directory
   ansible.builtin.file:
-    path: "~/.config/kanshi"
+    path: "{{ directory }}"
     state: directory
     mode: "0755"
     owner: "{{ username }}"
     group: "{{ groupname }}"
+  loop_control:
+    loop_var: directory
+  loop:
+    - ~/.config
+    - ~/.config/kanshi
+
 - name: Deploy kanshi config
   ansible.builtin.copy:
     src: kanshi/config
