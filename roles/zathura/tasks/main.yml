@@ -1,0 +1,19 @@
+---
+- name: Load installation tasks
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family | lower }}.yml"
+
+- name: Create zathura config dir
+  ansible.builtin.file:
+    path: "{{ directory }}"
+    state: directory
+    mode: "0755"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+  loop_control:
+    loop_var: directory
+  loop:
+    - ~/.config
+    - ~/.config/zathura
+
+- name: Load zathura theme tasks
+  ansible.builtin.include_tasks: "theme-{{ zathura_theme }}.yml"

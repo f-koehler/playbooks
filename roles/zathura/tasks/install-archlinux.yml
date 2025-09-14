@@ -1,0 +1,10 @@
+---
+- name: "Pacman | Install zathura"
+  become: true
+  community.general.pacman:
+    state: present
+    name:
+      - zathura
+      - zathura-pdf-mupdf
+      - zathura-djvu
+      - zathura-ps
