@@ -1,0 +1,16 @@
+---
+- name: Clone catppuccin theme
+  ansible.builtin.git:
+    repo: https://github.com/catppuccin/btop.git
+    dest: ~/.config/btop/catppuccin
+    version: main
+    accept_hostkey: true
+
+- name: Link catppuccin theme
+  ansible.builtin.file:
+    src: "~/.config/btop/catppuccin/themes/catppuccin_{{ catppuccin_theme | default('mocha') | lower }}.theme"
+    dest: "~/.config/btop/themes/catppuccin_{{ catppuccin_theme | default('mocha') | lower }}.theme"
+    state: link
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0644"
