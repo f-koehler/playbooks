@@ -1,0 +1,19 @@
+---
+- name: "Pacman | Install yazi"
+  become: true
+  community.general.pacman:
+    name:
+      - yazi
+      - 7zip
+      - chafa
+      - fd
+      - ffmpeg
+      - fzf
+      - imagemagick
+      - jq
+      - poppler
+      - resvg
+      - ripgrep
+      - wl-clipboard
+      - zoxide
+    state: present

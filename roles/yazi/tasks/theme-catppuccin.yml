@@ -1,0 +1,16 @@
+---
+- name: Clone catppuccin theme
+  ansible.builtin.git:
+    repo: https://github.com/catppuccin/yazi.git
+    dest: ~/.config/yazi/catppuccin
+    version: main
+    accept_hostkey: true
+
+- name: Link catppuccin theme
+  ansible.builtin.file:
+    src: "~/.config/yazi/catppuccin/themes/{{ catppuccin_theme | default('mocha') | lower }}/catppuccin-{{ catppuccin_theme | default('mocha') | lower }}-{{ catppuccin_accent | default('mauve') | lower }}.toml"
+    dest: "~/.config/yazi/theme.toml"
+    state: link
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0644"

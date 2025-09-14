@@ -1,0 +1,27 @@
+---
+- name: Load installation tasks
+  ansible.builtin.include_tasks: "{{ lookup('ansible.builtin.first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "install-{{ ansible_os_family | lower }}.yml"
+        - "install-fallback.yml"
+      paths:
+        - "{{ role_path }}/tasks"
+
+- name: Create yazi configuration directory
+  ansible.builtin.file:
+    path: "{{ directory }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: 0755
+  loop_control:
+    loop_var: directory
+  loop:
+    - "~/.config"
+    - "~/.config/yazi"
+
+- name: Load theme tasks
+  ansible.builtin.include_tasks:
+    file: "theme-{{ yazi_theme }}.yml"
