@@ -12,19 +12,5 @@
     - ~/.config
     - ~/.config/rofi
 
-- name: Generate rofi config file
-  ansible.builtin.template:
-    src: rofi/config.rasi.j2
-    dest: "~/.config/rofi/config.rasi"
-    mode: "0644"
-    owner: "{{ username }}"
-    group: "{{ groupname }}"
-
-- name: Link rofi theme
-  ansible.builtin.file:
-    src: "{{ catppuccin_clone_path }}/rofi/themes/catppuccin-{{ catppuccin_flavor | lower }}.rasi"
-    dest: "~/.config/rofi/theme.rasi"
-    state: link
-    mode: "0644"
-    owner: "{{ username }}"
-    group: "{{ groupname }}"
+- name: Load rofi theme tasks
+  ansible.builtin.include_tasks: "theme-{{ rofi_theme }}-rofi.yml"

@@ -1,0 +1,24 @@
+---
+- name: Clone catppuccin rofi theme
+  ansible.builtin.git:
+    repo: https://github.com/catppuccin/rofi.git
+    dest: ~/.config/rofi/catppuccin
+    version: main
+    accept_hostkey: yes
+
+- name: Generate rofi config file
+  ansible.builtin.template:
+    src: rofi/config.rasi.j2
+    dest: "~/.config/rofi/config.rasi"
+    mode: "0644"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+
+- name: Link rofi theme
+  ansible.builtin.file:
+    src: "~/.config/rofi/catppuccin/themes/catppuccin-{{ catppuccin_flavor | lower }}.rasi"
+    dest: "~/.config/rofi/theme.rasi"
+    state: link
+    mode: "0644"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
