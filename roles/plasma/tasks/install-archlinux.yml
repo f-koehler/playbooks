@@ -1,0 +1,9 @@
+---
+- name: Pacman | Install Plasma
+  become: true
+  community.general.pacman:
+    state: present
+    name:
+      - plasma
+      - plasma-meta
+      - wget

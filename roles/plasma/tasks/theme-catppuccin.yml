@@ -1,0 +1,21 @@
+---
+- name: Create clone dir
+  ansible.builtin.file:
+    path: "{{ directory }}"
+    state: directory
+    mode: "0755"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+  loop_control:
+    loop_var: directory
+  loop:
+    - ~/.local
+    - ~/.local/share
+    - ~/.local/share/catppuccin
+
+- name: Clone catppuccin theme
+  ansible.builtin.git:
+    repo: https://github.com/catppuccin/kde.git
+    dest: ~/.local/share/catppuccin/kde
+    version: main
+    accept_hostkey: true
