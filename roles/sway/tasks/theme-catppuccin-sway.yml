@@ -1,0 +1,15 @@
+---
+- name: Clone catppuccin sway theme
+  ansible.builtin.git:
+    repo: https://github.com/catppuccin/i3.git
+    dest: ~/.config/sway/catppuccin
+    version: main
+    accept_hostkey: true
+
+- name: Link catppuccin theme
+  ansible.builtin.template:
+    src: sway/theme-catppuccin
+    dest: ~/.config/sway/config.d/theme
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0644"

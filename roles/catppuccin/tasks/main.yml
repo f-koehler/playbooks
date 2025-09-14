@@ -10,9 +10,7 @@
   loop:
     - btop
     - eza
-    - i3
     - yazi
-    - zathura
     - zsh-syntax-highlighting
   async: 600
   poll: 0
