@@ -4,7 +4,7 @@
     repo: https://github.com/catppuccin/zathura.git
     dest: ~/.config/zathura/catppuccin
     version: main
-    accept_hostkey: yes
+    accept_hostkey: true
 
 - name: Link catppuccin theme
   ansible.builtin.file:
@@ -13,4 +13,4 @@
     state: link
     owner: "{{ username }}"
     group: "{{ groupname }}"
-    mode: 0644
+    mode: "0644"

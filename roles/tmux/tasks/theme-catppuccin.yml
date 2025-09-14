@@ -4,4 +4,4 @@
     repo: https://github.com/catppuccin/tmux.git
     dest: ~/.config/tmux/plugins/catppuccin
     version: main
-    accept_hostkey: yes
+    accept_hostkey: true
