@@ -13,6 +13,6 @@
       - xdg-desktop-portal-kde
       - xdg-desktop-portal-wlr
       - rofi # TODO(fk): replace with walker later
-      - waybar
       - kanshi
+      - swaylock
     state: present
