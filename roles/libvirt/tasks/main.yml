@@ -4,7 +4,7 @@
     file: "{{ ansible_os_family | lower }}.yml"
     dir: vars
 
-- name: Install libvirt, qemu, and related packages
+- name: "Package | Install libvirt, qemu, and related packages"
   become: true
   ansible.builtin.package:
     name: "{{ libvirt_packages }}"

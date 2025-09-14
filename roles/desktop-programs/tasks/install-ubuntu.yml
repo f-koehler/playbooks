@@ -1,12 +1,12 @@
 ---
-- name: Install Firefox via snap
+- name: "Snap | Install Firefox"
   become: true
   community.general.snap:
     name: firefox
     state: present
     classic: true
 
-- name: Install desktop programs via flatpak (system)
+- name: "Flatpak | Install desktop programs (system)"
   become: true
   community.general.flatpak:
     method: system

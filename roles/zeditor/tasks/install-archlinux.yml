@@ -1,5 +1,5 @@
 ---
-- name: Install zed
+- name: "Pacman | Install zed"
   become: true
   community.general.pacman:
     state: present

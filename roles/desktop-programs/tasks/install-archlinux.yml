@@ -1,5 +1,5 @@
 ---
-- name: Install common desktop programs
+- name: "Pacman | Install common desktop programs"
   become: true
   community.general.pacman:
     state: present
@@ -14,7 +14,7 @@
       - obsidian
       - papers
 
-- name: Install libreoffice
+- name: "Pacman | Install libreoffice"
   become: true
   community.general.pacman:
     state: present
@@ -33,7 +33,7 @@
       - ttf-liberation
       - ttf-linux-libertine-g
 
-- name: Install dolphin
+- name: "Pacman | Install dolphin"
   become: true
   community.general.pacman:
     state: present
@@ -50,7 +50,7 @@
       - resvg
       - taglib
 
-- name: Install ark
+- name: "Pacman | Install ark"
   become: true
   community.general.pacman:
     state: present
@@ -63,7 +63,7 @@
       - unarchiver
       - unrar
 
-- name: Install zathura
+- name: "Pacman | Install zathura"
   become: true
   community.general.pacman:
     state: present

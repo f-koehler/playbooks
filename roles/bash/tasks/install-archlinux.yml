@@ -1,5 +1,5 @@
 ---
-- name: Install bash and bash-completion
+- name: "Pacman | Install bash and bash-completion"
   become: true
   community.general.pacman:
     name:

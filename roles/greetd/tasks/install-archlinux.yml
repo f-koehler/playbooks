@@ -1,5 +1,5 @@
 ---
-- name: Install greetd
+- name: "Pacman | Install greetd"
   become: true
   community.general.pacman:
     name:

@@ -1,5 +1,5 @@
 ---
-- name: Install CUDA development tools
+- name: "Pacman | Install CUDA development tools"
   become: true
   community.general.pacman:
     state: present
@@ -10,7 +10,7 @@
       - cudnn
       - cudss
 
-- name: Install HIP/ROCm development tools
+- name: "Pacman | Install HIP/ROCm development tools"
   become: true
   community.general.pacman:
     state: present
@@ -24,7 +24,7 @@
       - hip-runtime-nvidia
       - hip-runtime-amd
 
-- name: Install OpenCL development tools
+- name: "Pacman | Install OpenCL development tools"
   become: true
   community.general.pacman:
     state: present

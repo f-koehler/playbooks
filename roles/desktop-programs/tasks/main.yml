@@ -2,7 +2,7 @@
 - name: Load installation tasks
   ansible.builtin.include_tasks: "install-{{ ansible_os_family | lower }}.yml"
 
-- name: Install flatpaks
+- name: "Flatpak | Install flatpaks"
   become: true
   community.general.flatpak:
     method: system

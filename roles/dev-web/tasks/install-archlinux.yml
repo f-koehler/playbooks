@@ -1,5 +1,5 @@
 ---
-- name: Install python development tools
+- name: "Pacman | Install web development tools"
   become: true
   community.general.pacman:
     state: present

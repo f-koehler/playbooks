@@ -1,4 +1,4 @@
-- name: Install steam and friends
+- name: "Pacman | Install steam and friends"
   become: true
   community.general.pacman:
     name:

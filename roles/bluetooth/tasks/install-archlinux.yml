@@ -1,5 +1,5 @@
 ---
-- name: Install bluez
+- name: "Pacman | Install bluez"
   become: true
   community.general.pacman:
     name:

@@ -1,5 +1,5 @@
 ---
-- name: Install tmux using Homebrew
+- name: "Homebrew | Install tmux"
   community.general.homebrew:
     name: tmux
     state: present

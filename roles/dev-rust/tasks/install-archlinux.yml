@@ -8,7 +8,7 @@
 #       - rust-src
 #       - rust-analyzer
 
-- name: Install rust development tools
+- name: "Pacman | Install rust development tools"
   become: true
   notify:
     - Install rust toolchains

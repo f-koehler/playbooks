@@ -1,5 +1,5 @@
 ---
-- name: Install nvidia GPU driver
+- name: "Pacman | Install nvidia GPU driver"
   become: true
   community.general.pacman:
     name:

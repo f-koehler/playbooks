@@ -1,5 +1,5 @@
 ---
-- name: Install fish
+- name: "Pacman | Install fish"
   become: true
   community.general.pacman:
     state: present

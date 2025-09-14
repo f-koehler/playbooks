@@ -1,5 +1,5 @@
 ---
-- name: Install zed
+- name: "Homebrew | Install zed"
   community.general.homebrew_cask:
     name: zed
     state: present

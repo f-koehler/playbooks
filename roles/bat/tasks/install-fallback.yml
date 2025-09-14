@@ -1,5 +1,5 @@
 ---
-- name: Install bat using Homebrew
+- name: "Homebrew | Install bat"
   community.general.homebrew:
     name: bat
     state: present

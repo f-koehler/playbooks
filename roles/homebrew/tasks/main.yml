@@ -1,5 +1,5 @@
 ---
-- name: Install homebrew dependencies
+- name: "Package | Install homebrew dependencies"
   become: true
   ansible.builtin.package:
     name: "{{ homebrew_dependencies[ansible_os_family | lower] }}"

@@ -1,5 +1,5 @@
 ---
-- name: Install lazygit
+- name: "Pacman | Install lazygit"
   become: true
   community.general.pacman:
     name:

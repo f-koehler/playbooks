@@ -1,5 +1,5 @@
 ---
-- name: Install lua development tools
+- name: "Pacman | Install lua development tools"
   become: true
   community.general.pacman:
     state: present

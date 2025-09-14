@@ -1,5 +1,5 @@
 ---
-- name: Install alacritty
+- name: "Pacman | Install alacritty"
   become: true
   community.general.pacman:
     name:

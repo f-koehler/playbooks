@@ -1,5 +1,5 @@
 ---
-- name: Install starship
+- name: "Pacman | Install starship"
   community.general.pacman:
     name: starship
     state: present

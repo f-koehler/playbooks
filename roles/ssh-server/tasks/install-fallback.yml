@@ -1,5 +1,5 @@
 ---
-- name: Install openssh-server
+- name: "Apt | Install openssh-server"
   become: true
   ansible.builtin.apt:
     name: openssh-server

@@ -1,5 +1,5 @@
 ---
-- name: Install pipewire
+- name: "Pacman | Install pipewire"
   become: true
   community.general.pacman:
     name:

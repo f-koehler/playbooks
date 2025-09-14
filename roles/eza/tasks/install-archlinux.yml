@@ -1,5 +1,5 @@
 ---
-- name: Install eza
+- name: "Pacman | Install eza"
   community.general.pacman:
     name: eza
     state: present

@@ -1,5 +1,5 @@
 ---
-- name: Install neovim
+- name: "Pacman | Install neovim"
   become: true
   community.general.pacman:
     name:

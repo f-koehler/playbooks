@@ -1,5 +1,5 @@
 ---
-- name: Install C++ development tools
+- name: "Pacman | Install C++ development tools"
   become: true
   community.general.pacman:
     state: present

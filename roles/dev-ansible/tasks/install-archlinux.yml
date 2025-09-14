@@ -1,5 +1,5 @@
 ---
-- name: Install ansible development tools
+- name: "Pacman | Install ansible development tools"
   become: true
   community.general.pacman:
     state: present

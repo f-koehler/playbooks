@@ -1,5 +1,5 @@
 ---
-- name: Install flatpak and dependencies
+- name: "Package | Install flatpak and dependencies"
   ansible.builtin.package:
     name: "{{ flatpak_dependencies[ansible_os_family | lower] }}"
     state: present
