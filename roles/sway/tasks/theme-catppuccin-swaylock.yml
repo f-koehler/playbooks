@@ -1,0 +1,16 @@
+---
+- name: Clone catppuccin swaylock theme
+  ansible.builtin.git:
+    repo: https://github.com/catppuccin/swaylock.git
+    dest: ~/.config/swaylock/catppuccin
+    version: main
+    accept_hostkey: yes
+
+- name: Link catppuccin theme
+  ansible.builtin.file:
+    src: "~/.config/swaylock/catppuccin/themes/{{ catppuccin_theme | default('mocha') | lower }}.conf"
+    dest: ~/.config/swaylock/config
+    state: link
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: 0644

@@ -8,14 +8,10 @@
   loop_control:
     loop_var: repo_name
   loop:
-    - bat
     - btop
     - eza
-    - fzf
     - i3
-    - lazygit
     - rofi
-    - swaylock
     - yazi
     - zathura
     - zsh-syntax-highlighting

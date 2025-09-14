@@ -1,0 +1,17 @@
+---
+- name: Create swaylock config dir
+  ansible.builtin.file:
+    path: "{{ directory }}"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0755"
+    state: directory
+  loop_control:
+    loop_var: directory
+  loop:
+    - "~/.config"
+    - "~/.config/swaylock"
+
+- name: Load swaylock catppuccin tasks
+  ansible.builtin.include_tasks:
+    file: "theme-{{ swaylock_theme }}-swaylock.yml"
