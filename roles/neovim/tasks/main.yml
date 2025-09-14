@@ -10,7 +10,8 @@
         - "{{ role_path }}/tasks"
 
 - name: Clone neovim config
-  ignore_errors: true # TODO(fk): more fine-grained error handling, only accept if due to modified local clone
+  # TODO(fk): more fine-grained error handling, only accept if due to modified local clone
+  failed_when: false
   ansible.builtin.git:
     repo: "git@github.com:f-koehler/neovim-config.git"
     dest: "~/.config/nvim"

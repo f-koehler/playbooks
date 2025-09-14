@@ -14,4 +14,4 @@
 
 - name: Load swaylock catppuccin tasks
   ansible.builtin.include_tasks:
-    file: "theme-{{ swaylock_theme }}-swaylock.yml"
+    file: "theme-{{ sway_swaylock_theme }}-swaylock.yml"

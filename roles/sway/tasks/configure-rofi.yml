@@ -13,4 +13,4 @@
     - ~/.config/rofi
 
 - name: Load rofi theme tasks
-  ansible.builtin.include_tasks: "theme-{{ rofi_theme }}-rofi.yml"
+  ansible.builtin.include_tasks: "theme-{{ sway_rofi_theme }}-rofi.yml"

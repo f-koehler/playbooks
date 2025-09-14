@@ -1,4 +1,4 @@
 ---
 sway_theme: catppuccin
-swaylock_theme: catppuccin
-rofi_theme: catppuccin
+sway_swaylock_theme: catppuccin
+sway_rofi_theme: catppuccin

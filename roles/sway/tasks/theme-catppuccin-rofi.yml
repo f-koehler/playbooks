@@ -4,7 +4,7 @@
     repo: https://github.com/catppuccin/rofi.git
     dest: ~/.config/rofi/catppuccin
     version: main
-    accept_hostkey: yes
+    accept_hostkey: true
 
 - name: Generate rofi config file
   ansible.builtin.template:
