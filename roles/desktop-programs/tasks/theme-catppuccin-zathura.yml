@@ -1,0 +1,16 @@
+---
+- name: Clone catppuccin theme
+  ansible.builtin.git:
+    repo: https://github.com/catppuccin/zathura.git
+    dest: ~/.config/zathura/catppuccin
+    version: main
+    accept_hostkey: yes
+
+- name: Link catppuccin theme
+  ansible.builtin.file:
+    src: "~/.config/zathura/catppuccin/themes/catppuccin-{{ catppuccin_theme | default('mocha') | lower }}"
+    dest: ~/.config/zathura/zathurarc
+    state: link
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: 0644
