@@ -1,0 +1,104 @@
+---
+- name: Create audiobookshelf group
+  become: true
+  ansible.builtin.group:
+    name: "{{ audiobookshelf_group }}"
+
+- name: Create audiobookshelf user
+  become: true
+  ansible.builtin.user:
+    name: "{{ audiobookshelf_user }}"
+    group: "{{ audiobookshelf_group }}"
+    state: present
+    create_home: true
+    home: "{{ audiobookshelf_home }}"
+
+- name: Enable linger for audiobookshelf user
+  become: true
+  ansible.builtin.command:
+    cmd: loginctl enable-linger "{{ audiobookshelf_user }}"
+
+- name: Create quadlet directory
+  become: true
+  become_user: "{{ audiobookshelf_user }}"
+  ansible.builtin.file:
+    path: "{{ audiobookshelf_home }}/.config/containers/systemd"
+    state: directory
+    owner: "{{ audiobookshelf_user }}"
+    group: "{{ audiobookshelf_group }}"
+    mode: 0755
+    recurse: true
+
+- name: Generate quadlet files
+  become: true
+  become_user: "{{ audiobookshelf_user }}"
+  notify: Restart audiobookshelf containers
+  register: quadlet_result
+  ansible.builtin.template:
+    src: "{{ template }}"
+    dest: "{{ audiobookshelf_home }}/.config/containers/systemd/{{ template }}"
+    owner: "{{ audiobookshelf_user }}"
+    group: "{{ audiobookshelf_group }}"
+    mode: 0644
+  loop_control:
+    loop_var: template
+  loop:
+    - audiobookshelf.container
+    - audiobookshelf.pod
+    - audiobookshelf.network
+
+- name: Generate environment file
+  become: true
+  become_user: "{{ audiobookshelf_user }}"
+  notify: Restart audiobookshelf containers
+  register: env_result
+  ansible.builtin.template:
+    src: "audiobookshelf.env"
+    dest: "{{ audiobookshelf_home }}/.env"
+    owner: "{{ audiobookshelf_user }}"
+    group: "{{ audiobookshelf_group }}"
+    mode: 0600
+
+- name: Reload systemd daemon
+  become: true
+  become_user: "{{ audiobookshelf_user }}"
+  when: quadlet_result.changed or env_result.changed
+  ansible.builtin.systemd:
+    daemon_reload: true
+    scope: user
+
+- name: Validate quadlet files
+  become: true
+  become_user: "{{ audiobookshelf_user }}"
+  changed_when: false
+  ansible.builtin.command:
+    cmd: /usr/lib/podman/quadlet -dryrun -user
+
+- name: Create volumes
+  become: true
+  notify: Restart audiobookshelf containers
+  ansible.builtin.file:
+    path: "{{ volume }}"
+    state: directory
+    owner: "{{ audiobookshelf_user }}"
+    group: "{{ audiobookshelf_group }}"
+    mode: 0700
+  loop_control:
+    loop_var: volume
+  loop:
+    - "{{ audiobookshelf_volume_audiobooks }}"
+    - "{{ audiobookshelf_volume_podcasts }}"
+    - "{{ audiobookshelf_volume_config }}"
+    - "{{ audiobookshelf_volume_metadata }}"
+
+- name: Enable audiobookshelf containers
+  become: true
+  become_user: "{{ audiobookshelf_user }}"
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+    scope: user
+  loop:
+    - audiobookshelf-pod.service
+    - audiobookshelf.service
