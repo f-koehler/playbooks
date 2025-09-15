@@ -1,0 +1,118 @@
+---
+- name: Create paperless group
+  become: true
+  register: paperless_group_result
+  ansible.builtin.group:
+    name: "{{ paperless_group }}"
+
+- name: Create paperless user
+  become: true
+  register: paperless_user_result
+  ansible.builtin.user:
+    name: "{{ paperless_user }}"
+    group: "{{ paperless_group }}"
+    state: present
+    create_home: true
+    home: "{{ paperless_home }}"
+
+- name: Set uid/gid fact
+  ansible.builtin.set_fact:
+    paperless_gid: "{{ paperless_group_result.gid }}"
+    paperless_uid: "{{ paperless_user_result.uid }}"
+
+- name: Enable linger for paperless user
+  become: true
+  ansible.builtin.command:
+    cmd: loginctl enable-linger "{{ paperless_user }}"
+
+- name: Create quadlet directory
+  become: true
+  become_user: "{{ paperless_user }}"
+  ansible.builtin.file:
+    path: "{{ paperless_home }}/.config/containers/systemd"
+    state: directory
+    owner: "{{ paperless_user }}"
+    group: "{{ paperless_group }}"
+    mode: 0755
+    recurse: true
+
+- name: Generate quadlet files
+  become: true
+  become_user: "{{ paperless_user }}"
+  notify: Restart paperless containers
+  register: quadlet_result
+  ansible.builtin.template:
+    src: "{{ template }}"
+    dest: "{{ paperless_home }}/.config/containers/systemd/{{ template }}"
+    owner: "{{ paperless_user }}"
+    group: "{{ paperless_group }}"
+    mode: 0644
+  loop_control:
+    loop_var: template
+  loop:
+    - broker.container
+    - gotenberg.container
+    - paperless.container
+    - paperless.network
+    - paperless.pod
+    - tika.container
+
+- name: Generate environment file
+  become: true
+  become_user: "{{ paperless_user }}"
+  notify: Restart paperless containers
+  register: env_result
+  ansible.builtin.template:
+    src: "paperless.env"
+    dest: "{{ paperless_home }}/.env"
+    owner: "{{ paperless_user }}"
+    group: "{{ paperless_group }}"
+    mode: 0600
+
+- name: Reload systemd daemon
+  become: true
+  become_user: "{{ paperless_user }}"
+  when: quadlet_result.changed or env_result.changed
+  ansible.builtin.systemd:
+    daemon_reload: true
+    scope: user
+
+- name: Validate quadlet files
+  become: true
+  become_user: "{{ paperless_user }}"
+  changed_when: false
+  ansible.builtin.command:
+    cmd: /usr/lib/podman/quadlet -dryrun -user
+
+- name: Create volumes
+  become: true
+  notify: Restart paperless containers
+  ansible.builtin.file:
+    path: "{{ volume }}"
+    state: directory
+    owner: "{{ paperless_user }}"
+    group: "{{ paperless_group }}"
+    mode: 0700
+  loop_control:
+    loop_var: volume
+  loop:
+    - "{{ paperless_volume_data }}"
+    - "{{ paperless_volume_media }}"
+    - "{{ paperless_volume_consume }}"
+    - "{{ paperless_volume_export }}"
+    - "{{ paperless_volume_redisdata }}"
+
+- name: Enable paperless containers
+  become: true
+  become_user: "{{ paperless_user }}"
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+    scope: user
+  loop:
+    - paperless.service
+    - broker.service
+    - tika.service
+    - gotenberg.service
+    - paperless-pod.service

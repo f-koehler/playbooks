@@ -1,0 +1,9 @@
+[Unit]
+Description=Tika for Paperless
+
+[Container]
+ContainerName=tika
+Image=docker.io/apache/tika:3.2.2.0
+Pod=paperless.pod
+EnvironmentFile=%h/.env
+Exec= --chromium-disable-javascript=true --chromium-allow-list=file:///tmp/.*
