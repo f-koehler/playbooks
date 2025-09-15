@@ -4,7 +4,21 @@
   community.general.pacman:
     state: present
     name:
+      - btrfs-progs
       - cockpit
+      - cockpit-machines
       - cockpit-packagekit
       - cockpit-podman
       - cockpit-storaged
+      - dosfstools
+      - e2fsprogs
+      - exfatprogs
+      - f2fs-tools
+      - less
+      - networkmanager
+      - nilfs-utils
+      - udftools
+      - udisks2
+      - udisks2-btrfs
+      - udisks2-lvm2
+      - xfsprogs
