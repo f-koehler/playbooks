@@ -1,0 +1,15 @@
+[Unit]
+Description=Mediamanagement Tool
+
+[Pod]
+PodName=tinymediamanager
+PublishPort={{ tinymediamanager_port }}:4000
+Network=tinymediamanager.network
+
+[Service]
+RemainAfterExit=yes
+Restart=on-failure
+TimeoutStartSec=90
+
+[Install]
+WantedBy=default.target
