@@ -97,4 +97,5 @@
     enabled: true
     scope: user
   loop:
+    - navidrome-pod.service
     - navidrome.service
