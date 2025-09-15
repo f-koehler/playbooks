@@ -8,3 +8,4 @@
     scope: user
   loop:
     - navidrome.service
+    - navidrome-pod.service
