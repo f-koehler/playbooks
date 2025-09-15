@@ -1,0 +1,15 @@
+[Unit]
+Description=Audiobookshelf Audiobook and Podcast Server
+
+[Pod]
+PodName=audiobookshelf
+PublishPort={{ audiobookshelf_port }}:80
+Network=audiobookshelf.network
+
+[Service]
+RemainAfterExit=yes
+Restart=on-failure
+TimeoutStartSec=90
+
+[Install]
+WantedBy=default.target
