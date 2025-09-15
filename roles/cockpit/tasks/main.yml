@@ -1,0 +1,17 @@
+---
+- name: Load installation tasks
+  ansible.builtin.include_tasks: "{{ lookup('ansible.builtin.first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "install-{{ ansible_os_family | lower }}.yml"
+        - "install-fallback.yml"
+      paths:
+        - "{{ role_path }}/tasks"
+
+- name: Enable cockpit
+  become: true
+  ansible.builtin.systemd:
+    name: cockpit.socket
+    state: started
+    enabled: true
