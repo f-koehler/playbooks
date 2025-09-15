@@ -12,6 +12,7 @@
     - podman
     - cockpit
 
+    - audiobookshelf
     # - karakeep
     - navidrome
 
