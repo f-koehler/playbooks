@@ -1,0 +1,10 @@
+---
+- name: Pacman | Install cockpit
+  become: true
+  community.general.pacman:
+    state: present
+    name:
+      - cockpit
+      - cockpit-packagekit
+      - cockpit-podman
+      - cockpit-storaged
