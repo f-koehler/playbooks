@@ -1,5 +1,5 @@
 [Unit]
-Description=Mediamanagement Tool
+Description=Media Management Tool
 
 [Pod]
 PodName=tinymediamanager
