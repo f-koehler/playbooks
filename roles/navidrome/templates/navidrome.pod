@@ -7,6 +7,7 @@ PublishPort=4533:4533
 Network=navidrome.network
 
 [Service]
+RemainAfterExit=yes
 Restart=on-failure
 TimeoutStartSec=90
 
