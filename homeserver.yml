@@ -5,6 +5,9 @@
     - name: Load global variables
       ansible.builtin.include_vars:
         file: ./vars/main.yml
+    - name: Load secrets
+      ansible.builtin.include_vars:
+        file: ./secrets/homeservers.yml
   roles:
     - pacman
 
