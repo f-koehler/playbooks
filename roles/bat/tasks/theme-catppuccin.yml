@@ -1,0 +1,21 @@
+---
+- name: Clone catppuccin theme
+  ansible.builtin.git:
+    repo: https://github.com/catppuccin/bat.git
+    dest: ~/.config/bat/catppuccin
+    version: main
+    accept_hostkey: true
+
+- name: Link catppuccin theme
+  notify: Rebuild bat cache
+  ansible.builtin.file:
+    src: "~/.config/bat/catppuccin/themes/Catppuccin {{ catppuccin_theme | default('Mocha') }}.tmTheme"
+    dest: "~/.config/bat/themes/Catppuccin {{ catppuccin_theme | default('Mocha') }}.tmTheme"
+    state: link
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0644"
+
+- name: Set bat theme
+  ansible.builtin.set_fact:
+    bat_theme: "Catppuccin {{ catppuccin_theme | default('Mocha') }}"
