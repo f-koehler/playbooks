@@ -9,3 +9,4 @@
   loop:
     - navidrome.service
     - navidrome-pod.service
+    - tailscale.service
