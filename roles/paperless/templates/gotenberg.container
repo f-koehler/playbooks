@@ -6,4 +6,4 @@ ContainerName=gotenberg
 Image=docker.io/gotenberg/gotenberg:8.22
 Pod=paperless.pod
 EnvironmentFile=%h/.env
-Exec= --chromium-disable-javascript=true --chromium-allow-list=file:///tmp/.*
+Exec=gotenberg --chromium-disable-javascript=true --chromium-allow-list=file:///tmp/.*
