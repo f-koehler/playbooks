@@ -38,16 +38,6 @@
     group: "{{ groupname }}"
     mode: "0644"
 
-- name: Link lazygit theme
-  when: lazygit_theme_path != None
-  ansible.builtin.file:
-    src: "{{ lazygit_theme_path }}"
-    dest: "{{ lazygit_config_dir }}/theme.yml"
-    state: link
-    owner: "{{ username }}"
-    group: "{{ groupname }}"
-    mode: "0644"
-
 - name: Set lazygit config environment variable and alias
   ansible.builtin.set_fact: # noqa: var-naming[no-role-prefix]
     environment_variables: >
