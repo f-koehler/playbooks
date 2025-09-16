@@ -29,6 +29,17 @@
     mode: 0755
     recurse: true
 
+- name: Generate tailscale serve configuration
+  become: true
+  become_user: "{{ navidrome_user }}"
+  notify: Restart navidrome containers
+  ansible.builtin.template:
+    src: "ts-serve.json"
+    dest: "{{ navidrome_home }}/ts-serve.json"
+    owner: "{{ navidrome_user }}"
+    group: "{{ navidrome_group }}"
+    mode: 0644
+
 - name: Generate quadlet files
   become: true
   become_user: "{{ navidrome_user }}"
@@ -46,6 +57,7 @@
     - navidrome.container
     - navidrome.pod
     - navidrome.network
+    - tailscale.container
 
 - name: Generate environment file
   become: true
@@ -87,6 +99,7 @@
     loop_var: volume
   loop:
     - "{{ navidrome_volume_data }}"
+    - "{{ navidrome_volume_tailscale }}"
 
 - name: Enable navidrome containers
   become: true
@@ -99,3 +112,4 @@
   loop:
     - navidrome-pod.service
     - navidrome.service
+    - tailscale.service
