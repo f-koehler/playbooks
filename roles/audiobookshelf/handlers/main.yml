@@ -8,4 +8,5 @@
     scope: user
   loop:
     - audiobookshelf.service
+    - tailscale.service
     - audiobookshelf-pod.service
