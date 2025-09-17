@@ -1,0 +1,10 @@
+[Unit]
+Description=Tailscale sidecar container for Audiobookshelf
+
+[Container]
+ContainerName=tailscale
+Image=docker.io/tailscale/tailscale:v1.86.5
+Pod=audiobookshelf.pod
+EnvironmentFile=%h/.env
+Volume={{ audiobookshelf_volume_tailscale }}:/var/lib/tailscale:Z
+Volume={{ audiobookshelf_home }}/ts-serve.json:/ts-serve.json:Z
