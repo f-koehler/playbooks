@@ -5,7 +5,7 @@
     }
   },
   "Web": {
-    "{{ tailscale_serve_quadlet_hostname }}:443": {
+    "${TS_CERT_DOMAIN}:443": {
       "Handlers": {
         "/": {
           "Proxy": "http://{{ tailscale_serve_quadlet_service_name }}:{{ tailscale_serve_quadlet_service_port }}"
@@ -14,6 +14,6 @@
     }
   },
   "AllowFunnel": {
-    "{{ tailscale_serve_quadlet_hostname }}:443": false
+    "${TS_CERT_DOMAIN}:443": false
   }
 }
