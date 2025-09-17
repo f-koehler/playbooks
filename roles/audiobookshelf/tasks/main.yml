@@ -29,17 +29,6 @@
     mode: 0755
     recurse: true
 
-- name: Generate tailscale serve configuration
-  become: true
-  become_user: "{{ audiobookshelf_user }}"
-  notify: Restart audiobookshelf containers
-  ansible.builtin.template:
-    src: "ts-serve.json"
-    dest: "{{ audiobookshelf_home }}/ts-serve.json"
-    owner: "{{ audiobookshelf_user }}"
-    group: "{{ audiobookshelf_group }}"
-    mode: 0644
-
 - name: Generate quadlet files
   become: true
   become_user: "{{ audiobookshelf_user }}"
@@ -57,7 +46,6 @@
     - audiobookshelf.container
     - audiobookshelf.pod
     - audiobookshelf.network
-    - tailscale.container
 
 - name: Generate environment file
   become: true
@@ -102,7 +90,6 @@
     - "{{ audiobookshelf_volume_podcasts }}"
     - "{{ audiobookshelf_volume_config }}"
     - "{{ audiobookshelf_volume_metadata }}"
-    - "{{ audiobookshelf_volume_tailscale }}"
 
 - name: Enable audiobookshelf containers
   become: true
@@ -115,4 +102,15 @@
   loop:
     - audiobookshelf-pod.service
     - audiobookshelf.service
-    - tailscale.service
+
+- name: Expose audiobookshelf via Tailscale
+  ansible.builtin.include_role:
+    name: tailscale-serve-quadlet
+  vars:
+    tailscale_serve_quadlet_user: "{{ audiobookshelf_user }}"
+    tailscale_serve_quadlet_group: "{{ audiobookshelf_group }}"
+    tailscale_serve_quadlet_pod_name: "audiobookshelf"
+    tailscale_serve_quadlet_service_name: "audiobookshelf"
+    tailscale_serve_quadlet_service_port: 80
+    tailscale_serve_quadlet_hostname: "{{ audiobookshelf_hostname }}"
+    tailscale_serve_quadlet_oauth_client_secret: "{{ tailscale_oauth_client_secret }}"
