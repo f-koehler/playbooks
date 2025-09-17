@@ -1,0 +1,73 @@
+---
+- name: Assert required variables are defined
+  ansible.builtin.assert:
+    that:
+      - vars[item] is defined
+      - vars[item] != ""
+    fail_msg: "{{ item }} is a required variable for the tailscale-serve-quadlet role."
+  loop:
+    - "tailscale_serve_quadlet_user"
+    - "tailscale_serve_quadlet_pod_name"
+    - "tailscale_serve_quadlet_service_name"
+    - "tailscale_serve_quadlet_service_port"
+    - "tailscale_serve_quadlet_hostname"
+    - "tailscale_serve_quadlet_oauth_client_secret"
+
+- name: Generate tailscale serve configuration
+  become: true
+  become_user: "{{ tailscale_serve_quadlet_user }}"
+  notify: Restart tailscale service
+  ansible.builtin.template:
+    src: "ts-serve.json"
+    dest: "{{ tailscale_serve_quadlet_home }}/ts-serve.json"
+    owner: "{{ tailscale_serve_quadlet_user }}"
+    group: "{{ tailscale_serve_quadlet_group }}"
+    mode: "0644"
+
+- name: Generate tailscale container file
+  register: container_result
+  become: true
+  become_user: "{{ tailscale_serve_quadlet_user }}"
+  notify: Restart tailscale service
+  ansible.builtin.template:
+    src: "tailscale.container"
+    dest: "{{ tailscale_serve_quadlet_home }}/.config/containers/systemd/tailscale.container"
+    mode: "0644"
+
+- name: Generate environment file for tailscale
+  register: env_result
+  become: true
+  become_user: "{{ tailscale_serve_quadlet_user }}"
+  notify: Restart tailscale service
+  ansible.builtin.template:
+    src: "tailscale.env"
+    dest: "{{ tailscale_serve_quadlet_home }}/.tailscale.env"
+    owner: "{{ tailscale_serve_quadlet_user }}"
+    group: "{{ tailscale_serve_quadlet_group }}"
+    mode: "0600"
+
+- name: Create tailscale state volume
+  become: true
+  ansible.builtin.file:
+    path: "{{ tailscale_serve_quadlet_state_volume }}"
+    state: directory
+    owner: "{{ tailscale_serve_quadlet_user }}"
+    group: "{{ tailscale_serve_quadlet_group }}"
+    mode: "0700"
+
+- name: Reload systemd daemon
+  become: true
+  become_user: "{{ tailscale_serve_quadlet_user }}"
+  when: container_result.changed or env_result.changed
+  ansible.builtin.systemd:
+    daemon_reload: true
+    scope: user
+
+- name: Enable and start tailscale service
+  become: true
+  become_user: "{{ tailscale_serve_quadlet_user }}"
+  ansible.builtin.systemd:
+    name: "tailscale.service"
+    state: started
+    enabled: true
+    scope: user
