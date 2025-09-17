@@ -8,4 +8,4 @@ tailscale_serve_quadlet_pod_name: "{{ tailscale_serve_quadlet_service_name }}"
 tailscale_serve_quadlet_hostname: "{{ tailscale_serve_quadlet_service_name }}"
 tailscale_serve_quadlet_service_port: ""
 tailscale_serve_quadlet_tags:
-  - tag:container
+  - tag:homeserver-container
