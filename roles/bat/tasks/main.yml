@@ -20,7 +20,6 @@
     owner: "{{ username }}"
     group: "{{ groupname }}"
     mode: "0755"
-    recurse: true
   loop_control:
     loop_var: directory
   loop:
