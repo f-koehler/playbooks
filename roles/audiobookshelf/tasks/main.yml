@@ -17,17 +17,23 @@
   become: true
   ansible.builtin.command:
     cmd: loginctl enable-linger "{{ audiobookshelf_user }}"
+    creates: /var/lib/systemd/linger/{{ audiobookshelf_user }}
 
 - name: Create quadlet directory
   become: true
   become_user: "{{ audiobookshelf_user }}"
   ansible.builtin.file:
-    path: "{{ audiobookshelf_home }}/.config/containers/systemd"
+    path: "{{ directory }}"
     state: directory
     owner: "{{ audiobookshelf_user }}"
     group: "{{ audiobookshelf_group }}"
     mode: 0755
-    recurse: true
+  loop_control:
+    loop_var: directory
+  loop:
+    - "{{ audiobookshelf_home }}/.config"
+    - "{{ audiobookshelf_home }}/.config/containers"
+    - "{{ audiobookshelf_home }}/.config/containers/systemd"
 
 - name: Generate quadlet files
   become: true

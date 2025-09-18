@@ -24,17 +24,23 @@
   become: true
   ansible.builtin.command:
     cmd: loginctl enable-linger "{{ paperless_user }}"
+    creates: /var/lib/systemd/linger/{{ paperless_user }}
 
 - name: Create quadlet directory
   become: true
   become_user: "{{ paperless_user }}"
   ansible.builtin.file:
-    path: "{{ paperless_home }}/.config/containers/systemd"
+    path: "{{ directory }}"
     state: directory
     owner: "{{ paperless_user }}"
     group: "{{ paperless_group }}"
     mode: 0755
-    recurse: true
+  loop_control:
+    loop_var: directory
+  loop:
+    - "{{ paperless_home }}/.config"
+    - "{{ paperless_home }}/.config/containers"
+    - "{{ paperless_home }}/.config/containers/systemd"
 
 - name: Generate quadlet files
   become: true
@@ -90,9 +96,9 @@
   ansible.builtin.file:
     path: "{{ volume }}"
     state: directory
+    mode: 0700
     owner: "{{ paperless_user }}"
     group: "{{ paperless_group }}"
-    mode: 0700
   loop_control:
     loop_var: volume
   loop:

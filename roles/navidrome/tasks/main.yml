@@ -17,6 +17,7 @@
   become: true
   ansible.builtin.command:
     cmd: loginctl enable-linger "{{ navidrome_user }}"
+    creates: /var/lib/systemd/linger/{{ navidrome_user }}
 
 - name: Create quadlet directory
   become: true
@@ -27,7 +28,12 @@
     owner: "{{ navidrome_user }}"
     group: "{{ navidrome_group }}"
     mode: 0755
-    recurse: true
+  loop_control:
+    loop_var: directory
+  loop:
+    - "{{ navidrome_home }}/.config"
+    - "{{ navidrome_home }}/.config/containers"
+    - "{{ navidrome_home }}/.config/containers/systemd"
 
 - name: Generate quadlet files
   become: true
