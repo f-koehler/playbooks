@@ -24,17 +24,23 @@
   become: true
   ansible.builtin.command:
     cmd: loginctl enable-linger "{{ tinymediamanager_user }}"
+    creates: /var/lib/systemd/linger/{{ tinymediamanager_user }}
 
 - name: Create quadlet directory
   become: true
   become_user: "{{ tinymediamanager_user }}"
   ansible.builtin.file:
-    path: "{{ tinymediamanager_home }}/.config/containers/systemd"
+    path: "{{ directory }}"
     state: directory
     owner: "{{ tinymediamanager_user }}"
     group: "{{ tinymediamanager_group }}"
     mode: 0755
-    recurse: true
+  loop_control:
+    loop_var: directory
+  loop:
+    - "{{ tinymediamanager_home }}/.config"
+    - "{{ tinymediamanager_home }}/.config/containers"
+    - "{{ tinymediamanager_home }}/.config/containers/systemd"
 
 - name: Generate quadlet files
   become: true
