@@ -106,3 +106,15 @@
   loop:
     - tinymediamanager-pod.service
     - tinymediamanager.service
+
+- name: Expose tinymediamanager via Tailscale
+  ansible.builtin.include_role:
+    name: tailscale-serve-quadlet
+  vars:
+    tailscale_serve_quadlet_user: "{{ tinymediamanager_user }}"
+    tailscale_serve_quadlet_group: "{{ tinymediamanager_group }}"
+    tailscale_serve_quadlet_pod_name: "tinymediamanager"
+    tailscale_serve_quadlet_service_name: "tinymediamanager"
+    tailscale_serve_quadlet_service_port: 4000
+    tailscale_serve_quadlet_hostname: "{{ tinymediamanager_hostname }}"
+    tailscale_serve_quadlet_oauth_client_secret: "{{ tailscale_oauth_client_secret }}"
