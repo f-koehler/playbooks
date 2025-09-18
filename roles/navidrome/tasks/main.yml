@@ -27,7 +27,7 @@
     state: directory
     owner: "{{ navidrome_user }}"
     group: "{{ navidrome_group }}"
-    mode: 0755
+    mode: "0755"
   loop_control:
     loop_var: directory
   loop:
@@ -39,13 +39,13 @@
   become: true
   become_user: "{{ navidrome_user }}"
   notify: Restart navidrome containers
-  register: quadlet_result
+  register: navidrome_quadlet_result
   ansible.builtin.template:
     src: "{{ template }}"
     dest: "{{ navidrome_home }}/.config/containers/systemd/{{ template }}"
     owner: "{{ navidrome_user }}"
     group: "{{ navidrome_group }}"
-    mode: 0644
+    mode: "0644"
   loop_control:
     loop_var: template
   loop:
@@ -57,18 +57,18 @@
   become: true
   become_user: "{{ navidrome_user }}"
   notify: Restart navidrome containers
-  register: env_result
+  register: navidrome_env_result
   ansible.builtin.template:
     src: "navidrome.env"
     dest: "{{ navidrome_home }}/.env"
     owner: "{{ navidrome_user }}"
     group: "{{ navidrome_group }}"
-    mode: 0600
+    mode: "0600"
 
 - name: Reload systemd daemon
   become: true
   become_user: "{{ navidrome_user }}"
-  when: quadlet_result.changed or env_result.changed
+  when: navidrome_quadlet_result.changed or navidrome_env_result.changed
   ansible.builtin.systemd:
     daemon_reload: true
     scope: user
@@ -88,7 +88,7 @@
     state: directory
     owner: "{{ navidrome_user }}"
     group: "{{ navidrome_group }}"
-    mode: 0700
+    mode: "0700"
   loop_control:
     loop_var: volume
   loop:

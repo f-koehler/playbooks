@@ -7,8 +7,11 @@
     accept_hostkey: true
 
 - name: Link catppuccin theme
+  vars:
+    catppuccin_flavor_lower: "{{ catppuccin_theme | default('mocha') | lower }}"
+    catppuccin_accent_lower: "{{ catppuccin_accent | default('mauve') | lower }}"
   ansible.builtin.file:
-    src: "~/.config/yazi/catppuccin/themes/{{ catppuccin_theme | default('mocha') | lower }}/catppuccin-{{ catppuccin_theme | default('mocha') | lower }}-{{ catppuccin_accent | default('mauve') | lower }}.toml"
+    src: "~/.config/yazi/catppuccin/themes/{{ catppuccin_flavor_lower }}/catppuccin-{{ catppuccin_flavor_lower }}-{{ catppuccin_accent_lower }}.toml"
     dest: "~/.config/yazi/theme.toml"
     state: link
     owner: "{{ username }}"

@@ -15,7 +15,7 @@
     state: directory
     owner: "{{ username }}"
     group: "{{ groupname }}"
-    mode: 0755
+    mode: "0755"
   loop_control:
     loop_var: directory
   loop:

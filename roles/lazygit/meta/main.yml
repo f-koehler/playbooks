@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Fabian Koehler
-  description: Setup lazygit
+  description: Role to install and configure lazygit
   license: MIT
   min_ansible_version: "2.1"
   galaxy_tags: []

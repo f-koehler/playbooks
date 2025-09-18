@@ -34,7 +34,7 @@
     state: directory
     owner: "{{ paperless_user }}"
     group: "{{ paperless_group }}"
-    mode: 0755
+    mode: "0755"
   loop_control:
     loop_var: directory
   loop:
@@ -46,13 +46,13 @@
   become: true
   become_user: "{{ paperless_user }}"
   notify: Restart paperless containers
-  register: quadlet_result
+  register: paperless_quadlet_result
   ansible.builtin.template:
     src: "{{ template }}"
     dest: "{{ paperless_home }}/.config/containers/systemd/{{ template }}"
     owner: "{{ paperless_user }}"
     group: "{{ paperless_group }}"
-    mode: 0644
+    mode: "0644"
   loop_control:
     loop_var: template
   loop:
@@ -67,18 +67,18 @@
   become: true
   become_user: "{{ paperless_user }}"
   notify: Restart paperless containers
-  register: env_result
+  register: paperless_env_result
   ansible.builtin.template:
     src: "paperless.env"
     dest: "{{ paperless_home }}/.env"
     owner: "{{ paperless_user }}"
     group: "{{ paperless_group }}"
-    mode: 0600
+    mode: "0600"
 
 - name: Reload systemd daemon
   become: true
   become_user: "{{ paperless_user }}"
-  when: quadlet_result.changed or env_result.changed
+  when: paperless_quadlet_result.changed or paperless_env_result.changed
   ansible.builtin.systemd:
     daemon_reload: true
     scope: user
@@ -96,7 +96,7 @@
   ansible.builtin.file:
     path: "{{ volume }}"
     state: directory
-    mode: 0700
+    mode: "0700"
     owner: "{{ paperless_user }}"
     group: "{{ paperless_group }}"
   loop_control:

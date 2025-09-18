@@ -1,7 +1,7 @@
+---
 galaxy_info:
-  author: fkoehler
   description: Homebrew role for installing packages
-  company: ""
+  author: Fabian Koehler
   license: MIT
   min_ansible_version: "2.1"
   galaxy_tags: []

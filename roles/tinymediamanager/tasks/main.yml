@@ -34,7 +34,7 @@
     state: directory
     owner: "{{ tinymediamanager_user }}"
     group: "{{ tinymediamanager_group }}"
-    mode: 0755
+    mode: "0755"
   loop_control:
     loop_var: directory
   loop:
@@ -46,13 +46,13 @@
   become: true
   become_user: "{{ tinymediamanager_user }}"
   notify: Restart tinymediamanager containers
-  register: quadlet_result
+  register: tinymediamanager_quadlet_result
   ansible.builtin.template:
     src: "{{ template }}"
     dest: "{{ tinymediamanager_home }}/.config/containers/systemd/{{ template }}"
     owner: "{{ tinymediamanager_user }}"
     group: "{{ tinymediamanager_group }}"
-    mode: 0644
+    mode: "0644"
   loop_control:
     loop_var: template
   loop:
@@ -64,18 +64,18 @@
   become: true
   become_user: "{{ tinymediamanager_user }}"
   notify: Restart tinymediamanager containers
-  register: env_result
+  register: tinymediamanager_env_result
   ansible.builtin.template:
     src: "tinymediamanager.env"
     dest: "{{ tinymediamanager_home }}/.env"
     owner: "{{ tinymediamanager_user }}"
     group: "{{ tinymediamanager_group }}"
-    mode: 0600
+    mode: "0600"
 
 - name: Reload systemd daemon
   become: true
   become_user: "{{ tinymediamanager_user }}"
-  when: quadlet_result.changed or env_result.changed
+  when: tinymediamanager_quadlet_result.changed or tinymediamanager_env_result.changed
   ansible.builtin.systemd:
     daemon_reload: true
     scope: user
@@ -95,7 +95,7 @@
     state: directory
     owner: "{{ tinymediamanager_user }}"
     group: "{{ tinymediamanager_group }}"
-    mode: 0700
+    mode: "0700"
   loop_control:
     loop_var: volume
   loop:
