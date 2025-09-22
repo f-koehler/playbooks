@@ -1,0 +1,22 @@
+---
+- name: Create homebrew directory
+  ansible.builtin.file:
+    path: "{{ homebrew_root }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0755"
+
+- name: Download homebrew tarball
+  ansible.builtin.get_url:
+    url: https://github.com/Homebrew/brew/tarball/master
+    dest: /tmp/homebrew.tar.gz
+    mode: "0644"
+
+- name: Extract homebrew tarball
+  ansible.builtin.shell: |
+    set -o pipefail
+    tar xz --strip 1 -C {{ homebrew_root }} < /tmp/homebrew.tar.gz
+  args:
+    executable: /bin/bash
+  changed_when: true

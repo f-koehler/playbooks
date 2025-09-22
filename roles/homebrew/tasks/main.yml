@@ -1,36 +1,20 @@
 ---
-- name: "Package | Install homebrew dependencies"
-  become: true
-  ansible.builtin.package:
-    name: "{{ homebrew_dependencies[ansible_os_family | lower] }}"
-    state: present
+- name: Load defaults
+  ansible.builtin.include_vars:
+    file: "defaults/{{ ansible_os_family | lower }}.yml"
 
 - name: Check if homebrew already installed
   ansible.builtin.stat:
     path: "{{ homebrew_root }}/bin/brew"
   register: homebrew_stat
 
-- name: Install homebrew
+- name: Load installation tasks
   when: not homebrew_stat.stat.exists
-  block:
-    - name: Create homebrew directory
-      ansible.builtin.file:
-        path: "{{ homebrew_root }}"
-        state: directory
-        owner: "{{ username }}"
-        group: "{{ groupname }}"
-        mode: "0755"
-
-    - name: Download homebrew tarball
-      ansible.builtin.get_url:
-        url: https://github.com/Homebrew/brew/tarball/master
-        dest: /tmp/homebrew.tar.gz
-        mode: "0644"
-
-    - name: Extract homebrew tarball
-      ansible.builtin.shell: |
-        set -o pipefail
-        tar xz --strip 1 -C {{ homebrew_root }} < /tmp/homebrew.tar.gz
-      args:
-        executable: /bin/bash
-      changed_when: true
+  ansible.builtin.include_tasks: "{{ lookup('ansible.builtin.first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "install-{{ ansible_distribution | lower }}.yml"
+        - "install-{{ ansible_os_family | lower }}.yml"
+        - "install-{{ ansible_system | lower }}.yml"
+        - "install-fallback.yml"

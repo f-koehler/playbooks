@@ -1,0 +1,14 @@
+---
+- name: Apt | Install homebrew deps
+  become: true
+  ansible.builtin.apt:
+    state: present
+    name:
+      - base-devel
+      - curl
+      - file
+      - git
+      - procps-ng
+
+- name: Load common Linux installation tasks
+  ansible.builtin.include_tasks: "install-linux-common.yml"
