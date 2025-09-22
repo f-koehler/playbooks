@@ -1,0 +1,18 @@
+---
+- name: "Homebrew | Install common desktop programs (Cask)"
+  community.general.homebrew_cask:
+    state: present
+    name:
+      - drawio
+      - firefox
+      - gimp
+      - inkscape
+      - nextcloud
+      - obsidian
+      - libreoffice
+
+- name: "Homebrew | Install common desktop programs"
+  community.general.homebrew:
+    state: present
+    name:
+      - mpv

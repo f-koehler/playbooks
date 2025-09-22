@@ -1,12 +1,9 @@
 ---
 - name: Load installation tasks
-  ansible.builtin.include_tasks: "install-{{ ansible_os_family | lower }}.yml"
-
-- name: Improve game stability by increasing vm.max_map_count
-  become: true
-  ansible.builtin.copy:
-    src: 80-gamecompatibility.conf
-    dest: /etc/sysctl.d/80-gamecompatibility.conf
-    owner: root
-    group: root
-    mode: "0644"
+  ansible.builtin.include_tasks: "{{ lookup('ansible.builtin.first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "install-{{ ansible_distribution | lower }}.yml"
+        - "install-{{ ansible_os_family | lower }}.yml"
+        - "install-{{ ansible_system | lower }}.yml"

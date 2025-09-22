@@ -1,0 +1,18 @@
+---
+- name: "Snap | Install neovim"
+  become: true
+  community.general.snap:
+    name: nvim
+    state: present
+    classic: true
+
+- name: "Apt | Install dependencies"
+  become: true
+  ansible.builtin.apt:
+    state: present
+    name:
+      - fd-find
+      - nodejs
+      - ripgrep
+      - prettier
+      - taplo-cli

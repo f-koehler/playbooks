@@ -7,3 +7,12 @@
       - mangohud
       - ttf-liberation
     state: present
+
+- name: Improve game stability by increasing vm.max_map_count
+  become: true
+  ansible.builtin.copy:
+    src: 80-gamecompatibility.conf
+    dest: /etc/sysctl.d/80-gamecompatibility.conf
+    owner: root
+    group: root
+    mode: "0644"
