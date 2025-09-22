@@ -1,8 +1,10 @@
 ---
 - name: Load install tasks
+  when: ansible_system == 'Linux'
   ansible.builtin.include_tasks:
     file: "install-{{ ansible_distribution | lower }}.yml"
 
 - name: Load theme tasks
+  when: ansible_system == 'Linux'
   ansible.builtin.include_tasks:
     file: "theme-{{ plasma_theme }}.yml"

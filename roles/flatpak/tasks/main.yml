@@ -1,10 +1,12 @@
 ---
 - name: "Package | Install flatpak and dependencies"
+  when: ansible_system == 'Linux'
   ansible.builtin.package:
     name: "{{ flatpak_dependencies[ansible_os_family | lower] }}"
     state: present
 
 - name: Add flathub remote (system)
+  when: ansible_system == 'Linux'
   community.general.flatpak_remote:
     name: flathub
     state: present

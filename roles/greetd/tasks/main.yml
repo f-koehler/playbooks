@@ -1,8 +1,10 @@
 ---
 - name: Load installation tasks
+  when: ansible_system == 'Linux'
   ansible.builtin.include_tasks: "install-{{ ansible_os_family | lower }}.yml"
 
 - name: Configure greetd
+  when: ansible_system == 'Linux'
   become: true
   notify: Restart greetd
   ansible.builtin.template:
@@ -13,6 +15,7 @@
     mode: "0644"
 
 - name: Enable greetd
+  when: ansible_system == 'Linux'
   become: true
   ansible.builtin.systemd_service:
     name: greetd.service

@@ -1,8 +1,10 @@
 ---
 - name: Load installation tasks
+  when: ansible_system  == 'Linux'
   ansible.builtin.include_tasks: "install-{{ ansible_os_family | lower }}.yml"
 
 - name: Start bluetooth service
+  when: ansible_system  == 'Linux'
   become: true
   ansible.builtin.systemd_service:
     name: "bluetooth.service"

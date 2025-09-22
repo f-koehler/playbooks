@@ -1,14 +1,17 @@
 ---
 - name: Load installation tasks
+  when: ansible_system  == 'Linux'
   ansible.builtin.include_tasks: "install-{{ ansible_os_family | lower }}.yml"
 
 - name: Remove default sway session
+  when: ansible_system  == 'Linux'
   become: true
   ansible.builtin.file:
     path: /usr/share/wayland-sessions/sway.desktop
     state: absent
 
 - name: Create uwsm sway session
+  when: ansible_system  == 'Linux'
   become: true
   ansible.builtin.copy:
     src: sway-uwsm.desktop
@@ -18,6 +21,7 @@
     mode: "0644"
 
 - name: Load configuration tasks
+  when: ansible_system  == 'Linux'
   ansible.builtin.include_tasks: "configure-{{ item }}.yml"
   loop:
     - kanshi

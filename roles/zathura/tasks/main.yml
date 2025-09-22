@@ -1,8 +1,10 @@
 ---
 - name: Load installation tasks
+  when: ansible_system == 'Linux'
   ansible.builtin.include_tasks: "install-{{ ansible_os_family | lower }}.yml"
 
 - name: Create zathura config dir
+  when: ansible_system == 'Linux'
   ansible.builtin.file:
     path: "{{ directory }}"
     state: directory
@@ -16,4 +18,5 @@
     - ~/.config/zathura
 
 - name: Load zathura theme tasks
+  when: ansible_system == 'Linux'
   ansible.builtin.include_tasks: "theme-{{ zathura_theme }}.yml"
