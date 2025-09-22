@@ -1,0 +1,8 @@
+---
+- name: "Homebrew | Install python development tools"
+  community.general.homebrew:
+    state: present
+    name:
+      - python
+      - uv
+      - ruff

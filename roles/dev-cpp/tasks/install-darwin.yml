@@ -1,0 +1,13 @@
+---
+- name: "Pacman | Install C++ development tools"
+  community.general.homebrew:
+    state: present
+    name:
+      - cmake
+      - gcc
+      - gdb
+      - make
+      - ninja
+      - vcpkg
+      - clang-format
+      - llvm

@@ -1,0 +1,8 @@
+---
+- name: "Homewbrew | Install rust development tools"
+  notify:
+    - Install rust toolchains
+  community.general.homebrew:
+    state: present
+    name:
+      - rustup

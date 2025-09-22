@@ -1,0 +1,8 @@
+---
+- name: "Homebrew | Install lua development tools"
+  community.general.homebrew:
+    name:
+      - lua-language-server
+      - lua
+      - selene
+      - stylua

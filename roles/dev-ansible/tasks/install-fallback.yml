@@ -1,0 +1,8 @@
+---
+- name: "Homebrew | Install ansible development tools"
+  community.general.homebrew:
+    name:
+      - ansible
+      - ansible-lint
+      - ansible-language-server
+      - yamllint

@@ -1,13 +1,4 @@
 ---
-# - name: Remove system rust development tools
-#   become: true
-#   community.general.pacman:
-#     state: absent
-#     name:
-#       - rust
-#       - rust-src
-#       - rust-analyzer
-
 - name: "Pacman | Install rust development tools"
   become: true
   notify:
