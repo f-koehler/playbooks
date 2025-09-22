@@ -10,7 +10,7 @@
         - "{{ role_path }}/tasks"
 
 - name: Load theme tasks
-  ansible.builtin.include_tasks: "theme-{{ fish_theme }}.yml"
+  ansible.builtin.include_tasks: "theme-{{ fzf_theme }}.yml"
 
 - name: Register fzf hooks
   ansible.builtin.set_fact:

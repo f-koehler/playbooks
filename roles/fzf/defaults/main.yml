@@ -5,3 +5,4 @@ fzf_hook_fish: |
   fzf --fish | source
 fzf_hook_zsh: |
   source <(fzf --zsh)
+fzf_theme: "catppuccin"
