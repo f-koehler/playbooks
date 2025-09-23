@@ -1,0 +1,5 @@
+---
+- name: Homebrew | Install fish
+  community.general.homebrew:
+    state: present
+    name: fish
