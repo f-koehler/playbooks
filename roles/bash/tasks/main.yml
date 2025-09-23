@@ -1,7 +1,13 @@
 ---
-- name: Load Archlinux install tasks
-  when: ansible_os_family == 'Archlinux'
-  ansible.builtin.include_tasks: install-archlinux.yml
+- name: Load installation tasks
+  ansible.builtin.include_tasks: "{{ lookup('ansible.builtin.first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "install-{{ ansible_distribution | lower }}.yml"
+        - "install-{{ ansible_os_family | lower }}.yml"
+        - "install-{{ ansible_system | lower }}.yml"
+        - "install-fallback.yml"
 
 - name: Configure bash
   ansible.builtin.template:

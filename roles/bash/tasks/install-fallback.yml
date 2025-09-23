@@ -1,0 +1,7 @@
+---
+- name: Homebrew | Install bash
+  community.general.homebrew:
+    state: present
+    name:
+      - bash
+      - bash-completion@2
