@@ -4,5 +4,5 @@
     name:
       - git
       - gnupg
-      - pinentry
+      - pinentry-mac
     state: present
