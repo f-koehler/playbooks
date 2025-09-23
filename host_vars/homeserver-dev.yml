@@ -1,4 +1,8 @@
 ---
+username: fkoehler
+groupname: fkoehler
+hostname: homeserver-dev
+domain: corgi-dojo.ts.net
 audiobookshelf_hostname: audiobookshelf2
 navidrome_hostname: navidrome2
 paperless_hostname: paperless2
