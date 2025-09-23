@@ -1,8 +1,7 @@
 ---
 - name: Generate SSH key
   community.crypto.openssh_keypair:
-    # TODO(fk): parametrize with hostname & domain
-    comment: "{{ username }}@destkop.corgi-dojo.ts.net"
+    comment: "{{ username }}@{{ hostname }}.{{ domain }}"
     group: "{{ groupname }}"
     owner: "{{ username }}"
     mode: "400"
