@@ -1,0 +1,15 @@
+---
+# TODO(fk): figure out a more "Ansible" way of doing this
+- name: Enable SSH Access on MacOS
+  become: true
+  changed_when: false
+  ansible.builtin.shell: |
+    sudo systemsetup -setremotelogin on
+    sudo systemsetup -getremotelogin
+
+- name: Add user to SSH group
+  become: true
+  ansible.builtin.user:
+    user: "{{ username }}"
+    groups: "com.apple.access_ssh"
+    append: true
