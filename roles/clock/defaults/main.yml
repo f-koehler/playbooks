@@ -1,0 +1,3 @@
+---
+clock_ntp_region: "asia"
+clock_ntp_intermittent: false

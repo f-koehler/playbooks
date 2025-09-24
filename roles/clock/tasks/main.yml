@@ -1,0 +1,35 @@
+---
+- name: Set timezone
+  become: true
+  community.general.timezone:
+    name: "{{ timezone }}"
+
+- name: Install chrony
+  become: true
+  ansible.builtin.package:
+    name: chrony
+    state: present
+
+- name: Configure chrony
+  become: true
+  notify: Restart chrony
+  ansible.builtin.template:
+    src: chrony.conf
+    dest: /etc/chrony.conf
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Disable systemd-timesyncd
+  become: true
+  ansible.builtin.systemd:
+    name: systemd-timesyncd.service
+    state: stopped
+    enabled: false
+
+- name: Enable chrony
+  become: true
+  ansible.builtin.systemd:
+    name: chronyd.service
+    state: started
+    enabled: true

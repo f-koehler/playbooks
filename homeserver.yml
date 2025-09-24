@@ -10,6 +10,7 @@
         file: ./secrets/homeservers.yml
   roles:
     - pacman
+    - clock
 
     - catppuccin
     - podman
