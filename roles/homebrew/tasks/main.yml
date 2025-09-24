@@ -1,7 +1,7 @@
 ---
 - name: Load defaults
   ansible.builtin.include_vars:
-    file: "defaults/{{ ansible_os_family | lower }}.yml"
+    file: "defaults/{{ ansible_system | lower }}.yml"
 
 - name: Check if homebrew already installed
   ansible.builtin.stat:
