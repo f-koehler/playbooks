@@ -1,5 +1,5 @@
 ---
-- name: Assert required variables are defined
+- name: "Tailscale Serve Quadlet | Assert required variables are defined"
   ansible.builtin.assert:
     that:
       - vars[item] is defined
@@ -13,10 +13,10 @@
     - "tailscale_serve_quadlet_hostname"
     - "tailscale_serve_quadlet_oauth_client_secret"
 
-- name: Generate tailscale serve configuration
+- name: "Tailscale Serve Quadlet ({{ tailscale_serve_quadlet_service_name }}) | Generate tailscale serve configuration"
   become: true
   become_user: "{{ tailscale_serve_quadlet_user }}"
-  notify: Restart tailscale service
+  notify: "Tailscale Serve Quadlet ({{ tailscale_serve_quadlet_service_name }}) | Restart tailscale service"
   ansible.builtin.template:
     src: "ts-serve.json"
     dest: "{{ tailscale_serve_quadlet_home }}/ts-serve.json"
@@ -24,21 +24,21 @@
     group: "{{ tailscale_serve_quadlet_group }}"
     mode: "0644"
 
-- name: Generate tailscale container file
+- name: "Tailscale Serve Quadlet ({{ tailscale_serve_quadlet_service_name }}) | Generate tailscale container file"
   register: container_result
   become: true
   become_user: "{{ tailscale_serve_quadlet_user }}"
-  notify: Restart tailscale service
+  notify: "Tailscale Serve Quadlet ({{ tailscale_serve_quadlet_service_name }}) | Restart tailscale service"
   ansible.builtin.template:
     src: "tailscale.container"
     dest: "{{ tailscale_serve_quadlet_home }}/.config/containers/systemd/tailscale.container"
     mode: "0644"
 
-- name: Generate environment file for tailscale
+- name: "Tailscale Serve Quadlet ({{ tailscale_serve_quadlet_service_name }}) | Generate environment file"
   register: env_result
   become: true
   become_user: "{{ tailscale_serve_quadlet_user }}"
-  notify: Restart tailscale service
+  notify: "Tailscale Serve Quadlet ({{ tailscale_serve_quadlet_service_name }}) | Restart tailscale service"
   ansible.builtin.template:
     src: "tailscale.env"
     dest: "{{ tailscale_serve_quadlet_home }}/.tailscale.env"
@@ -46,7 +46,7 @@
     group: "{{ tailscale_serve_quadlet_group }}"
     mode: "0600"
 
-- name: Create tailscale state volume
+- name: "Tailscale Serve Quadlet ({{ tailscale_serve_quadlet_service_name }}) | Create tailscale state volume"
   become: true
   ansible.builtin.file:
     path: "{{ tailscale_serve_quadlet_state_volume }}"
@@ -55,7 +55,7 @@
     group: "{{ tailscale_serve_quadlet_group }}"
     mode: "0700"
 
-- name: Reload systemd daemon
+- name: "Tailscale Serve Quadlet ({{ tailscale_serve_quadlet_service_name }}) | Reload systemd daemon"
   become: true
   become_user: "{{ tailscale_serve_quadlet_user }}"
   when: container_result.changed or env_result.changed
@@ -63,7 +63,7 @@
     daemon_reload: true
     scope: user
 
-- name: Enable and start tailscale service
+- name: "Tailscale Serve Quadlet ({{ tailscale_serve_quadlet_service_name }}) | Enable and start tailscale service"
   become: true
   become_user: "{{ tailscale_serve_quadlet_user }}"
   ansible.builtin.systemd:
