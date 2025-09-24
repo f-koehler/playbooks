@@ -12,3 +12,30 @@
       - make
       - ninja
       - vcpkg
+
+- name: "Prepare VCPKG recipe directory"
+  ansible.builtin.file:
+    path: "{{ directory }}"
+    state: directory
+    mode: "0755"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+  loop_control:
+    loop_var: directory
+  loop:
+    - "~/.local"
+    - "~/.local/share"
+
+- name: "Clone VCPKG recipes"
+  ansible.builtin.git:
+    repo: "https://github.com/microsoft/vcpkg"
+    dest: "~/.local/share/vcpkg"
+    version: master
+    accept_hostkey: true
+
+- name: Set lazygit config environment variable and alias
+  ansible.builtin.set_fact:
+    environment_variables: >
+      {{ (environment_variables | default({})) | combine({
+        'VCPKG_ROOT': '~/.local/share/vcpkg'
+      }) }}
