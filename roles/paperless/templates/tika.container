@@ -3,7 +3,7 @@ Description=Tika for Paperless
 
 [Container]
 ContainerName=tika
-Image=docker.io/apache/tika:3.2.2.0
+Image=docker.io/apache/tika:3.2.3.0
 Pod=paperless.pod
 EnvironmentFile=%h/.env
 Exec=
