@@ -1,0 +1,79 @@
+---
+- name: Load installation tasks
+  when: ansible_system == 'Linux'
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family | lower }}.yml"
+
+- name: Add kwallet auth module
+  when: ansible_system == 'Linux'
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/pam.d/login
+    insertafter: '^\s*(auth)\s+(include)\s*(system-local-login)\s*$'
+    regexp: '^\s*(auth)\s+(optional)\s*(pam_kwallet5\.so)\s*$'
+    line: "auth       optional     pam_kwallet5.so"
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Add kwallet session module
+  when: ansible_system == 'Linux'
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/pam.d/login
+    insertafter: '^\s*(session)\s+(include)\s*(system-local-login)\s*$'
+    regexp: '^\s*(session)\s+(optional)\s*(pam_kwallet5\.so).*$'
+    line: "session    optional     pam_kwallet5.so auto_start"
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Check check if greetd pam config exists
+  ansible.builtin.stat:
+    path: /etc/pam.d/greetd
+  register: kwallet_greetd_pamd_stat
+
+- name: Load greetd config tasks
+  when: kwallet_greetd_pamd_stat.stat.exists
+  ansible.builtin.include_tasks: configure-greetd.yml
+
+- name: Configure KDE Wallet for SSH & Git Credentials
+  ansible.builtin.set_fact: # noqa: var-naming[no-role-prefix]
+    environment_variables: >
+      {{ (environment_variables | default({})) | combine({
+        'SSH_ASKPASS': '/usr/bin/ksshaskpass',
+        'SSH_ASKPASS_REQUIRE': 'prefer',
+        'GIT_ASKPASS': '/usr/bin/ksshaskpass',
+      }) }}
+
+- name: Configure KDE Wallet for GPG
+  community.general.ini_file:
+    path: ~/.config/kwalletrc
+    section: "org.freedesktop.secrets"
+    option: "apiEnabled"
+    value: "true"
+    mode: "0600"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+
+- name: Create DBus directory
+  ansible.builtin.file:
+    path: "{{ directory }}"
+    state: directory
+    mode: "0755"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+  loop_control:
+    loop_var: directory
+  loop:
+    - ~/.local
+    - ~/.local/share
+    - ~/.local/share/dbus-1
+    - ~/.local/share/dbus-1/services
+
+- name: Configure DBus activation for KDE Wallet
+  ansible.builtin.template:
+    src: org.freedesktop.secrets.service
+    dest: ~/.local/share/dbus-1/services/org.freedesktop.secrets.service
+    mode: "0644"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"

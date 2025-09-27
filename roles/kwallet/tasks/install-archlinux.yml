@@ -1,0 +1,11 @@
+---
+- name: Pacman | Install kwallet
+  become: true
+  community.general.pacman:
+    state: present
+    name:
+      - kwallet
+      - kwalletmanager
+      - kwallet-pam
+      - ksshaskpass
+      - pinentry

@@ -1,0 +1,24 @@
+---
+- name: Add kwallet auth module
+  when: ansible_system == 'Linux'
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/pam.d/greetd
+    insertafter: '^\s*(auth)\s+(include)\s*(system-local-login)\s*$'
+    regexp: '^\s*(auth)\s+(optional)\s*(pam_kwallet5\.so).*$'
+    line: "auth       optional     pam_kwallet5.so"
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Add kwallet session module
+  when: ansible_system == 'Linux'
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/pam.d/greetd
+    insertafter: '^\s*(session)\s+(include)\s*(system-local-login)\s*$'
+    regexp: '^\s*(session)\s+(optional)\s*(pam_kwallet5\.so).*$'
+    line: "session    optional     pam_kwallet5.so auto_start force_run"
+    owner: root
+    group: root
+    mode: "0644"
