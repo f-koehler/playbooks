@@ -1,0 +1,15 @@
+---
+- name: Homewbrew | Install aerospace
+  when: ansible_system == 'Darwin'
+  community.general.homebrew_cask:
+    name: nikitabobko/tap/aerospace
+    state: present
+
+- name: Configure aerospace
+  when: ansible_system == 'Darwin'
+  ansible.builtin.template:
+    src: aerospace.toml
+    dest: ~/.aerospace.toml
+    mode: "0644"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
