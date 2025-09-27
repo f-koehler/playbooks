@@ -1,0 +1,13 @@
+---
+- name: Use pinentry-mac on MacOS
+  when: ansible_system == 'Darwin'
+  ansible.builtin.set_fact:
+    gpg_pinentry_program: /usr/bin/pinentry-mac
+
+- name: Configure gpg-agent
+  ansible.builtin.template:
+    src: gpg-agent.conf
+    dest: "~/.gnupg/gpg-agent.conf"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0600"
