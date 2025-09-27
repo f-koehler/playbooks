@@ -1,0 +1,22 @@
+---
+- name: Create Sway directory
+  ansible.builtin.file:
+    path: "{{ directory }}"
+    state: directory
+    mode: "0755"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+  loop_control:
+    loop_var: directory
+  loop:
+    - ~/.config
+    - ~/.config/sway
+    - ~/.config/sway/config.d
+
+- name: Generate sway config
+  ansible.builtin.template:
+    src: sway
+    dest: ~/.config/sway/config.d/kwallet
+    mode: "0644"
+    owner: "{{ username }}"
+    group: "{{ groupname }}"

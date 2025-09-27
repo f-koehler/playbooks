@@ -77,3 +77,6 @@
     mode: "0644"
     owner: "{{ username }}"
     group: "{{ groupname }}"
+
+- name: Load sway config tasks
+  ansible.builtin.include_tasks: configure-sway.yml
