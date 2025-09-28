@@ -13,6 +13,7 @@
       - nextcloud-client
       - obsidian
       - okular
+      - virt-manager
 
 - name: "Pacman | Install libreoffice"
   become: true
