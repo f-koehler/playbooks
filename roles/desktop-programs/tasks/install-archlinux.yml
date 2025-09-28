@@ -12,7 +12,7 @@
       - mpv
       - nextcloud-client
       - obsidian
-      - papers
+      - okular
 
 - name: "Pacman | Install libreoffice"
   become: true
