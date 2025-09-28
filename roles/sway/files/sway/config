@@ -85,7 +85,7 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'uwsm stop'
+    bindsym $mod+Shift+e exec swayshell_dialog_logout
 #
 # Moving around:
 #
@@ -228,5 +228,6 @@ hide_edge_borders smart_no_gaps
 exec systemctl --user set-environment XDG_CURRENT_DESKTOP=sway
 exec uwsm finalize DISPLAY SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec uwsm app -- kanshi
+exec uwsm app -- swayshell_bar
 
 include ~/.config/sway/config.d/*
