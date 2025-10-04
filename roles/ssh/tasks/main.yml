@@ -1,4 +1,12 @@
 ---
+- name: Create SSH directory
+  ansible.builtin.file:
+    path: ~/.ssh
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0700"
+
 - name: Generate SSH key
   community.crypto.openssh_keypair:
     comment: "{{ username }}@{{ hostname }}.{{ domain }}"
