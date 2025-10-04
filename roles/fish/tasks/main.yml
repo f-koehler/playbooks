@@ -9,11 +9,20 @@
         - "install-{{ ansible_system | lower }}.yml"
         - "install-fallback.yml"
 
+# TODO(fk) clean this up
 - name: Set default shell to fish
   become: true
+  when: ansible_system == 'Linux'
   ansible.builtin.user:
     name: "{{ username }}"
     shell: /bin/fish
+
+- name: Set default shell to fish
+  become: true
+  when: ansible_system == 'Darwin'
+  ansible.builtin.user:
+    name: "{{ username }}"
+    shell: /opt/homebrew/bin/fish
 
 - name: Create fish config directory
   ansible.builtin.file:
