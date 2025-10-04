@@ -17,3 +17,10 @@
     state: present
     name:
       - mpv
+      - mas
+
+- name: Install AppStore apps
+  community.general.mas:
+    id:
+      - 1352778147 # bitwarden
+    state: present
