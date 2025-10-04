@@ -2,6 +2,7 @@
 - name: "Homebrew | Install common desktop programs (Cask)"
   community.general.homebrew_cask:
     state: present
+    sudo_password: "{{ ansible_become_password }}"
     name:
       - drawio
       - firefox
