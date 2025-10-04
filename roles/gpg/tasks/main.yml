@@ -4,6 +4,14 @@
   ansible.builtin.set_fact:
     gpg_pinentry_program: /usr/bin/pinentry-mac
 
+- name: Create GPG dir
+  ansible.builtin.file:
+    path: ~/.gnupg
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0700"
+
 - name: Configure gpg-agent
   ansible.builtin.template:
     src: gpg-agent.conf
