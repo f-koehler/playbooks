@@ -5,12 +5,14 @@
     name: "{{ timezone }}"
 
 - name: Install chrony
+  when: ansible_system == 'Linux'
   become: true
   ansible.builtin.package:
     name: chrony
     state: present
 
 - name: Configure chrony
+  when: ansible_system == 'Linux'
   become: true
   notify: Restart chrony
   ansible.builtin.template:
@@ -21,6 +23,7 @@
     mode: "0644"
 
 - name: Disable systemd-timesyncd
+  when: ansible_system == 'Linux'
   become: true
   ansible.builtin.systemd:
     name: systemd-timesyncd.service
@@ -28,6 +31,7 @@
     enabled: false
 
 - name: Enable chrony
+  when: ansible_system == 'Linux'
   become: true
   ansible.builtin.systemd:
     name: chronyd.service
