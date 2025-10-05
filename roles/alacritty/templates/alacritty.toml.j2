@@ -11,5 +11,7 @@ bold =   { family = "{{ alacritty_font_family }}", style = "Bold" }
 italic = { family = "{{ alacritty_font_family }}", style = "Italic" }
 size = {{ alacritty_font_size }}
 
+{% if ansible_system == "Linux" %}
 [window]
 decorations = "None"
+{% endif %}
