@@ -80,3 +80,12 @@
     type: bool
     value: true
     state: present
+
+- name: Automatically hide dock
+  notify: Restart dock
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: autohide
+    type: bool
+    value: true
+    state: present
