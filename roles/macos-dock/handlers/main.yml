@@ -1,0 +1,3 @@
+---
+- name: Restart dock
+  ansible.builtin.command: killall Dock

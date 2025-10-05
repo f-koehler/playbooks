@@ -1,0 +1,82 @@
+---
+- name: Homebrew | Install dockutil
+  when: ansible_system == "Darwin"
+  community.general.homebrew:
+    name: dockutil
+    state: present
+
+- name: Configure MacOS Dock
+  when: ansible_system == "Darwin"
+  ansible.builtin.include_role:
+    name: geerlingguy.mac.dock
+  vars:
+    dockitems_remove:
+      - "App Store"
+      - "Calendar"
+      - "Contacts"
+      - "FaceTime"
+      - "Games"
+      - "Mail"
+      - "Maps"
+      - "Messages"
+      - "Music"
+      - "Notes"
+      - "Phone"
+      - "Photos"
+      - "Reminders"
+      - "Safari"
+      - "System Settings"
+      - "TV"
+      - "iPhone Mirroring"
+    dockitems_persist:
+      - name: "Alacritty"
+        path: "/Applications/Alacritty.app/"
+      - name: "Firefox"
+        path: "/Applications/Firefox.app/"
+      - name: "Zed"
+        path: "/Applications/Zed.app/"
+
+- name: Set size
+  notify: Restart dock
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: tilesize
+    type: int
+    value: 32
+    state: present
+
+- name: Enable magnification
+  notify: Restart dock
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: magnification
+    type: bool
+    value: true
+    state: present
+
+- name: Set magnified size
+  notify: Restart dock
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: largesize
+    type: int
+    value: 64
+    state: present
+
+- name: Hide recent apps
+  notify: Restart dock
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: show-recents
+    type: bool
+    value: false
+    state: present
+
+- name: Minimize windows to application
+  notify: Restart dock
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: minimize-to-application
+    type: bool
+    value: true
+    state: present
