@@ -8,3 +8,83 @@
         - "install-{{ ansible_os_family | lower }}.yml"
         - "install-{{ ansible_system | lower }}.yml"
         - "install-fallback.yml"
+
+- name: Create directory for fish completions
+  ansible.builtin.file:
+    path: "{{ directory }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0755"
+  loop_control:
+    loop_var: directory
+  loop:
+    - ~/.config
+    - ~/.config/fish
+    - ~/.config/fish/completions
+
+- name: Create directory for bash completions
+  when: ansible_system != "Darwin"
+  ansible.builtin.file:
+    path: "{{ directory }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0755"
+  loop_control:
+    loop_var: directory
+  loop:
+    - ~/.local
+    - ~/.local/share
+    - ~/.local/share/bash-completion
+    - ~/.local/share/bash-completion/completions
+
+- name: Create directory for bash completions (Mac)
+  when: ansible_system == "Darwin"
+  become: true
+  ansible.builtin.file:
+    path: "{{ directory }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "admin"
+    mode: "0755"
+  loop_control:
+    loop_var: directory
+  loop:
+    - "{{ homebrew_root }}"
+    - "{{ homebrew_root }}/etc"
+    - "{{ homebrew_root }}/etc/bash_completion.d"
+
+- name: Create directory for zsh completions
+  ansible.builtin.file:
+    path: "{{ directory }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+    mode: "0755"
+  loop_control:
+    loop_var: directory
+  loop:
+    - ~/.zfunc
+
+- name: Create bash completions
+  when: ansible_system != "Darwin"
+  ansible.builtin.shell: rustup completions bash > ~/.local/share/bash-completion/completions/rustup
+  args:
+    creates: ~/.local/share/bash-completion/completions/rustup
+
+- name: Create bash completions (Mac)
+  when: ansible_system == "Darwin"
+  ansible.builtin.shell: "rustup completions bash > {{ homebrew_root }}/etc/bash_completion.d/rustup.bash-completion"
+  args:
+    creates: "{{ homebrew_root }}/etc/bash_completion.d/rustup.bash-completion"
+
+- name: Create fish completions
+  ansible.builtin.shell: "rustup completions fish > ~/.config/fish/completions/rustup.fish"
+  args:
+    creates: "~/.config/fish/completions/rustup.fish"
+
+- name: Create zsh completions
+  ansible.builtin.shell: "rustup completions zsh > ~/.zfunc/_rustup"
+  args:
+    creates: "~/.zfunc/_rustup"
