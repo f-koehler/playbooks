@@ -1,0 +1,36 @@
+---
+- name: Show file extensions
+  when: ansible_system == "Darwin"
+  notify: Kill finder
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleShowAllExtensions
+    type: bool
+    value: true
+
+- name: Set default view
+  when: ansible_system == "Darwin"
+  notify: Kill finder
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: FXPreferredViewStyle
+    type: string
+    value: Nlsv
+
+- name: Show path bar
+  when: ansible_system == "Darwin"
+  notify: Kill finder
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: ShowPathbar
+    type: bool
+    value: true
+
+- name: Show folders first
+  when: ansible_system == "Darwin"
+  notify: Kill finder
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: _FXSortFoldersFirst
+    type: bool
+    value: true
