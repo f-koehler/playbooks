@@ -1,0 +1,13 @@
+---
+- name: Pacman | Install tailscale
+  become: true
+  community.general.pacman:
+    name: tailscale
+    state: present
+
+- name: Start tailscale daemon
+  become: true
+  ansible.builtin.systemd:
+    name: tailscaled
+    state: started
+    enabled: true
