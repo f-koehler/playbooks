@@ -24,3 +24,9 @@
     id:
       - 1352778147 # bitwarden
     state: present
+
+- name: Install cascadia-code font
+  community.general.homebrew_cask:
+    state: present
+    sudo_password: "{{ ansible_become_password }}"
+    name: font-cascadia-code-nf
