@@ -6,4 +6,6 @@
       - git
       - gnupg
       - github-cli
+      - difftastic
+      - mergiraf
     state: present
