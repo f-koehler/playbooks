@@ -29,3 +29,8 @@
     owner: "{{ username }}"
     group: "{{ groupname }}"
     mode: "0644"
+
+- name: Configure mergiraf languages
+  ansible.builtin.shell: mergiraf languages --gitattributes > ~/.config/git/attributes
+  args:
+    creates: ~/.config/git/attributes
