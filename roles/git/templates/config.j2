@@ -23,3 +23,9 @@ gpgSign = {{ git_enable_gpg }}
 email = "fabian.koehler@proton.me"
 name = "Fabian Koehler"
 signingKey = "C5DC80511469AD81C84E3564D55A35AFB2900A11"
+
+[merge]
+conflictStyle = "diff3"
+
+[diff]
+external = difft
