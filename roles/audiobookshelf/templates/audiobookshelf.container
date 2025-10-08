@@ -3,7 +3,7 @@ Description=Audiobookshelf Audiobook and Podcast Server
 
 [Container]
 ContainerName=audiobookshelf
-Image=ghcr.io/advplyr/audiobookshelf:2.29.0
+Image=ghcr.io/advplyr/audiobookshelf:2.30.0
 Pod=audiobookshelf.pod
 EnvironmentFile=%h/.env
 Volume={{ audiobookshelf_volume_audiobooks }}:/audiobooks:Z
