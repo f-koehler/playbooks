@@ -12,6 +12,7 @@
       - make
       - ninja
       - vcpkg
+      - nlohmann-json
 
 - name: "Prepare VCPKG recipe directory"
   ansible.builtin.file:
