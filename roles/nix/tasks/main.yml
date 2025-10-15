@@ -1,0 +1,27 @@
+---
+- name: Load installation tasks
+  ansible.builtin.include_tasks: "{{ lookup('ansible.builtin.first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "install-{{ ansible_distribution | lower }}.yml"
+        - "install-{{ ansible_os_family | lower }}.yml"
+        - "install-{{ ansible_system | lower }}.yml"
+        - "install-fallback.yml"
+
+- name: Configure nix
+  become: true
+  notify: Restart nix daemon
+  ansible.builtin.template:
+    src: "nix.conf"
+    dest: /etc/nix/nix.conf
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Start nix daemon
+  become: true
+  ansible.builtin.systemd:
+    name: nix-daemon.service
+    state: started
+    enabled: true

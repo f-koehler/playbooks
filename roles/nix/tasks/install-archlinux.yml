@@ -1,0 +1,7 @@
+---
+- name: Pacman | Install nix
+  become: true
+  community.general.pacman:
+    state: present
+    name:
+      - nix

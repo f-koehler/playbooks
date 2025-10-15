@@ -41,6 +41,7 @@
     - lazygit
     - macos-dock
     - macos-finder
+    - nix
     - neovim
     - plasma
     - starship
