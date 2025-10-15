@@ -39,6 +39,7 @@
     - greetd
     - kwallet
     - lazygit
+    - libvirt
     - macos-dock
     - macos-finder
     - nix
