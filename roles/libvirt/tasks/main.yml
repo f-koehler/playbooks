@@ -2,7 +2,6 @@
 - name: Load libvirt variables
   ansible.builtin.include_vars:
     file: "{{ ansible_os_family | lower }}.yml"
-    dir: vars
 
 - name: "Package | Install libvirt, qemu, and related packages"
   become: true
