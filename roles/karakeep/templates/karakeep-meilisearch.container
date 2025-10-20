@@ -3,7 +3,7 @@ Description=Karakeep Bookmark Manager (Meilisearch)
 
 [Container]
 ContainerName=karakeep-meilisearch
-Image=docker.io/getmeili/meilisearch:v1.22.0
+Image=docker.io/getmeili/meilisearch:v1.24.0
 Pod=karakeep.pod
 EnvironmentFile=%h/.env
 Volume={{ karakeep_volume_meilisearch }}:/meili_data:Z
