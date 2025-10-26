@@ -3,7 +3,7 @@ Description=Media Management Tool
 
 [Container]
 ContainerName=tinymediamanager
-Image=docker.io/tinymediamanager/tinymediamanager:5.2.2
+Image=docker.io/tinymediamanager/tinymediamanager:5.2.3
 Pod=tinymediamanager.pod
 EnvironmentFile=%h/.env
 Volume={{ tinymediamanager_volume_data }}:/data:Z
