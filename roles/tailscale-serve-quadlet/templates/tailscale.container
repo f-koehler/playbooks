@@ -3,7 +3,7 @@ Description=Tailscale serve sidecar container for {{ tailscale_serve_quadlet_pod
 
 [Container]
 ContainerName=tailscale
-Image=docker.io/tailscale/tailscale:v1.88.2
+Image=docker.io/tailscale/tailscale:v1.90.6
 Pod={{ tailscale_serve_quadlet_pod_name }}.pod
 EnvironmentFile=%h/.tailscale.env
 Volume={{ tailscale_serve_quadlet_state_volume }}:/var/lib/tailscale:Z
