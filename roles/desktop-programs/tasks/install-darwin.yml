@@ -18,6 +18,7 @@
     name:
       - mpv
       - mas
+      - poppler
 
 - name: Install AppStore apps
   community.general.mas:
