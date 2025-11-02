@@ -2,7 +2,7 @@
 - name: Use pinentry-mac on MacOS
   when: ansible_system == 'Darwin'
   ansible.builtin.set_fact:
-    gpg_pinentry_program: /usr/bin/pinentry-mac
+    gpg_pinentry_program: /opt/homebrew/bin/pinentry-mac
 
 - name: Create GPG dir
   ansible.builtin.file:
