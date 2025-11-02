@@ -30,6 +30,9 @@ conflictStyle = "diff3"
 [diff]
 external = difft
 
+[gpg]
+program = {{ git_gpg_program }}
+
 [merge "mergiraf"]
 name = mergiraf
 driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L

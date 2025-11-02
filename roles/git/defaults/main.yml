@@ -1,2 +1,3 @@
 ---
 git_enable_gpg: true
+git_gpg_program: /usr/bin/gpg

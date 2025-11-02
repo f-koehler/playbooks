@@ -8,3 +8,7 @@
       - difftastic
       - mergiraf
     state: present
+
+- name: "Override default GPG program"
+  ansible.builtin.set_fact:
+    git_gpg_program: /opt/homebrew/bin/gpg
