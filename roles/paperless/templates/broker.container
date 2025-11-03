@@ -3,7 +3,7 @@ Description=Key value database for Paperless
 
 [Container]
 ContainerName=broker
-Image=docker.io/library/redis:8.2.1
+Image=docker.io/library/redis:8.2.3
 Pod=paperless.pod
 EnvironmentFile=%h/.env
 Volume={{ paperless_volume_redisdata }}:/data:Z
