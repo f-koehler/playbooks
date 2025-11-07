@@ -3,7 +3,7 @@ Description=Document Management Tool
 
 [Container]
 ContainerName=paperless
-Image=ghcr.io/paperless-ngx/paperless-ngx:2.18.4
+Image=ghcr.io/paperless-ngx/paperless-ngx:2.19.5
 Pod=paperless.pod
 EnvironmentFile=%h/.env
 Volume={{ paperless_volume_data }}:/usr/src/paperless/data:Z
