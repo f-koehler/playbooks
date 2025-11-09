@@ -3,7 +3,7 @@ Description=Karakeep Bookmark Manager
 
 [Container]
 ContainerName=karakeep
-Image=ghcr.io/karakeep-app/karakeep:0.27.1
+Image=ghcr.io/karakeep-app/karakeep:0.28.0
 Pod=karakeep.pod
 EnvironmentFile=%h/.env
 Volume={{ karakeep_volume_data }}:/data:Z
