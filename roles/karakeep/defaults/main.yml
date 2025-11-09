@@ -1,7 +1,0 @@
----
-karakeep_user: karakeep
-karakeep_group: karakeep
-karakeep_home: /home/{{ karakeep_user }}
-karakeep_volume_data: "{{ karakeep_home }}/data"
-karakeep_volume_meilisearch: "{{ karakeep_home }}/meilisearch"
-karakeep_network: "192.168.99.0/24"

@@ -1,8 +1,0 @@
----
-navidrome_user: navidrome
-navidrome_group: navidrome
-navidrome_home: /home/{{ navidrome_user }}
-navidrome_volume_data: "{{ navidrome_home }}/data"
-navidrome_network: "192.168.98.0/24"
-navidrome_port: 4533
-navidrome_hostname: navidrome

@@ -1,8 +1,0 @@
----
-galaxy_info:
-  author: Fabian Koehler
-  description: Role to install and configure paperless
-  license: MIT
-  min_ansible_version: "2.1"
-  galaxy_tags: []
-dependencies: []

@@ -1,9 +1,0 @@
-[Unit]
-Description=Gotenberg for Paperless
-
-[Container]
-ContainerName=gotenberg
-Image=docker.io/gotenberg/gotenberg:8.23
-Pod=paperless.pod
-EnvironmentFile=%h/.env
-Exec=gotenberg --chromium-disable-javascript=true --chromium-allow-list=file:///tmp/.*

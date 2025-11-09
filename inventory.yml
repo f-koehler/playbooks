@@ -3,7 +3,3 @@ workstations:
     desktop.corgi-dojo.ts.net:
     mbp21:
       ansible_connection: local
-homeservers:
-  hosts:
-    homeserver-dev:
-      ansible_host: homeserver2.corgi-dojo.ts.net

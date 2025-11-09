@@ -1,9 +1,0 @@
----
-tinymediamanager_user: tinymediamanager
-tinymediamanager_group: tinymediamanager
-tinymediamanager_home: /home/{{ tinymediamanager_user }}
-tinymediamanager_volume_data: "{{ tinymediamanager_home }}/data"
-tinymediamanager_volumes_media: {}
-tinymediamanager_network: "192.168.96.0/24"
-tinymediamanager_port: 4000
-tinymediamanager_hostname: tinymediamanager

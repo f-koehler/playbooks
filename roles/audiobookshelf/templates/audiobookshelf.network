@@ -1,4 +1,0 @@
-[Network]
-Subnet={{ audiobookshelf_network | ansible.utils.ipv4 }}
-Gateway={{ audiobookshelf_network | ansible.utils.ipv4('1') | ansible.utils.ipv4('address') }}
-Label=audiobookshelf
