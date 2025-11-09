@@ -11,6 +11,7 @@
       - nextcloud
       - obsidian
       - libreoffice
+      - zotero
 
 - name: "Homebrew | Install common desktop programs"
   community.general.homebrew:
