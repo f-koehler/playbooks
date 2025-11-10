@@ -2,6 +2,7 @@
 - name: "Homebrew | Install git"
   community.general.homebrew:
     name:
+      - gh
       - git
       - gnupg
       - pinentry-mac
