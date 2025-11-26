@@ -2,6 +2,16 @@
 - name: Setup workstations
   hosts: workstations
   pre_tasks:
+    - name: Show system information
+      ansible.builtin.debug:
+        msg: "{{ message }}"
+      loop_control:
+        loop_var: message
+      loop:
+        - "ansible-system:               {{ ansible_system }}"
+        - "ansible_os_family:            {{ ansible_os_family }}"
+        - "ansible_distribution:         {{ ansible_distribution }}"
+        - "ansible_distribution_version: {{ ansible_distribution_version }}"
     - name: Load global variables
       ansible.builtin.include_vars:
         file: ./vars/main.yml
