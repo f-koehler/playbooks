@@ -2,4 +2,5 @@
 - name: "Homebrew | Install fzf"
   community.general.homebrew:
     name: fzf
+    path: "{{ homebrew_bin_path }}"
     state: present
