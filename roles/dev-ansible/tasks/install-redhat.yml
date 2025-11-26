@@ -1,0 +1,9 @@
+---
+- name: "DNF | Install ansible development tools"
+  become: true
+  ansible.builtin.dnf:
+    state: present
+    name:
+      - ansible
+      - python3-ansible-lint
+      - yamllint
