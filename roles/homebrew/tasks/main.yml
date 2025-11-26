@@ -18,3 +18,7 @@
         - "install-{{ ansible_os_family | lower }}.yml"
         - "install-{{ ansible_system | lower }}.yml"
         - "install-fallback.yml"
+
+- name: "Set homebrew bin path"
+  ansible.builtin.set_fact:
+    homebrew_bin_path: "{{ homebrew_root }}/bin"
