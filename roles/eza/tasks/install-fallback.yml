@@ -2,4 +2,5 @@
 - name: "Homebrew | Install eza"
   community.general.homebrew:
     name: eza
+    path: "{{ homebrew_bin_path }}"
     state: present
