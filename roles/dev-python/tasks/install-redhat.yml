@@ -1,0 +1,9 @@
+---
+- name: "DNF | Install python development tools"
+  become: true
+  ansible.builtin.dnf:
+    state: present
+    name:
+      - uv
+      - python3-ruff
+      - python3
