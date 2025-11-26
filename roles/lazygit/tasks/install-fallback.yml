@@ -2,4 +2,5 @@
 - name: "Homebrew | Install lazygit"
   community.general.homebrew:
     name: lazygit
+    path: "{{ homebrew_bin_path }}"
     state: present
