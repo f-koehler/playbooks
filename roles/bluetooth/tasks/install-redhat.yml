@@ -1,0 +1,8 @@
+---
+- name: "DNF | Install bluez"
+  become: true
+  ansible.builtin.dnf:
+    state: present
+    name:
+      - bluez
+      - bluez-tools
