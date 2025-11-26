@@ -1,0 +1,11 @@
+---
+- name: "DNF | Install rust development tools"
+  become: true
+  notify:
+    - Install rust toolchains
+  ansible.builtin.dnf:
+    state: present
+    name:
+      - "@development-tools"
+      - rustup
+      - cargo
