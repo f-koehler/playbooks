@@ -1,0 +1,17 @@
+---
+- name: "DNF | Install git"
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - git
+      - gnupg
+    state: present
+
+- name: "Homebrew | Install additional git tools"
+  community.general.homebrew:
+    path: "{{ homebrew_bin_path }}"
+    name:
+      - github-cli
+      - difftastic
+      - mergiraf
+    state: present

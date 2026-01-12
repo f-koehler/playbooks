@@ -1,0 +1,12 @@
+---
+- name: "DNF | Install zathura"
+  become: true
+  ansible.builtin.dnf:
+    state: present
+    name:
+      - zathura
+      - zathura-pdf-mupdf
+      - zathura-djvu
+      - zathura-ps
+      - zathura-bash-completion
+      - zathura-zsh-completion

@@ -1,0 +1,24 @@
+---
+- name: "DNF | Install desktop programs"
+  become: true
+  ansible.builtin.dnf:
+    state: present
+    name:
+      - firefox
+      - virt-manager
+      - okular
+      - imhex
+
+- name: "Flatpak | Install desktop programs (system)"
+  become: true
+  community.general.flatpak:
+    method: system
+    name:
+      - com.bitwarden.desktop
+      - com.jgraph.drawio.desktop
+      - org.gimp.GIMP
+      - org.inkscape.Inkscape
+      - io.mpv.Mpv
+      - com.nextcloud.desktopclient.nextcloud
+      - md.obsidian.Obsidian
+      - org.libreoffice.LibreOffice

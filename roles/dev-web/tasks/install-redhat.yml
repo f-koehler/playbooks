@@ -1,0 +1,8 @@
+---
+- name: "Pacman | Install web development tools"
+  become: true
+  ansible.builtin.dnf:
+    state: present
+    name:
+      - nodejs
+      - yarnpkg

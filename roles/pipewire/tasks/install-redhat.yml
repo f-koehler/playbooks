@@ -1,0 +1,12 @@
+---
+- name: "DNF | Install pipewire"
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - pipewire
+      - wireplumber
+      - wiremix
+      - pipewire-pulseaudio
+      - pipewire-alsa
+      - pipewire-jack-audio-connection-kit
+    state: present

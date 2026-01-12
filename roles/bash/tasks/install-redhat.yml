@@ -1,0 +1,8 @@
+---
+- name: "DNF | Install bash and bash-completion"
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - bash
+      - bash-completion
+    state: present

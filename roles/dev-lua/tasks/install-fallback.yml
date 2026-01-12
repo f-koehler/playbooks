@@ -1,6 +1,7 @@
 ---
 - name: "Homebrew | Install lua development tools"
   community.general.homebrew:
+    path: "{{ homebrew_bin_path }}"
     name:
       - lua-language-server
       - lua

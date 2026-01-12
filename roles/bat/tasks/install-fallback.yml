@@ -2,4 +2,5 @@
 - name: "Homebrew | Install bat"
   community.general.homebrew:
     name: bat
+    path: "{{ homebrew_bin_path }}"
     state: present

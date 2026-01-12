@@ -1,0 +1,13 @@
+---
+- name: "DNF | Install C++ development tools"
+  become: true
+  ansible.builtin.dnf:
+    state: present
+    name:
+      - "@development-tools"
+      - cmake
+      - clang
+      - gcc
+      - gdb
+      - make
+      - ninja-build

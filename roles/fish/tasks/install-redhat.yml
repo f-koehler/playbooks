@@ -1,0 +1,10 @@
+---
+- name: "DNF | Install fish"
+  become: true
+  ansible.builtin.dnf:
+    state: present
+    name:
+      - fish
+      - groff
+      - python3
+      - wl-clipboard

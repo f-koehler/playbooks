@@ -1,0 +1,21 @@
+---
+- name: DNF | Install homebrew deps
+  become: true
+  ansible.builtin.dnf:
+    state: present
+    name:
+      - "@development-tools"
+      - file
+      - procps-ng
+      - perl-AutoSplit
+      - perl-ExtUtils-Command
+      - perl-File-Compare
+      - perl-FindBin
+      - perl-IPC-Cmd
+      - perl-Module-Find
+      - perl-Time-Piece
+      - perl-Pod-Html
+      - perl-Benchmark
+
+- name: Load common Linux installation tasks
+  ansible.builtin.include_tasks: "install-linux-common.yml"

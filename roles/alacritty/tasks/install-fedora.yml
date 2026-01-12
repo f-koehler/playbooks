@@ -1,0 +1,8 @@
+---
+- name: "DNF | Install alacritty"
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - alacritty
+      - cascadia-fonts-all
+    state: present
